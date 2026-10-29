@@ -1,40 +1,40 @@
 {
   "schema": "hamon.glossopia-build.v1",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "worker": "estate-6653e323ca46-20261029",
   "session": "estate-6653e323ca46-20261029-s1",
   "prompt_version": "2026-10-28.25",
-  "source_role": "saved-practice impact contribution; original implementation claim retained",
+  "source_role": "word-order recovery contribution; original implementation claim retained",
   "original_source_archive_sha256": "4e9c453985c37f67f46fbe94f9830d6224d0e99e5ea981f0b9f7631d016f6750",
-  "base_git_commit": "3dcef2d1b5a5f5a86b40242e1ce0e264699caf18",
-  "base_git_tree": "23d806283108fa43352da6c219999e14b54c3e52",
-  "task_id": "glossopia-saved-practice-impact-6653e323",
-  "created_at": "2026-10-29T08:27:26.428758+00:00",
+  "base_git_commit": "28dad20815df5e19546ae36973c952fe19e95d4f",
+  "base_git_tree": "def358d4ab4ba068fb610d720183750c675a5272",
+  "task_id": "glossopia-word-order-recovery-6653e323",
+  "created_at": "2026-10-29T15:10:33.321664+00:00",
   "files": [
     {
       "path": "README.md",
-      "bytes": 6629,
-      "sha256": "bb5311049916a320bff8fe67479a32e9e7990255a1e1bb3f614376eaa74da470"
+      "bytes": 9558,
+      "sha256": "736d964ec1949f4a09ad5ca6f5ebc4f24fb3be9228ff5c182a26e8112377237c"
     },
     {
       "path": "app.mjs",
-      "bytes": 25480,
-      "sha256": "77ff62fb307b1b3238d6cd7e2120c5640c432bbcd517caedb00cd792cbdab663"
+      "bytes": 29990,
+      "sha256": "9de257ae91a6b9676bac0b2bbd35f6f68cd46760366dce1a669bdf4b96200dd1"
     },
     {
       "path": "index.html",
-      "bytes": 13206,
-      "sha256": "53b99fd961b8d3d19ba1beb3e2656a0f02bb48e819c89dd18c00ad6930892415"
+      "bytes": 14135,
+      "sha256": "07368a088828b5ca3cb13e8d6ebbbddda0ed8b0b12099b1800adba85193fdcc8"
     },
     {
       "path": "package.json",
       "bytes": 455,
-      "sha256": "2f7722f92b9eaeca0678e74268e38b988c5449f7b4170c25f47a977f690ec913"
+      "sha256": "a80b6253332d3c049c02927007bdaa7d0a72e2d5ba880cd8904a62a72d28258a"
     },
     {
       "path": "server.mjs",
-      "bytes": 2355,
-      "sha256": "4c25b508f98c3f2201164435338996b79fd9c8c434abd0d2967a0a0adb99cb0d"
+      "bytes": 2376,
+      "sha256": "68842b2b74d14356c04e80ebe575bf47a4d2401580fb2e40f3bb455b8b1f034e"
     },
     {
       "path": "src/language-core.mjs",
@@ -62,9 +62,14 @@
       "sha256": "08c0493f315092a813911d6028d1d0af4b2adb60453eb6b6b93ea86a091366bc"
     },
     {
+      "path": "src/word-order.mjs",
+      "bytes": 3447,
+      "sha256": "bd481bed9b9369cde53ea6510202c9fa3a622a982cdf94ae80d6acb84f82afe4"
+    },
+    {
       "path": "style.css",
-      "bytes": 17225,
-      "sha256": "b62a79e0f8f5f2490623c44ef8a985a80399f73ebb24e6810f5e25ed2ca4f3ec"
+      "bytes": 18422,
+      "sha256": "69a4f351968354dfed1ca61d3d047f6dfa0d6005295c8cc65b3a1b1cec4cf600"
     },
     {
       "path": "test/history.test.mjs",
@@ -90,6 +95,11 @@
       "path": "test/practice-impact.test.mjs",
       "bytes": 8091,
       "sha256": "db28cd588f8f2809cc7c64de296138bdd6695ad28fc3c3437f48865c9e78977a"
+    },
+    {
+      "path": "test/word-order.test.mjs",
+      "bytes": 5302,
+      "sha256": "62390e7118bb46640d252762d8f9fe987dc9078c1f77809249177de4f5d9f950"
     }
   ]
 }

@@ -3,6 +3,7 @@ import {starterLanguage} from './src/starter-language.mjs';
 import {replayMission, submitSentence, canPlayMission} from './src/mission-core.mjs';
 import {createProject, validateProject, serializeProject, parseProject, addPractice} from './src/project.mjs';
 import {analyzePracticeImpact} from './src/practice-impact.mjs';
+import {analyzeWordOrder} from './src/word-order.mjs';
 
 const $ = id => document.getElementById(id);
 const storageKey = 'glossopia-project-v1';
@@ -10,6 +11,7 @@ let project = createProject(starterLanguage), pending = null, hintVisible = fals
 let importSelection = 0;
 let toastTimer;
 let practiceImpactCache = null, practiceImpactPage = 0;
+let wordOrderHelp = null;
 const practiceImpactPageSize = 12;
 let persistence = 'This tab holds your project. Download a copy to keep it.';
 function node(tag, text, className) {
@@ -47,7 +49,7 @@ function persist() {
   catch { persistence = 'Browser saving is unavailable. Your project is in this tab; download a copy before closing it.'; }
   $('saveState').textContent = persistence;
 }
-function commit(next) { project = validateProject(next); persist(); render(); }
+function commit(next) { project = validateProject(next); clearWordOrderHelp(); persist(); render(); }
 function showView(name, focus = false) {
   for (const tab of document.querySelectorAll('[data-view]')) {
     const selected = tab.dataset.view === name;
@@ -61,6 +63,54 @@ function interpretation(result) {
   if (result.status === 'unknown_words') return 'Unknown words: ' + result.unknownWords.join(', ');
   if (result.status === 'ambiguous') return 'Ambiguous: ' + result.readings.map(reading => semanticGloss(reading.meaning ?? reading)).join(' / ');
   return 'Not a sentence under these rules (' + result.status + ').';
+}
+function clearWordOrderHelp() {
+  wordOrderHelp = null;
+  const panel = $('wordOrderHelp'); panel.hidden = true;
+  for (const key of ['sessionId', 'versionId', 'status']) delete panel.dataset[key];
+  for (const id of ['wordOrderTitle', 'wordOrderRule', 'wordOrderOriginal', 'wordOrderMessage', 'wordOrderSentence', 'wordOrderMeaning']) $(id).textContent = '';
+  $('wordOrderTokens').replaceChildren(); $('wordOrderSuggestion').hidden = true; $('applyWordOrder').disabled = true;
+}
+function renderWordOrderHelp() {
+  const context = wordOrderHelp, active = session();
+  if (!context || context.project !== project || context.sessionId !== active.id || context.versionId !== active.versionId || $('sentenceInput').value !== '') { clearWordOrderHelp(); return; }
+  const language = version(active.versionId), report = context.report, suggested = report?.status === 'suggested';
+  const labels = {actor: 'Speaker', verb: 'Action', quantity: 'Quantity', object: 'Thing'};
+  const roles = report?.expectedRoles ?? (language.grammar.order === 'SOV' ? ['actor', 'quantity', 'object', 'verb'] : ['actor', 'verb', 'quantity', 'object']);
+  const panel = $('wordOrderHelp'); panel.hidden = false;
+  panel.dataset.sessionId = active.id; panel.dataset.versionId = language.versionId; panel.dataset.status = report?.status ?? 'unavailable';
+  $('wordOrderTitle').textContent = suggested ? 'Your words can follow this order.' : 'Check the roles of these words.';
+  $('wordOrderRule').textContent = 'Practice version ' + language.number + ' · ' + language.grammar.order + ': ' + roles.map(role => labels[role]).join(' → ') + '.';
+  $('wordOrderOriginal').textContent = context.text;
+  $('wordOrderSuggestion').hidden = !suggested; $('applyWordOrder').disabled = !suggested;
+  $('wordOrderTokens').replaceChildren(); $('wordOrderSentence').textContent = ''; $('wordOrderMeaning').textContent = '';
+  if (suggested) {
+    $('wordOrderMessage').textContent = 'These same words can express one unambiguous meaning.';
+    $('wordOrderSentence').textContent = report.suggestion.text;
+    const showMeanings = $('showGlosses').checked;
+    $('wordOrderMeaning').hidden = !showMeanings;
+    $('wordOrderMeaning').textContent = 'Meaning: ' + semanticGloss(report.suggestion.meaning);
+    $('wordOrderTokens').replaceChildren(...report.suggestion.interpretation.readings[0].derivations[0].map(token => {
+      const item = node('div', undefined, 'word-order-token'); item.dataset.role = token.role; item.dataset.entryId = token.entryId;
+      item.append(node('strong', token.token), node('small', labels[token.role] + (showMeanings ? ' · ' + token.gloss : ''))); return item;
+    }));
+  } else if (report?.status === 'ambiguous_rearrangement') {
+    $('wordOrderMessage').textContent = 'Rearranging these words can produce ' + report.meaningCount + ' meanings. Choose words that make your meaning unambiguous.';
+  } else if (report?.status === 'no_rearrangement') {
+    $('wordOrderMessage').textContent = 'These words cannot fill all four sentence roles in this version. Use the word bank to choose another word.';
+  } else {
+    $('wordOrderMessage').textContent = 'Word order help is unavailable for this sentence. Your submitted words remain in this conversation.';
+  }
+}
+function offerWordOrderHelp(language, text) {
+  let report;
+  try {
+    report = analyzeWordOrder(language, text);
+    if (!['suggested', 'ambiguous_rearrangement', 'no_rearrangement'].includes(report.status)) return;
+  } catch { report = null; }
+  const active = session();
+  wordOrderHelp = {project, sessionId: active.id, versionId: active.versionId, text, report};
+  renderWordOrderHelp();
 }
 function startPractice(id) {
   guarded(() => { commit(addPractice(project, id)); hintVisible = false; renderMarket(); showView('market'); $('sentenceInput').focus(); });
@@ -83,7 +133,7 @@ function renderMarket() {
     const b = button(entry.form, () => {
       const input = $('sentenceInput'), next = [input.value.trim(), entry.form].filter(Boolean).join(' ');
       if (next.length > 240) { tell('A sentence supports at most 240 characters.'); return; }
-      input.value = next; input.focus();
+      clearWordOrderHelp(); input.value = next; input.focus();
     });
     if ($('showGlosses').checked) b.append(node('small', entry.gloss));
     b.title = entry.role + ': ' + entry.gloss; return b;
@@ -101,6 +151,7 @@ function renderMarket() {
   $('missionHint').hidden = !hintVisible;
   $('missionHint').textContent = state.expected ? 'Try: ' + compose(language, state.expected).text : 'This conversation is complete. Start a new practice to try again.';
   $('showHint').disabled = state.complete;
+  renderWordOrderHelp();
 }
 function renderStudio() {
   const language = viewed(), historical = language.versionId !== project.currentVersionId;
@@ -236,11 +287,21 @@ for (const tab of document.querySelectorAll('[data-view]')) {
   });
 }
 $('sentenceForm').addEventListener('submit', event => { event.preventDefault(); guarded(() => {
-  const active = session(), result = submitSentence(version(active.versionId), active, $('sentenceInput').value);
+  const active = session(), language = version(active.versionId), text = $('sentenceInput').value;
+  const result = submitSentence(language, active, text);
   commit({...project, sessions: project.sessions.map(item => item.id === active.id ? result.session : item)});
-  $('sentenceInput').value = ''; $('sentenceInput').focus();
+  $('sentenceInput').value = '';
+  if (result.state.lastResult?.status === 'invalid_syntax') offerWordOrderHelp(language, text);
+  $('sentenceInput').focus();
 }, 'sentenceFeedback'); });
-$('clearSentence').addEventListener('click', () => { $('sentenceInput').value = ''; $('sentenceInput').focus(); });
+$('sentenceInput').addEventListener('input', clearWordOrderHelp);
+$('clearSentence').addEventListener('click', () => { clearWordOrderHelp(); $('sentenceInput').value = ''; $('sentenceInput').focus(); });
+$('applyWordOrder').addEventListener('click', () => {
+  const context = wordOrderHelp, active = session();
+  if (!context || context.project !== project || context.sessionId !== active.id || context.versionId !== active.versionId || $('sentenceInput').value !== '' || context.report?.status !== 'suggested') { clearWordOrderHelp(); return; }
+  $('sentenceInput').value = context.report.suggestion.text;
+  clearWordOrderHelp(); $('sentenceInput').focus();
+});
 $('restartMission').textContent = 'Start a new practice';
 $('restartMission').addEventListener('click', () => startPractice(session().versionId));
 $('showHint').addEventListener('click', () => guarded(() => {
@@ -316,7 +377,7 @@ $('projectFile').addEventListener('change', async () => {
   } catch (error) { if (selection === importSelection) tell('Could not open this file: ' + error.message + ' Your current project is unchanged.'); return; }
   finally { if (selection === importSelection) $('projectFile').value = ''; }
   if (selection !== importSelection) return;
-  project = next; pending = null; hintVisible = false; $('sentenceInput').value = ''; $('inspectResult').textContent = ''; $('proposalFeedback').textContent = '';
+  project = next; pending = null; hintVisible = false; clearWordOrderHelp(); $('sentenceInput').value = ''; $('inspectResult').textContent = ''; $('proposalFeedback').textContent = '';
   guarded(() => { persist(); render(); tell('Project opened. Earlier conversations and accepted versions are available in Versions.'); });
 });
 try {
