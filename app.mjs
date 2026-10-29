@@ -1,6 +1,6 @@
 import {parse, compose, semanticGloss, proposeRevision, acceptRevision} from './src/language-core.mjs';
 import {starterLanguage} from './src/starter-language.mjs';
-import {replayMission, submitSentence, canPlayMission} from './src/mission-core.mjs';
+import {replayMission, submitSentence, canPlayMission, analyzeMissionCompatibility} from './src/mission-core.mjs';
 import {createProject, validateProject, serializeProject, parseProject, addPractice} from './src/project.mjs';
 import {analyzePracticeImpact} from './src/practice-impact.mjs';
 import {analyzeWordOrder} from './src/word-order.mjs';
@@ -11,6 +11,7 @@ let project = createProject(starterLanguage), pending = null, hintVisible = fals
 let importSelection = 0;
 let toastTimer;
 let practiceImpactCache = null, practiceImpactPage = 0;
+let missionCompatibilityCache = null;
 let wordOrderHelp = null;
 const practiceImpactPageSize = 12;
 let persistence = 'This tab holds your project. Download a copy to keep it.';
@@ -190,6 +191,79 @@ function renderHistory() {
     return row;
   }));
 }
+function clearMissionCompatibility() {
+  missionCompatibilityCache = null;
+  const panel = $('missionCompatibility'); panel.hidden = true;
+  for (const key of ['currentVersionId', 'proposedVersionId', 'analysis']) delete panel.dataset[key];
+  for (const id of ['missionCurrentStatus', 'missionProposedStatus']) {
+    const status = $(id); status.replaceChildren();
+    delete status.dataset.available; delete status.dataset.versionId;
+  }
+  const summary = $('missionCompatibilitySummary'); summary.textContent = '';
+  for (const key of ['currentReadyCount', 'proposedReadyCount', 'requiredCount']) delete summary.dataset[key];
+  $('missionCompatibilityConsequence').textContent = '';
+  $('missionCompatibilityRows').replaceChildren();
+}
+function missionCompositionCell(statement, side, language) {
+  const result = statement.composition, cell = node('div', undefined, 'mission-composition');
+  cell.dataset.side = side; cell.dataset.status = result.status;
+  cell.append(node('small', (side === 'current' ? 'Current' : 'Proposed') + ' · version ' + language.number, 'mission-cell-version'));
+  const labels = {ok: 'Verified statement', ambiguous: 'Ambiguous selected wording', choice_required: 'Preferred word choice needed', unexpressible: 'Required wording unavailable'};
+  cell.append(node('strong', labels[result.status] ?? 'Generation unavailable', 'mission-cell-status'));
+  if (result.text) cell.append(node('code', result.text, 'mission-expression'));
+  if (result.status === 'ambiguous') {
+    cell.append(node('p', 'The selected wording does not resolve to this one meaning. Another accepted synonym may still work; this check does not choose it.', 'mission-cell-detail'));
+  } else if (result.status !== 'ok') {
+    const roleNames = {actor: 'speaker', verb: 'action', quantity: 'quantity', object: 'thing'};
+    const explanations = result.issues.map(issue => {
+      if (issue.code === 'NO_ACCEPTED_WORD') return 'No accepted word for ' + (roleNames[issue.role] ?? issue.role) + ' “' + String(issue.meaning).replaceAll('_', ' ') + '”.';
+      if (issue.code === 'FORM_CHOICE_REQUIRED') return 'Several accepted forms need a preferred choice for the ' + (roleNames[issue.role] ?? issue.role) + '.';
+      return 'The market cannot generate this required statement with the current word choices.';
+    });
+    cell.append(node('p', explanations.join(' ') || 'No verified generated wording is available.', 'mission-cell-detail'));
+  }
+  return cell;
+}
+function renderMissionCompatibility() {
+  if (!pending) { clearMissionCompatibility(); return; }
+  const panel = $('missionCompatibility');
+  try {
+    if (missionCompatibilityCache?.proposal !== pending || missionCompatibilityCache?.project !== project) {
+      missionCompatibilityCache = {proposal: pending, project, current: analyzeMissionCompatibility(current()), proposed: analyzeMissionCompatibility(pending.candidate)};
+    }
+    const before = missionCompatibilityCache.current, after = missionCompatibilityCache.proposed;
+    const currentLanguage = current(), proposedLanguage = pending.candidate;
+    panel.hidden = false; panel.dataset.analysis = 'complete';
+    panel.dataset.currentVersionId = before.versionId; panel.dataset.proposedVersionId = after.versionId;
+    for (const [id, label, report, language] of [['missionCurrentStatus', 'Current', before, currentLanguage], ['missionProposedStatus', 'Proposed', after, proposedLanguage]]) {
+      const status = $(id); status.dataset.available = String(report.available); status.dataset.versionId = report.versionId;
+      status.replaceChildren(node('small', label + ' · version ' + language.number), node('strong', report.available ? 'New practice available' : 'New practice unavailable'));
+    }
+    const summary = $('missionCompatibilitySummary');
+    summary.dataset.currentReadyCount = String(before.summary.readyCount); summary.dataset.proposedReadyCount = String(after.summary.readyCount); summary.dataset.requiredCount = String(after.summary.requiredCount);
+    summary.textContent = 'Current: ' + before.summary.readyCount + ' of ' + before.summary.requiredCount + ' required statements verified. Proposed: ' + after.summary.readyCount + ' of ' + after.summary.requiredCount + '.';
+    $('missionCompatibilityConsequence').textContent = after.available
+      ? (before.available ? 'New practice remains available under the proposal.' : 'This proposal restores new practice with its selected words.')
+      : (before.available ? 'This proposal would make new practice on version ' + proposedLanguage.number + ' unavailable.' : 'The current version already has unavailable statements. New practice would still be unavailable under this proposal.');
+    const proposedById = new Map(after.statements.map(statement => [statement.id, statement]));
+    const rows = before.statements.map(statement => {
+      const proposed = proposedById.get(statement.id);
+      if (!proposed) throw new Error('A required market statement is missing from the comparison.');
+      const row = node('article', undefined, 'mission-compatibility-row'); row.dataset.statementId = statement.id;
+      const heading = node('div', undefined, 'mission-statement-heading');
+      heading.append(node('span', statement.speaker === 'player' ? 'YOU' : 'TRADER', 'eyebrow'), node('h4', statement.purpose), node('p', semanticGloss(statement.meaning), 'mission-meaning'));
+      const comparison = node('div', undefined, 'mission-statement-comparison');
+      comparison.append(missionCompositionCell(statement, 'current', currentLanguage), missionCompositionCell(proposed, 'proposed', proposedLanguage));
+      row.append(heading, comparison); return row;
+    });
+    $('missionCompatibilityRows').replaceChildren(...rows);
+  } catch (error) {
+    clearMissionCompatibility(); panel.hidden = false; panel.dataset.analysis = 'unavailable';
+    $('missionCompatibilitySummary').textContent = 'Market practice could not be checked for this preview.';
+    $('missionCompatibilityConsequence').textContent = 'The authored-example checks and your explicit acceptance still apply.';
+    $('missionCompatibilityRows').append(node('p', error.message, 'body-copy'));
+  }
+}
 function renderPracticeImpact() {
   if (!pending) {
     practiceImpactCache = null; practiceImpactPage = 0;
@@ -253,7 +327,7 @@ function renderPracticeImpact() {
 }
 function renderImpact() {
   $('impactPanel').hidden = !pending;
-  if (!pending) { renderPracticeImpact(); return; }
+  if (!pending) { renderMissionCompatibility(); renderPracticeImpact(); return; }
   const {summary, examples} = pending.impact;
   $('impactTitle').textContent = 'Review version ' + pending.candidate.number;
   $('impactBadge').textContent = summary.unresolved ? 'Needs resolution' : 'Ready for your decision';
@@ -268,7 +342,7 @@ function renderImpact() {
     row.append(before, node('span', '→', 'arrow'), after);
     return row;
   }));
-  renderPracticeImpact();
+  renderMissionCompatibility(); renderPracticeImpact();
   $('acceptProposal').disabled = summary.unresolved > 0;
 }
 function render() {
@@ -338,14 +412,16 @@ $('proposalForm').addEventListener('submit', event => { event.preventDefault(); 
   if ($('changeKind').value === 'rename') patch.wordChanges = [{entryId: $('renameConcept').value, form: $('renameForm').value}];
   if ($('changeKind').value === 'add') patch.addEntries = [{id: 'word-' + crypto.randomUUID(), role: 'object', meaning: $('newConcept').value.trim(), form: $('newWord').value, gloss: $('newConcept').value.trim().replaceAll('_', ' '), author, rationale, canonical: true}];
   const proposal = proposeRevision(current(), patch); pending = proposal;
-  $('proposalFeedback').textContent = 'Preview only. Review the authored examples and saved practice effects before accepting.'; renderImpact();
+  $('proposalFeedback').textContent = 'Preview only. Review the authored examples, market readiness and saved practice effects before accepting.'; renderImpact();
   $('impactPanel').scrollIntoView({block: 'nearest'});
 }, 'proposalFeedback'); });
 $('acceptProposal').addEventListener('click', () => guarded(() => {
   if (!pending) throw new Error('Review a proposal first.');
   const history = acceptRevision(project.history, pending, {accept: true, author: pending.patch.author});
   const next = validateProject({...project, history, currentVersionId: history.at(-1).versionId, viewVersionId: history.at(-1).versionId});
-  pending = null; commit(next); $('proposalFeedback').textContent = 'Accepted locally. Existing conversations retain their original version. Start a practice from Versions to use the new version.';
+  pending = null; commit(next);
+  const playable = canPlayMission(current());
+  $('proposalFeedback').textContent = 'Accepted locally. Existing conversations retain their original version. ' + (playable.available ? 'Start a practice from Versions to use the new version.' : 'New practice is unavailable with this version’s current word choices. You can use an earlier version in Versions.');
 }, 'proposalFeedback'));
 $('discardProposal').addEventListener('click', () => { pending = null; renderImpact(); $('proposalFeedback').textContent = 'Proposal discarded. Accepted language and practice are unchanged.'; });
 $('inspectForm').addEventListener('submit', event => { event.preventDefault(); guarded(() => {

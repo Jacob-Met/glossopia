@@ -50,6 +50,15 @@
     <section id="impactPanel" class="card impact-card" hidden>
       <div class="card-heading"><div><span class="eyebrow">BEFORE THIS BECOMES OUR LANGUAGE</span><h2 id="impactTitle">What changes?</h2></div><span id="impactBadge" class="pill"></span></div>
       <p id="impactSummary" class="body-copy"></p><div id="impactProblems" class="problems"></div><div id="impactRows" class="impact-rows"></div>
+      <section id="missionCompatibility" class="mission-compatibility" aria-labelledby="missionCompatibilityTitle" hidden>
+        <span class="eyebrow">THE MARKET, IN THESE WORDS</span><h3 id="missionCompatibilityTitle">Can a new practice use this version?</h3>
+        <p class="body-copy">The market needs five statements it can generate with unambiguous meanings. This check uses each version’s current word choices, including the trader’s replies.</p>
+        <div class="mission-version-statuses"><p id="missionCurrentStatus"></p><p id="missionProposedStatus"></p></div>
+        <p id="missionCompatibilitySummary" class="body-copy" role="status"></p>
+        <p id="missionCompatibilityConsequence" class="mission-compatibility-consequence"></p>
+        <div id="missionCompatibilityRows" class="mission-compatibility-rows"></div>
+        <p class="note">This check describes the current market’s word choices, not every possible expression in the language. It does not choose substitute synonyms or add an acceptance requirement. Existing conversations keep their original versions.</p>
+      </section>
       <section class="practice-impact" aria-labelledby="practiceImpactTitle">
         <span class="eyebrow">THE WORDS YOU HAVE USED</span><h3 id="practiceImpactTitle">Saved practice, under the proposal.</h3>
         <p class="body-copy">Compare reusing your saved words under the proposed rules. Each conversation keeps its original language version and interpretation.</p>
@@ -65,7 +74,7 @@
   </section>
   <section id="historyView" class="view" role="tabpanel" aria-labelledby="tab-history" hidden><div class="section-intro"><div><p class="eyebrow">A SHARED MEMORY</p><h1>Change the language.<br><em>Keep its story.</em></h1></div><p>Every accepted revision records what changed and why. Inspect an earlier version or practice with it without rewriting the current language.</p></div><div id="versionList" class="version-list"></div><section class="card practice-history"><span class="eyebrow">YOUR PRACTICE</span><h2>Conversations belong to a version.</h2><div id="practiceRecords"></div></section></section>
   <section class="model-status"><div><span class="eyebrow">CO-CREATION, WITH CLEAR BOUNDARIES</span><h3>You decide what this local project accepts.</h3><p id="modelStatus">The local language studio is available. NVIDIA-assisted proposals through Nebius have not been configured or verified in this build.</p></div><span class="pill">LOCAL STUDIO</span></section>
-  <footer><span>GLOSSOPIA</span><p>A small language. A world to share.</p><span>PRIVATE DEVELOPMENT / 0.3</span></footer>
+  <footer><span>GLOSSOPIA</span><p>A small language. A world to share.</p><span>PRIVATE DEVELOPMENT / 0.4</span></footer>
 </main>
 <div id="toast" class="toast" role="status" hidden></div>
 </body></html>

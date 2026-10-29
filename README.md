@@ -1,6 +1,6 @@
 # GLOSSOPIA — local experimental receiving build
 
-GLOSSOPIA is an invented-language studio with an authored fixed-price trading mission. Version 0.3.0 adds word-order help in practice, building on version 0.2.0 saved-practice proposal review while preserving the original Luma language, transparent parser, mission and immutable version history.
+GLOSSOPIA is an invented-language studio with an authored fixed-price trading mission. Version 0.4.0 adds pre-acceptance market compatibility information, building on version 0.3.0 word-order help and version 0.2.0 saved-practice review while preserving the original language, parser, mission and version history.
 
 ## Run
 
@@ -27,6 +27,20 @@ In Language studio, inspect words and token derivations, preview a sentence-orde
 In Versions, inspect earlier language versions, reopen earlier conversations or start a fresh practice. Existing conversations retain their original version. The header distinguishes latest accepted language, displayed studio language and practice language.
 
 Use Save a copy to download the full validated project JSON. Open reopens such a file. Malformed replacements retain the current project. The browser may also retain a local copy; the interface reports storage failures. Downloaded copies are the portable backup.
+
+## Check market compatibility before accepting a proposal
+
+A language proposal can preserve the authored examples and saved utterances yet prevent a fresh market practice from starting. Compatibility review checks the current exercise’s five required statements: your lantern request, two-pear payment and confirmation, plus the trader’s price and receipt statements.
+
+The result describes whether the current market engine can generate all five statements unambiguously using its existing word-selection rules. A failure may mean a missing word, an unresolved choice among accepted forms, or ambiguity in the selected expression. It does not prove that the language cannot express the meaning: another accepted synonym may work even when the engine’s preferred form does not.
+
+This information supports your decision without adding an acceptance restriction. It does not change the fixed price, stock, inventory transfers or mission progression. Existing conversations remain attached to their historical versions. A compatible result does not guarantee that every sentence you might enter is understood or that you will complete the exchange.
+
+## Verification of version 0.4.0
+
+Source qualification completed successfully on Coordinator3 at 2026-10-29 15:41:37 UTC with Node.js 22.23.4, npm 10.9.9 and Chrome 156.0.8078.47. All 27 maintained tests across seven files, the independent form-choice adversarial receiver, five equivalence cases against the frozen version 0.3 implementation, and five actual-browser checks passed with no recorded browser errors. The receiving lead executed and reported these native results.
+
+Package and Mac receiving are separate exact-artifact checks; no result for those stages is claimed here. Earlier results below retain their original version scope.
 
 ## Recover from a word-order error
 
@@ -86,7 +100,9 @@ Original uncommitted source snapshot SHA-256: 4e9c453985c37f67f46fbe94f9830d6224
 Receiving contributor: estate-6653e323ca46-20261029 and retained internal reviewers.
 Original receiving work record: glossopia-existing-project-reconciliation-20261029.
 Version 0.2.0 work record: glossopia-saved-practice-impact-6653e323.
-Current work record: glossopia-word-order-recovery-6653e323.
+Version 0.3.0 work record: glossopia-word-order-recovery-6653e323.
+Current native work record: https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6501026466.
+Proposed board task `glossopia-mission-compatibility-6653e323` is not yet registered: the primary route timed out and standby snapshot 5032 is read-only. This record does not assert a new board claim.
 Canonical worker prompt fully read: 2026-10-28.25.
 
 The earlier receiving contribution added browser wiring, fixed version-ID construction for long valid language identifiers, corrected narrow interface wording, and supplied maintained tests. Version 0.2.0 added saved-practice proposal impact analysis and its interface. Version 0.3.0 adds version-pinned word-order analysis and an explicit fill-only recovery action. Original source attribution and historical language/session data remain preserved; this work does not modify the original contributor's workspace.
