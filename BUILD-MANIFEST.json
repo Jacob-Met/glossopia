@@ -1,43 +1,41 @@
 {
   "schema": "hamon.glossopia-build.v1",
-  "version": "0.4.0",
-  "worker": "estate-6653e323ca46-20261029",
-  "session": "estate-6653e323ca46-20261029-s1",
+  "version": "0.4.1",
+  "worker": "estate-609204fd-20261029",
+  "session": "estate-609204fd-20261029-s01",
   "prompt_version": "2026-10-28.25",
-  "source_role": "mission compatibility preview contribution; original implementation claim retained",
+  "source_role": "Preserve later work during asynchronous Open; previous implementation and mission compatibility contributions retained",
   "original_source_archive_sha256": "4e9c453985c37f67f46fbe94f9830d6224d0e99e5ea981f0b9f7631d016f6750",
-  "base_git_commit": "609e0b2aba7ff17253e3851d94065d3c85970760",
-  "base_git_tree": "77956718c349ca02384278e4c888bd599b6705cc",
-  "task_id": null,
-  "native_work_record": "https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6501026466",
-  "proposed_board_task_id": "glossopia-mission-compatibility-6653e323",
-  "board_registration": "pending-primary-route-recovery",
-  "created_at": "2026-10-29T15:44:30.704044+00:00",
+  "base_git_commit": "65600cc282efc9361e4efa7403b47a7139310491",
+  "base_git_tree": "a3f19b6ed1d151b6357618e1041c438a7266df12",
+  "task_id": "glossopia-open-preserve-work-609204fd",
+  "task_registration": "proposed; primary board unavailable; native issue 1 comment 6501756636",
+  "created_at": "2026-10-29T16:07:01.487485+00:00",
   "files": [
     {
       "path": "README.md",
-      "bytes": 11681,
-      "sha256": "30054106b572126bbc6ae0a0033d7e486d283541e79abf00c4936835ea2c8ff4"
+      "bytes": 13305,
+      "sha256": "635d7af58fb6d50a97cb62cf50c23426f253be2359bf30ab183d7383e6a63a20"
     },
     {
       "path": "app.mjs",
-      "bytes": 36503,
-      "sha256": "7f7a0a8dbaffcaef960dfaaf5c2f627973a6bf2d7e931532157ef28669668b62"
+      "bytes": 37265,
+      "sha256": "76f559d178af75389c0dc99d524f27ae5bb609eaa62f1fbfe1a6f4c383e96e97"
     },
     {
       "path": "index.html",
-      "bytes": 15253,
-      "sha256": "95e3c2d29c63f615932a3413009f16166807f0038cbf4252ae9dd6373073a01d"
+      "bytes": 15255,
+      "sha256": "56ac09425f7c8b80f98307a347316b577fd52f962aa4f3f83322072793824d40"
     },
     {
       "path": "package.json",
-      "bytes": 455,
-      "sha256": "ea17a41e343696052eb126f974ca289b2d371e9c6601f337b933d56eb4c2f460"
+      "bytes": 513,
+      "sha256": "8dedf7b46fc2f9162e5418d83c4fec0c6aeb4e8b7900a75c3cd29db355dabe5a"
     },
     {
       "path": "server.mjs",
       "bytes": 2376,
-      "sha256": "088433121d7b2949845f09c2291bf61335ed30c33eb91517703e87de69f3286c"
+      "sha256": "8f09999faceb733b42fc43cec815c6a6de83058fc74d71fb2a07b796a0bc1eb2"
     },
     {
       "path": "src/language-core.mjs",
@@ -73,6 +71,11 @@
       "path": "style.css",
       "bytes": 20820,
       "sha256": "e13a392617517da6f1621d83fa8f2511a8f3dbe1a18d5f7f98ca053b5f9a9b3e"
+    },
+    {
+      "path": "test/browser/open-project.mjs",
+      "bytes": 14476,
+      "sha256": "d956db4c0b66006856f914813a5523d74a8cb56880d473995804ae9145580ef5"
     },
     {
       "path": "test/history.test.mjs",

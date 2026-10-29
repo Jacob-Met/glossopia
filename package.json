@@ -1,6 +1,6 @@
 {
   "name": "glossopia",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": true,
   "type": "module",
   "description": "Transparent language co-creation and newcomer trading missions",
@@ -9,7 +9,8 @@
   },
   "scripts": {
     "start": "node server.mjs",
-    "test": "node --test test/*.test.mjs"
+    "test": "node --test test/*.test.mjs",
+    "test:browser": "node test/browser/open-project.mjs"
   },
   "files": [
     "index.html",

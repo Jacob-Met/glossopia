@@ -8,7 +8,17 @@ import {analyzeWordOrder} from './src/word-order.mjs';
 const $ = id => document.getElementById(id);
 const storageKey = 'glossopia-project-v1';
 let project = createProject(starterLanguage), pending = null, hintVisible = false, inspectedVersionId = null;
-let importSelection = 0;
+let importSelection = 0, importWorkRevision = 0;
+// An Open may replace only the work that existed when its file was selected.
+function noteWork() { importWorkRevision++; }
+function canFinishOpen(selection, revision) {
+  if (selection !== importSelection) return false;
+  if (revision !== importWorkRevision) {
+    tell('Open skipped because you made changes. Your work is kept. Select the file again to replace this project.');
+    return false;
+  }
+  return true;
+}
 let toastTimer;
 let practiceImpactCache = null, practiceImpactPage = 0;
 let missionCompatibilityCache = null;
@@ -50,7 +60,7 @@ function persist() {
   catch { persistence = 'Browser saving is unavailable. Your project is in this tab; download a copy before closing it.'; }
   $('saveState').textContent = persistence;
 }
-function commit(next) { project = validateProject(next); clearWordOrderHelp(); persist(); render(); }
+function commit(next) { project = validateProject(next); noteWork(); clearWordOrderHelp(); persist(); render(); }
 function showView(name, focus = false) {
   for (const tab of document.querySelectorAll('[data-view]')) {
     const selected = tab.dataset.view === name;
@@ -134,7 +144,7 @@ function renderMarket() {
     const b = button(entry.form, () => {
       const input = $('sentenceInput'), next = [input.value.trim(), entry.form].filter(Boolean).join(' ');
       if (next.length > 240) { tell('A sentence supports at most 240 characters.'); return; }
-      clearWordOrderHelp(); input.value = next; input.focus();
+      noteWork(); clearWordOrderHelp(); input.value = next; input.focus();
     });
     if ($('showGlosses').checked) b.append(node('small', entry.gloss));
     b.title = entry.role + ': ' + entry.gloss; return b;
@@ -368,12 +378,12 @@ $('sentenceForm').addEventListener('submit', event => { event.preventDefault(); 
   if (result.state.lastResult?.status === 'invalid_syntax') offerWordOrderHelp(language, text);
   $('sentenceInput').focus();
 }, 'sentenceFeedback'); });
-$('sentenceInput').addEventListener('input', clearWordOrderHelp);
-$('clearSentence').addEventListener('click', () => { clearWordOrderHelp(); $('sentenceInput').value = ''; $('sentenceInput').focus(); });
+$('sentenceInput').addEventListener('input', () => { noteWork(); clearWordOrderHelp(); });
+$('clearSentence').addEventListener('click', () => { if ($('sentenceInput').value || wordOrderHelp) noteWork(); clearWordOrderHelp(); $('sentenceInput').value = ''; $('sentenceInput').focus(); });
 $('applyWordOrder').addEventListener('click', () => {
   const context = wordOrderHelp, active = session();
   if (!context || context.project !== project || context.sessionId !== active.id || context.versionId !== active.versionId || $('sentenceInput').value !== '' || context.report?.status !== 'suggested') { clearWordOrderHelp(); return; }
-  $('sentenceInput').value = context.report.suggestion.text;
+  noteWork(); $('sentenceInput').value = context.report.suggestion.text;
   clearWordOrderHelp(); $('sentenceInput').focus();
 });
 $('restartMission').textContent = 'Start a new practice';
@@ -399,11 +409,13 @@ for (const id of ['renameForm', 'newWord']) { $(id).maxLength = 20; $(id).patter
 $('newConcept').pattern = '[a-z][a-z0-9_]{0,39}'; $('newConcept').title = 'Lowercase identifier: start with a letter, then letters, digits or underscores (up to 40 characters).';
 for (const option of $('proposedOrder').options) option.textContent = option.value === 'SOV' ? 'Speaker → quantity → thing → action' : 'Speaker → action → quantity → thing';
 function invalidatePreview() {
+  noteWork();
   if (pending) { pending = null; renderImpact(); $('proposalFeedback').textContent = 'Proposal changed. Review the effects again before acceptance.'; }
 }
 $('proposalForm').addEventListener('input', invalidatePreview);
 $('proposalForm').addEventListener('change', invalidatePreview);
 $('proposalForm').addEventListener('submit', event => { event.preventDefault(); guarded(() => {
+  if (pending) noteWork();
   pending = null; renderImpact();
   if (project.viewVersionId !== project.currentVersionId) throw new Error('Return to the latest accepted version before proposing a change.');
   const id = 'proposal-' + crypto.randomUUID(), author = $('proposalAuthor').value, rationale = $('proposalRationale').value;
@@ -411,7 +423,7 @@ $('proposalForm').addEventListener('submit', event => { event.preventDefault(); 
   if ($('changeKind').value === 'order') patch.order = $('proposedOrder').value;
   if ($('changeKind').value === 'rename') patch.wordChanges = [{entryId: $('renameConcept').value, form: $('renameForm').value}];
   if ($('changeKind').value === 'add') patch.addEntries = [{id: 'word-' + crypto.randomUUID(), role: 'object', meaning: $('newConcept').value.trim(), form: $('newWord').value, gloss: $('newConcept').value.trim().replaceAll('_', ' '), author, rationale, canonical: true}];
-  const proposal = proposeRevision(current(), patch); pending = proposal;
+  const proposal = proposeRevision(current(), patch); pending = proposal; noteWork();
   $('proposalFeedback').textContent = 'Preview only. Review the authored examples, market readiness and saved practice effects before accepting.'; renderImpact();
   $('impactPanel').scrollIntoView({block: 'nearest'});
 }, 'proposalFeedback'); });
@@ -423,9 +435,10 @@ $('acceptProposal').addEventListener('click', () => guarded(() => {
   const playable = canPlayMission(current());
   $('proposalFeedback').textContent = 'Accepted locally. Existing conversations retain their original version. ' + (playable.available ? 'Start a practice from Versions to use the new version.' : 'New practice is unavailable with this version’s current word choices. You can use an earlier version in Versions.');
 }, 'proposalFeedback'));
-$('discardProposal').addEventListener('click', () => { pending = null; renderImpact(); $('proposalFeedback').textContent = 'Proposal discarded. Accepted language and practice are unchanged.'; });
+$('discardProposal').addEventListener('click', () => { if (pending) noteWork(); pending = null; renderImpact(); $('proposalFeedback').textContent = 'Proposal discarded. Accepted language and practice are unchanged.'; });
+$('inspectInput').addEventListener('input', noteWork);
 $('inspectForm').addEventListener('submit', event => { event.preventDefault(); guarded(() => {
-  const result = parse(viewed(), $('inspectInput').value);
+  const result = parse(viewed(), $('inspectInput').value); noteWork();
   $('inspectResult').replaceChildren(node('p', 'Version ' + viewed().number + ': ' + interpretation(result)));
   for (const [index, reading] of result.readings.entries()) {
     const details = node('div'); details.append(node('strong', 'Reading ' + (index + 1) + ': ' + semanticGloss(reading.meaning)));
@@ -444,16 +457,16 @@ $('saveProject').addEventListener('click', () => guarded(() => {
 }));
 $('openProject').addEventListener('click', () => $('projectFile').click());
 $('projectFile').addEventListener('change', async () => {
-  const selection = ++importSelection;
   const file = $('projectFile').files[0]; if (!file) return;
+  const selection = ++importSelection, revision = importWorkRevision;
   let next;
   try {
     if (file.size > 1000000) throw new Error('Choose a project smaller than 1 MB.');
     next = parseProject(await file.text());
-  } catch (error) { if (selection === importSelection) tell('Could not open this file: ' + error.message + ' Your current project is unchanged.'); return; }
+  } catch (error) { if (canFinishOpen(selection, revision)) tell('Could not open this file: ' + error.message + ' Your current project is unchanged.'); return; }
   finally { if (selection === importSelection) $('projectFile').value = ''; }
-  if (selection !== importSelection) return;
-  project = next; pending = null; hintVisible = false; clearWordOrderHelp(); $('sentenceInput').value = ''; $('inspectResult').textContent = ''; $('proposalFeedback').textContent = '';
+  if (!canFinishOpen(selection, revision)) return;
+  project = next; noteWork(); pending = null; hintVisible = false; clearWordOrderHelp(); $('sentenceInput').value = ''; $('inspectResult').textContent = ''; $('proposalFeedback').textContent = '';
   guarded(() => { persist(); render(); tell('Project opened. Earlier conversations and accepted versions are available in Versions.'); });
 });
 try {

@@ -1,6 +1,6 @@
 # GLOSSOPIA — local experimental receiving build
 
-GLOSSOPIA is an invented-language studio with an authored fixed-price trading mission. Version 0.4.0 adds pre-acceptance market compatibility information, building on version 0.3.0 word-order help and version 0.2.0 saved-practice review while preserving the original language, parser, mission and version history.
+GLOSSOPIA is an invented-language studio with an authored fixed-price trading mission. Version 0.4.1 protects newer work while a project file is opening. Version 0.4.0 adds pre-acceptance market compatibility information, building on version 0.3.0 word-order help and version 0.2.0 saved-practice review while preserving the original language, parser, mission and version history.
 
 ## Run
 
@@ -41,6 +41,14 @@ This information supports your decision without adding an acceptance restriction
 Source qualification completed successfully on Coordinator3 at 2026-10-29 15:41:37 UTC with Node.js 22.23.4, npm 10.9.9 and Chrome 156.0.8078.47. All 27 maintained tests across seven files, the independent form-choice adversarial receiver, five equivalence cases against the frozen version 0.3 implementation, and five actual-browser checks passed with no recorded browser errors. The receiving lead executed and reported these native results.
 
 Package and Mac receiving are separate exact-artifact checks; no result for those stages is claimed here. Earlier results below retain their original version scope.
+
+## Keep working while a file opens
+
+Open reads and validates your selected file before replacing the current project. If you continue working while that read is pending, the app keeps your later practice, accepted revisions, sentence or proposal drafts, and inspection results. A notice explains that Open was skipped. Select the file again if you still want to replace the project.
+
+A newly selected file supersedes every earlier selection, even when the newer file is invalid. Cancelling a file chooser without selecting a file leaves an earlier pending Open alone. Merely changing tabs does not cancel Open. Work that predates file selection is still replaced when a valid Open finishes normally.
+
+The regression receiver uses controlled asynchronous file reads in a real browser. To run it, make Playwright available to Node (or set GLOSSOPIA_PLAYWRIGHT to its module path), then run `npm run test:browser`. GLOSSOPIA_CHROME can select an existing Chrome executable, and GLOSSOPIA_EVIDENCE selects the output directory. The browser receiver is optional development tooling; starting the app and running `npm test` still require no dependency installation.
 
 ## Recover from a word-order error
 
@@ -106,3 +114,5 @@ Proposed board task `glossopia-mission-compatibility-6653e323` is not yet regist
 Canonical worker prompt fully read: 2026-10-28.25.
 
 The earlier receiving contribution added browser wiring, fixed version-ID construction for long valid language identifiers, corrected narrow interface wording, and supplied maintained tests. Version 0.2.0 added saved-practice proposal impact analysis and its interface. Version 0.3.0 adds version-pinned word-order analysis and an explicit fill-only recovery action. Original source attribution and historical language/session data remain preserved; this work does not modify the original contributor's workspace.
+
+Version 0.4.1 Open protection: estate-609204fd-20261029 and retained independent reviewers. Base source: 65600cc282efc9361e4efa7403b47a7139310491. Native scope and evidence: https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6501756636. Proposed board task glossopia-open-preserve-work-609204fd remains pending primary recovery; this contribution does not transfer existing ownership.
