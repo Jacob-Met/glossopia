@@ -43,8 +43,8 @@
     },
     {
       "path": "server.mjs",
-      "bytes": 2457,
-      "sha256": "813494dae4963e55201c47d96c4918861a678dd2f2b87c5ca45bceda6618f7af"
+      "bytes": 2555,
+      "sha256": "f486f709372d114eae2c7c877c43ee64225e17aa7074e6acb8f01963a8009c32"
     },
     {
       "path": "src/browser-recovery.mjs",
@@ -184,6 +184,11 @@
       "receipt_recovery": "independent browser receiver",
       "peer_authority": "independent lifecycle review",
       "lead": "source recovery, consumer text, build receiving and integration"
+    },
+    "health_identity_followup": {
+      "base_commit": "4c748d9c693cf508a84a190d15a98a10fda4dc2c",
+      "scope": "Read health version from package.json so the running server identifies the actual package; response shape and asset policy unchanged",
+      "receiving": "Recorded separately against the final extracted package and actual npm start"
     }
   }
 }
