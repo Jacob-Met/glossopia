@@ -16,7 +16,7 @@ const SOURCE_PINS = {
   "src/language-creation.mjs": "62d16a3177bc0ee8e804737dca4f2075a7c20c240b6a059c9c77b52cae6954f6",
   "src/project-archive.mjs": "500c7cedc6dba3b291f9cd5b97f2a9ebe3d21533c6034e8ffa0985055a3d9dd9",
   "src/browser-recovery.mjs": "7f4adb3b77acca76fbb9c666fc9cf5418d579cb8095495a13bb2c00f876f0bc3",
-  "app.mjs": "52c338f5f4e5f5358d876652c71f4548adf0a067d283f78ce420c3af46835d3a",
+  "app.mjs": "0f1a066249dc6c25583df3e02ce1206a66a68655cd06183fee7eacf17c0f6852",
   "index.html": "e1d8e04f467bb6ae1084c7c819065cd1a39166b749efc525c060b062703066fa",
   "style.css": "0a74a2434eb67b0e4a99dae49bdbe7516a4c4fa412b6d376b611343deee46842",
   "package.json": "9f35d7d16ae2dab9c7c569b8d8eca7d033bc31d1874feba5acbec21c7dcb7dab"
