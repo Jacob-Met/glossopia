@@ -1,6 +1,6 @@
 # GLOSSOPIA — local experimental receiving build
 
-GLOSSOPIA is an invented-language studio with an authored fixed-price trading mission. Version 0.6.0 adds a standalone HTML distribution you can open directly in Chrome. It includes version 0.5.1 recovery of unread browser saves and retains version 0.5 creation of a named language you can play, with local snapshots for retaining projects when switching. It builds on market compatibility, word-order help and saved-practice review while preserving the existing parser, fixed-price mission and version history. It also preserves version 0.4.1 protection of newer work while a project file is opening.
+GLOSSOPIA is an invented-language studio with an authored fixed-price trading mission. Version 0.6.1 keeps each practice conversation's unsent sentence separate in the current tab. Version 0.6.0 adds a standalone HTML distribution you can open directly in Chrome. It includes version 0.5.1 recovery of unread browser saves and retains version 0.5 creation of a named language you can play, with local snapshots for retaining projects when switching. It builds on market compatibility, word-order help and saved-practice review while preserving the existing parser, fixed-price mission and version history. It also preserves version 0.4.1 protection of newer work while a project file is opening.
 
 ## Open the standalone HTML
 
@@ -65,6 +65,12 @@ In Language studio, inspect words and token derivations, preview a sentence-orde
 In Versions, inspect earlier language versions, reopen earlier conversations or start a fresh practice. Existing conversations retain their original version. The header distinguishes latest accepted language, displayed studio language and practice language.
 
 Use Save a copy to download the full validated project JSON. Open reopens such a file. Malformed replacements retain the current project. The browser may also retain a local copy; the interface reports storage failures. Downloaded copies are the portable backup.
+
+### Unsent sentences belong to their practice
+
+Switching conversations keeps each practice's unfinished sentence separately in the current tab, including when the conversations use different accepted language versions. A new practice starts with an empty input; returning to an earlier practice restores its exact unsent text. Typing, word-bank insertion and **Use this order** all follow the same rule. Showing a hint or inspecting another view does not reset the current draft. A completed submission or **Clear** leaves that practice's input empty; an error that prevents submission retains it.
+
+These drafts are temporary. They are not part of project JSON, browser saves or retained snapshots, and reloading the app clears them. Successfully opening another project, creating a language or reopening a saved project clears every practice draft. Invalid or superseded Open attempts preserve them. The creation and saved-project notices also account for unfinished text in inactive practices.
 
 ## Create a language and play it
 
