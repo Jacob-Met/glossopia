@@ -52,9 +52,11 @@ Both STANDALONE_FILE and EVIDENCE_DIR are required absolute paths. The receiver 
 
 ## Verification of version 0.6.0
 
-The receiving lead reports that the earlier standalone prototype built from version 0.5 source passed six native offline browser checks. That prototype was 147,193 bytes; its recorded SHA-256 is `c79f93cca1f586438bfd651d8d68d118dce81ac5a395ba8e7009d1056881800e`. These results establish the earlier prototype, not this version 0.6 artifact.
+Version 0.6.0 is integrated through [PR #10](https://github.com/Jacob-Met/glossopia/pull/10) at commit `d36d868386d297852556bc0d735d163d095212c2`. The [private runnable release](https://github.com/Jacob-Met/glossopia/releases/tag/v0.6.0-standalone.20261029.6653e323) was published with 44 assets freshly downloaded and hash-verified by the receiving owner. Its standalone HTML is **161,180 bytes**, SHA-256 `1043319a80487488a34c2d74eaf450cbbb6cf63229c1138169c2ce98d3f1c218`.
 
-This source composes standalone distribution with unread-browser recovery from main `3817c0674560f55c855b4014b7404d4b915d02b1`. Receiving of this exact composed version 0.6 standalone HTML and package is pending. No qualified Mac offline result is claimed here. Each completed receiving report must identify the actual file hash, browser/platform and tested storage/export behavior. Earlier version evidence below retains its original source and artifact scope.
+The receiving owner's exact version 0.6 results were **53 core tests, 85 browser scenarios and 19 offline-file cases on Linux**; the fresh Mac download receiver passed **53 core tests, 64 browser scenarios and 19 offline-file cases**, plus a byte-identical standalone rebuild. The additional 21 Linux-specific recovery browser cases were not repeated on Mac. See the [original receiving and delivery record](https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6504142794) for provenance and limitations. These are source/package/browser results on the reported platforms, not evidence of actual NVIDIA/Nebius inference benefit, an uninvolved newcomer's comprehension, other-platform support or public deployment.
+
+The earlier standalone prototype built from version 0.5 source passed six native offline checks. It was 147,193 bytes, SHA-256 `c79f93cca1f586438bfd651d8d68d118dce81ac5a395ba8e7009d1056881800e`. Those historical prototype results must not be substituted for the qualified version 0.6 release. The original unread-browser recovery remains attributed to the integrated 0.5.1 source at `3817c0674560f55c855b4014b7404d4b915d02b1`.
 
 ## Use
 
