@@ -55,3 +55,18 @@
 .storage-recovery .eyebrow{font-size:10px;margin:0}.recovery-copies{list-style:none;padding:0;margin:16px 0;display:grid;gap:10px}.recovery-copies li{display:flex;align-items:center;flex-wrap:wrap;gap:12px}.recovery-copy-detail,.storage-recovery .recovery-file-note{color:#5c6060;font-size:12px}
 .recovery-actions{display:flex;gap:10px;flex-wrap:wrap}.recovery-confirm{margin-top:20px;padding:20px;border:1px solid #b99b78;border-radius:8px;background:var(--card)}.recovery-actions button{min-height:42px}
 @media(max-width:600px){.storage-recovery{padding:18px 16px}.storage-recovery h2{font-size:21px}.recovery-confirm{padding:15px}.recovery-actions{align-items:stretch}.recovery-actions button{flex:1 1 160px}.recovery-copies li{align-items:flex-start;flex-direction:column;gap:5px}}
+
+/* Accepted vocabulary and sentence-order history. */
+.version-card{min-width:0}
+.version-changes{margin:18px 0 22px;border-top:1px solid var(--line);padding-top:14px}
+.version-changes summary{font-size:12px;line-height:1.6;color:var(--teal);font-weight:600;cursor:pointer}
+.version-changes[open] summary{margin-bottom:10px}
+.version-card .version-changes>.note{margin:10px 0 13px;font-size:11px;line-height:1.7}
+.version-change-list{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+.version-change{padding:12px;border:1px solid var(--line);border-radius:6px;background:#f6f5ed;overflow-wrap:anywhere;font-size:11px}
+.version-change strong{display:block;font-size:12px;line-height:1.5}
+.version-change-context{display:block;margin-top:4px;font-size:11px;color:var(--muted);line-height:1.6}
+.version-card .version-change-value{margin:10px 0 0;color:var(--ink);font-size:13px;line-height:1.9}
+.version-change-before,.version-change-after{padding:2px 5px;border-radius:4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.version-change-before{background:#efe3d8}
+.version-change-after{background:#dfece3}

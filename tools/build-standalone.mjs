@@ -3,7 +3,7 @@ import {createHash} from 'node:crypto';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 
-// GLOSSOPIA 0.6.2 maintained experimental standalone builder.
+// GLOSSOPIA 0.6.3 maintained experimental standalone builder.
 // This tool supports only these reviewed source bytes. Updating a pin
 // requires reviewing syntax, bindings, dependencies and browser policy again.
 const SOURCE_PINS = {
@@ -16,10 +16,11 @@ const SOURCE_PINS = {
   "src/language-creation.mjs": "62d16a3177bc0ee8e804737dca4f2075a7c20c240b6a059c9c77b52cae6954f6",
   "src/project-archive.mjs": "500c7cedc6dba3b291f9cd5b97f2a9ebe3d21533c6034e8ffa0985055a3d9dd9",
   "src/browser-recovery.mjs": "7f4adb3b77acca76fbb9c666fc9cf5418d579cb8095495a13bb2c00f876f0bc3",
-  "app.mjs": "0f1a066249dc6c25583df3e02ce1206a66a68655cd06183fee7eacf17c0f6852",
+  "src/version-history.mjs": "30d1f90e1937da652b4e3b9c6a79bf099ff2e24ac74945d50fb508b9741e4482",
+  "app.mjs": "a7f0a35cbc11aa6c76888c038d97bf4d637c168b81b20b3bec27cdbfd050efb1",
   "index.html": "e1d8e04f467bb6ae1084c7c819065cd1a39166b749efc525c060b062703066fa",
-  "style.css": "0a74a2434eb67b0e4a99dae49bdbe7516a4c4fa412b6d376b611343deee46842",
-  "package.json": "9f35d7d16ae2dab9c7c569b8d8eca7d033bc31d1874feba5acbec21c7dcb7dab"
+  "style.css": "69049064a1ea0f13e1bb43dad84de1ef82eb7031c65e953bc9f6d1af53926fa4",
+  "package.json": "761bb3ae3466c80a42986bc52407b6bec518e7526a85d08503a7cfa4682001d0"
 };
 
 const MODULES = Object.keys(SOURCE_PINS).filter(name => name.endsWith('.mjs'));
@@ -80,7 +81,7 @@ for (const [name, expected] of Object.entries(SOURCE_PINS)) {
 }
 const sourcePackage = JSON.parse(sources.get('package.json'));
 assert.equal(sourcePackage.name, 'glossopia');
-assert.equal(sourcePackage.version, '0.6.2');
+assert.equal(sourcePackage.version, '0.6.3');
 const completed = new Map();
 const javascript = 'const modules = Object.create(null);\n' + MODULES.map(name => transform(name, sources.get(name), completed)).join('\n');
 const css = sources.get('style.css');
@@ -101,4 +102,4 @@ html = once(html, '<head>', '<head><meta http-equiv="Content-Security-Policy" co
 await writeFile(outputPath, html, {flag: 'wx'});
 console.log(JSON.stringify({prototype: false, experimental: true, sourcePackage: {name: sourcePackage.name, version: sourcePackage.version, requiredNode: sourcePackage.engines.node, sha256: SOURCE_PINS['package.json']}, sourceRoot, outputPath, bytes: Buffer.byteLength(html), sha256: digest(html), sourceFiles: SOURCE_PINS,
   runtimeQualification: 'separate exact-artifact receiving required',
-  scope: 'Maintained experimental 0.6.2 build from verified source and package bytes. This build report does not establish browser, file-origin storage, CSP or usability qualification; retain the separate exact-artifact receiving reports.'}, null, 2));
+  scope: 'Maintained experimental 0.6.3 build from verified source and package bytes. This build report does not establish browser, file-origin storage, CSP or usability qualification; retain the separate exact-artifact receiving reports.'}, null, 2));

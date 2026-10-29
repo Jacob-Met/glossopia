@@ -1,6 +1,6 @@
 # GLOSSOPIA — local experimental receiving build
 
-GLOSSOPIA is an invented-language studio with an authored fixed-price trading mission. Version 0.6.1 keeps each practice conversation's unsent sentence separate in the current tab. Version 0.6.0 adds a standalone HTML distribution you can open directly in Chrome. It includes version 0.5.1 recovery of unread browser saves and retains version 0.5 creation of a named language you can play, with local snapshots for retaining projects when switching. It builds on market compatibility, word-order help and saved-practice review while preserving the existing parser, fixed-price mission and version history. It also preserves version 0.4.1 protection of newer work while a project file is opening.
+GLOSSOPIA is an invented-language studio with an authored fixed-price trading mission. Version 0.6.3 shows accepted changes to words and sentence order in Versions, including after you reload or open an exported project. It includes version 0.6.2 feedback explaining which part of a sentence differs from the current market goal, and version 0.6.1 separate unsent sentences for each practice in the current tab. Version 0.6.0 adds a standalone HTML distribution you can open directly in Chrome. It includes version 0.5.1 recovery of unread browser saves and retains version 0.5 creation of a named language you can play, with local snapshots for retaining projects when switching. It builds on market compatibility, word-order help and saved-practice review while preserving the existing parser, fixed-price mission and version history. It also preserves version 0.4.1 protection of newer work while a project file is opening.
 
 ## Open the standalone HTML
 
@@ -65,6 +65,16 @@ In Language studio, inspect words and token derivations, preview a sentence-orde
 In Versions, inspect earlier language versions, reopen earlier conversations or start a fresh practice. Existing conversations retain their original version. The header distinguishes latest accepted language, displayed studio language and practice language.
 
 Use Save a copy to download the full validated project JSON. Open reopens such a file. Malformed replacements retain the current project. The browser may also retain a local copy; the interface reports storage failures. Downloaded copies are the portable backup.
+
+### Review accepted changes to words and sentence order
+
+Each accepted revision after version 1 has a **Words and sentence order** comparison with the previous accepted version. The latest comparison starts open. It shows old and new word forms, meanings, glossary labels and preferred-form choices, plus added or removed words and changes to sentence order. The comparison comes from the saved version snapshots, so it remains available after the proposal preview closes, after a reload, and after opening a valid project file.
+
+Changes use each word's retained identity. Changing a word's meaning is labelled **Meaning**; changing its written form is labelled **Word form**. A removed word and a new word with a different identity appear separately, even when they have the same spelling. Earlier accepted words remain available for historical inspection and practice.
+
+This comparison covers vocabulary and sentence order. It does not compare examples, authorship or other metadata. A revision with only those changes says **No vocabulary or sentence-order differences in this comparison**; the author and reason still appear above it. Reading the comparison does not modify the project or any conversation.
+
+Developers can run the optional actual-browser receiver with `npm run test:browser:history`. It uses the same existing Playwright and Chrome configuration variables as the Open receiver below. Set `GLOSSOPIA_URL` to a `file:///absolute/path/to/app.html` URL to check a built standalone file; otherwise it starts the package's loopback server. Record the exact package or HTML hash with the receiving report.
 
 ### Unsent sentences belong to their practice
 
