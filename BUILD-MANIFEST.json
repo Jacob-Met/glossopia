@@ -1,46 +1,53 @@
 {
   "schema": "hamon.glossopia-build.v1",
-  "version": "0.4.1",
-  "worker": "estate-609204fd-20261029",
-  "session": "estate-609204fd-20261029-s01",
+  "version": "0.5.0",
+  "worker": "estate-6653e323ca46-20261029",
+  "session": "estate-6653e323ca46-20261029-s1",
   "prompt_version": "2026-10-28.25",
-  "source_role": "Preserve later work during asynchronous Open; previous implementation and mission compatibility contributions retained",
+  "source_role": "named-language creation and local snapshots composed with PR6 Open protection; original and concurrent contributions retained",
   "original_source_archive_sha256": "4e9c453985c37f67f46fbe94f9830d6224d0e99e5ea981f0b9f7631d016f6750",
-  "base_git_commit": "65600cc282efc9361e4efa7403b47a7139310491",
-  "base_git_tree": "a3f19b6ed1d151b6357618e1041c438a7266df12",
-  "task_id": "glossopia-open-preserve-work-609204fd",
-  "task_registration": "proposed; primary board unavailable; native issue 1 comment 6501756636",
-  "created_at": "2026-10-29T16:07:01.487485+00:00",
+  "base_git_commit": "320b81e4c612bdab75d2766e99ec4e912d54d937",
+  "base_git_tree": "bd88e6a4318f1e3b2c2ad065ded7d46aed7277cf",
+  "task_id": null,
+  "native_work_record": "https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6501724678",
+  "proposed_board_task_id": "glossopia-language-creation-6653e323",
+  "board_registration": "pending-authority-reconciliation",
+  "created_at": "2026-10-29T16:30:22.449748+00:00",
   "files": [
     {
       "path": "README.md",
-      "bytes": 13305,
-      "sha256": "635d7af58fb6d50a97cb62cf50c23426f253be2359bf30ab183d7383e6a63a20"
+      "bytes": 18107,
+      "sha256": "442410092e49e5f8c068e6aba687c56c4d5e913c64c63b8821e55552ad58981f"
     },
     {
       "path": "app.mjs",
-      "bytes": 37265,
-      "sha256": "76f559d178af75389c0dc99d524f27ae5bb609eaa62f1fbfe1a6f4c383e96e97"
+      "bytes": 48854,
+      "sha256": "4f7a5d400be050ae430dc34621c0a9a7a58efc38ef4dc6769d81c3a387476237"
     },
     {
       "path": "index.html",
-      "bytes": 15255,
-      "sha256": "56ac09425f7c8b80f98307a347316b577fd52f962aa4f3f83322072793824d40"
+      "bytes": 18911,
+      "sha256": "8a240143cd5dc85165925751ab98ffa1480eee424ce834ea36d48552209e5f3c"
     },
     {
       "path": "package.json",
       "bytes": 513,
-      "sha256": "8dedf7b46fc2f9162e5418d83c4fec0c6aeb4e8b7900a75c3cd29db355dabe5a"
+      "sha256": "b35c480638a0c77d683d4a151f70bee4d135b95ee283289a200cec5d4dcf3604"
     },
     {
       "path": "server.mjs",
-      "bytes": 2376,
-      "sha256": "8f09999faceb733b42fc43cec815c6a6de83058fc74d71fb2a07b796a0bc1eb2"
+      "bytes": 2430,
+      "sha256": "da39d9ffb1020adfc7f10ed807c9e8fcb3f966995bcc78e52d1d4ae64ba70b21"
     },
     {
       "path": "src/language-core.mjs",
       "bytes": 18458,
       "sha256": "60b988221a2170e3209ee9ccefdd3fe3437d72f91a9126f16c5f7a71dd39776a"
+    },
+    {
+      "path": "src/language-creation.mjs",
+      "bytes": 3979,
+      "sha256": "62d16a3177bc0ee8e804737dca4f2075a7c20c240b6a059c9c77b52cae6954f6"
     },
     {
       "path": "src/mission-core.mjs",
@@ -51,6 +58,11 @@
       "path": "src/practice-impact.mjs",
       "bytes": 5213,
       "sha256": "5acc58332d24938a5ab38ada9eaab0525cceeb98926d848729078a33a9845d4b"
+    },
+    {
+      "path": "src/project-archive.mjs",
+      "bytes": 5296,
+      "sha256": "500c7cedc6dba3b291f9cd5b97f2a9ebe3d21533c6034e8ffa0985055a3d9dd9"
     },
     {
       "path": "src/project.mjs",
@@ -69,8 +81,8 @@
     },
     {
       "path": "style.css",
-      "bytes": 20820,
-      "sha256": "e13a392617517da6f1621d83fa8f2511a8f3dbe1a18d5f7f98ca053b5f9a9b3e"
+      "bytes": 25238,
+      "sha256": "d1ba1c532aafbef2ebfc013d59f563d061fc10cc7ad062d5fc11132d12b4cacf"
     },
     {
       "path": "test/browser/open-project.mjs",
@@ -86,6 +98,11 @@
       "path": "test/id-boundaries.test.mjs",
       "bytes": 1690,
       "sha256": "8a15f5b40e97120396af3b7e7e7aba1d473d4401640ddc82d76ffb5976052061"
+    },
+    {
+      "path": "test/language-creation.test.mjs",
+      "bytes": 5049,
+      "sha256": "e5760c70d45a5a64abebdd5548c80adec0cd7c0ce607ef3260292518df0b0c19"
     },
     {
       "path": "test/long-language-id.test.mjs",
@@ -108,9 +125,20 @@
       "sha256": "db28cd588f8f2809cc7c64de296138bdd6695ad28fc3c3437f48865c9e78977a"
     },
     {
+      "path": "test/project-archive.test.mjs",
+      "bytes": 7192,
+      "sha256": "ac80409608134ccddd4b78d76d280a7fdfff08a27667ac4e9e300fe0170c970a"
+    },
+    {
       "path": "test/word-order.test.mjs",
       "bytes": 5302,
       "sha256": "62390e7118bb46640d252762d8f9fe987dc9078c1f77809249177de4f5d9f950"
     }
-  ]
+  ],
+  "concurrent_contribution": {
+    "source_commit": "320b81e4c612bdab75d2766e99ec4e912d54d937",
+    "worker": "estate-609204fd-20261029",
+    "pull_request": 6,
+    "composition_record": "https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6502333091"
+  }
 }

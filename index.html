@@ -5,7 +5,7 @@
 <header class="topbar">
   <a class="brand" href="/" aria-label="Glossopia home"><svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><path d="M5 8h17v15H13l-6 5v-5H5z" fill="#d77759"/><path d="M15 4h16v17h-2l-5 5v-5h-9z" fill="#286c66"/><path d="M20 10h6m-6 5h6" stroke="#fff8ea" stroke-width="2" stroke-linecap="round"/></svg><span>GLOSSOPIA<small>A LANGUAGE WE MAKE TOGETHER</small></span></a>
   <nav class="view-tabs" role="tablist" aria-label="Studio views"><button id="tab-market" role="tab" aria-selected="true" aria-controls="marketView" data-view="market">The market</button><button id="tab-studio" role="tab" aria-selected="false" aria-controls="studioView" data-view="studio">Language studio</button><button id="tab-history" role="tab" aria-selected="false" aria-controls="historyView" data-view="history">Versions</button></nav>
-  <div class="file-actions"><button id="openProject" class="quiet">Open</button><button id="saveProject" class="dark">Save a copy <span aria-hidden="true">↗</span></button><input id="projectFile" type="file" accept=".json,application/json" hidden></div>
+  <div class="file-actions"><button id="newLanguage">New language</button><button id="savedProjects" class="quiet">Saved projects</button><button id="openProject" class="quiet">Open</button><button id="saveProject" class="dark">Save a copy <span aria-hidden="true">↗</span></button><input id="projectFile" type="file" accept=".json,application/json" hidden></div>
 </header>
 <main>
   <div class="language-strip"><span><i class="status-dot"></i><strong id="languageName">The starter language</strong><span class="strip-divider">/</span><span id="languageVersion">Accepted version 1</span></span><span id="saveState">Save a copy to keep a portable project file.</span></div>
@@ -74,8 +74,38 @@
   </section>
   <section id="historyView" class="view" role="tabpanel" aria-labelledby="tab-history" hidden><div class="section-intro"><div><p class="eyebrow">A SHARED MEMORY</p><h1>Change the language.<br><em>Keep its story.</em></h1></div><p>Every accepted revision records what changed and why. Inspect an earlier version or practice with it without rewriting the current language.</p></div><div id="versionList" class="version-list"></div><section class="card practice-history"><span class="eyebrow">YOUR PRACTICE</span><h2>Conversations belong to a version.</h2><div id="practiceRecords"></div></section></section>
   <section class="model-status"><div><span class="eyebrow">CO-CREATION, WITH CLEAR BOUNDARIES</span><h3>You decide what this local project accepts.</h3><p id="modelStatus">The local language studio is available. NVIDIA-assisted proposals through Nebius have not been configured or verified in this build.</p></div><span class="pill">LOCAL STUDIO</span></section>
-  <footer><span>GLOSSOPIA</span><p>A small language. A world to share.</p><span>PRIVATE DEVELOPMENT / 0.4.1</span></footer>
+  <footer><span>GLOSSOPIA</span><p>A small language. A world to share.</p><span>PRIVATE DEVELOPMENT / 0.5</span></footer>
 </main>
+<dialog id="languageCreationDialog" class="project-dialog" aria-labelledby="newLanguageTitle">
+  <div class="dialog-heading"><div><span class="eyebrow">WORDS OF YOUR OWN</span><h2 id="newLanguageTitle">Make a language. Bring it to the market.</h2></div><button id="cancelCreation" type="button">Cancel</button></div>
+  <p class="body-copy">Name a small invented language and choose its ten words. The market keeps its familiar meanings; the words and sentence order are yours to decide.</p>
+  <form id="languageCreationForm" novalidate>
+    <div class="creation-identity">
+      <label>Language name<input id="creationName" maxlength="80" autocomplete="off" required></label>
+      <label>Author name (self-entered)<input id="creationAuthor" maxlength="80" autocomplete="off" required></label>
+      <label>Sentence order<select id="creationOrder"><option value="SOV">Speaker → quantity → thing → action</option><option value="SVO">Speaker → action → quantity → thing</option></select></label>
+    </div>
+    <p class="note">Use 1–20 letters, a–z, for each word. Uppercase letters become lowercase and surrounding spaces are trimmed. The preview checks the resulting sentences for clear meanings.</p>
+    <div id="creationWords" class="creation-words"></div>
+    <label class="creation-rationale">A note about your language (optional)<input id="creationRationale" maxlength="240" autocomplete="off" placeholder="What would you like these words to feel like?"></label>
+    <div class="dialog-actions"><button id="reviewCreation" type="submit" class="dark">Review my language</button></div>
+  </form>
+  <p id="creationFeedback" class="feedback" role="status"></p>
+  <section id="creationPreview" class="creation-review" aria-labelledby="creationTitle" hidden>
+    <span class="eyebrow">YOUR WORDS, IN USE</span><h3 id="creationTitle"></h3><p id="creationByline" class="body-copy"></p>
+    <p id="creationMissionSummary" class="body-copy"></p><div id="creationExamples"></div>
+    <p id="creationReplacement" class="body-copy"></p>
+    <p id="creationDraftNotice" class="notice" hidden>Your current unaccepted proposal and typed input are not part of the retained snapshot. Creating clears those drafts; Cancel keeps them in the current project.</p>
+    <div class="dialog-actions"><button id="createLanguage" type="button" class="dark" disabled>Create and open language</button><button id="exportCreatedLanguage" type="button" disabled>Download new project</button></div>
+    <p class="note">Saved projects stays in this browser and can be cleared by browser settings. Download copies for a portable backup. Creating changes no earlier accepted versions or conversations.</p>
+  </section>
+</dialog>
+<dialog id="projectArchiveDialog" class="project-dialog" aria-labelledby="archiveTitle">
+  <div class="dialog-heading"><div><span class="eyebrow">LANGUAGES YOU HAVE KEPT</span><h2 id="archiveTitle">Saved projects</h2></div><button id="closeArchive" type="button">Close</button></div>
+  <p class="body-copy">Accepted project snapshots retained before you created or reopened a language. Opening one first retains the project you are leaving. These copies are local to this browser; download a snapshot to keep it elsewhere.</p>
+  <p id="archiveDraftNotice" class="notice" hidden>Opening a saved project clears the current unaccepted proposal and typed input. The retained snapshot includes accepted versions and conversations.</p>
+  <p id="archiveFeedback" class="feedback" role="status"></p><div id="archivedProjects"></div>
+</dialog>
 <div id="toast" class="toast" role="status" hidden></div>
 </body></html>
 
