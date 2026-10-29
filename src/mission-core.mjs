@@ -57,10 +57,26 @@ export function startMission(versionInput,id='practice-1'){
   const v=validateVersion(versionInput);requirePlayable(v);
   return validateSession({id,versionId:v.versionId,inputs:[],hintsUsed:0},v);
 }
+// Compare the understood sentence with this conversation's current goal.
+// Guidance names English meanings only; the explicit language hint stays separate.
+function nextMeaningCorrection(meaning,expected,stage){
+  if(meaning.actor!==expected.actor)return 'Speak for yourself with the word for I.';
+  if(meaning.verb!==expected.verb){
+    const purpose={request:'to ask for the item',give:'to pay the trader',have:'to confirm what you received'};
+    return 'Use the word for "'+expected.verb+'" '+purpose[expected.verb]+'.';
+  }
+  if(meaning.object!==expected.object){
+    const action=['Ask for','Pay with','Confirm that you have'][stage];
+    return action+' '+expected.object.replaceAll('_',' ')+'.';
+  }
+  if(meaning.quantity!==expected.quantity){
+    return 'Use a quantity of '+expected.quantity+' for this '+['request','payment','confirmation'][stage]+'.';
+  }
+  return '';
+}
 function offGoal(meaning,stage,inventory){
   const understood='Understood: '+describeMeaning(meaning)+' ';
   if(!['pear','lantern'].includes(meaning.object))return understood+'This trader has no exchange for that item. Language can name things the market does not stock.';
-  if(meaning.actor!=='i')return understood+'Speak for yourself with the word for I.';
   if(stage===0)return understood+'First ask for exactly one lantern. Nothing has moved from your bag.';
   if(stage===1)return understood+'The agreed price is exactly two pears. Your bag is unchanged.';
   if(stage===2)return understood+'The exchange is already complete: you have '+inventory.pear+' pear and '+inventory.lantern+' lantern. Confirm that you have one lantern.';
@@ -79,6 +95,7 @@ export function replayMission(versionInput,sessionInput){
     else if(parsed.status!=='ok'){status='invalid_syntax';feedback='Those words do not form a sentence under this version’s '+v.grammar.order+' rule. Use who, an action, a quantity and a thing in the displayed order.';}
     else if(!meaningsEqual(parsed.meaning,starterMission.stages[stage].expected)){
       status='off_goal';feedback=offGoal(parsed.meaning,stage,inventory);
+      feedback+=' '+nextMeaningCorrection(parsed.meaning,starterMission.stages[stage].expected,stage);
     }else{
       status='accepted';
       if(stage===0){
