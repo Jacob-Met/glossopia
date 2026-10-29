@@ -238,8 +238,8 @@
     },
     {
       "path": "server.mjs",
-      "bytes": 2457,
-      "sha256": "1601962b00ec1c6a5c07a1ff9ecacb8f45559968958e96859953b27ace585a1e"
+      "bytes": 2555,
+      "sha256": "f486f709372d114eae2c7c877c43ee64225e17aa7074e6acb8f01963a8009c32"
     },
     {
       "path": "src/browser-recovery.mjs",
@@ -371,5 +371,13 @@
       "bytes": 7849,
       "sha256": "c0f30d2bef2db633230934dbb189aa03e6a5813bc787d9dab9aa05284c93b7e9"
     }
-  ]
+  ],
+  "health_identity_contribution": {
+    "worker": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
+    "task_id": "glossopia-practice-sentence-drafts-02c95f09",
+    "base_commit": "9cccb2b3434439aa6981287ffef7aa6383708692",
+    "previous_reviewed_head": "4e358c222635cc0eb5c7f5db5b36536d037349e0",
+    "scope": "Read health version from included package metadata while preserving the integrated step feedback and practice drafts",
+    "receiving": "Separate exact-package npm-start receipt; original 0.6.1 candidate and conflict receipt preserved"
+  }
 }
