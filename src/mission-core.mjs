@@ -2,6 +2,32 @@ import {validateVersion,parse,compose,meaningsEqual,semanticGloss} from './langu
 import {starterMission} from './starter-language.mjs';
 const clone=x=>JSON.parse(JSON.stringify(x));
 const sessionId=/^[A-Za-z][A-Za-z0-9_-]{0,79}$/;
+function freeze(value){
+  if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.values(value).forEach(freeze);Object.freeze(value);}
+  return value;
+}
+const merchantStatements=freeze({
+  price:{id:'merchant-price',speaker:'merchant',purpose:'Trader states the price.',meaning:{actor:'i',verb:'request',object:'pear',quantity:2}},
+  receipt:{id:'merchant-receipt',speaker:'merchant',purpose:'Trader confirms the received lantern.',meaning:{actor:'you',verb:'have',object:'lantern',quantity:1}}
+});
+function missionRequirements(){
+  return [...starterMission.stages.map(stage=>({id:'player-'+stage.id,speaker:'player',purpose:stage.goal,meaning:stage.expected})),
+    merchantStatements.price,merchantStatements.receipt];
+}
+function compatibilityValidated(version){
+  const statements=missionRequirements().map(requirement=>{
+    const composition=compose(version,requirement.meaning);
+    return {...clone(requirement),composition,available:composition.status==='ok'};
+  });
+  const readyCount=statements.filter(statement=>statement.available).length;
+  return freeze({versionId:version.versionId,missionId:starterMission.id,available:readyCount===statements.length,
+    summary:{requiredCount:statements.length,readyCount,unavailableCount:statements.length-readyCount},statements});
+}
+// Availability describes the current engine's selected forms. Other accepted
+// synonyms may exist; this report does not claim global expressibility.
+export function analyzeMissionCompatibility(versionInput){
+  return compatibilityValidated(validateVersion(structuredClone(versionInput)));
+}
 export function describeMeaning(m){
   const actor=m.actor==='i'?'I':'You',verb=m.verb==='request'?'want':m.verb;
   const quantity=({1:'one',2:'two',3:'three'})[m.quantity]??String(m.quantity);
@@ -9,10 +35,7 @@ export function describeMeaning(m){
   return actor+' '+verb+' '+quantity+' '+noun+'.';
 }
 function requirePlayable(v){
-  const meanings=[...starterMission.stages.map(s=>s.expected),
-    {actor:'i',verb:'request',object:'pear',quantity:2},{actor:'you',verb:'have',object:'lantern',quantity:1}];
-  const unresolved=meanings.filter(m=>compose(v,m).status!=='ok');
-  if(unresolved.length)throw new Error('This language version cannot express every required market statement unambiguously.');
+  if(!compatibilityValidated(v).available)throw new Error('The current mission engine cannot generate every required market statement unambiguously using its selected word forms.');
 }
 export function canPlayMission(version){
   try{requirePlayable(validateVersion(version));return {available:true,reason:null};}
@@ -59,13 +82,13 @@ export function replayMission(versionInput,sessionInput){
     }else{
       status='accepted';
       if(stage===0){
-        const reply=compose(v,{actor:'i',verb:'request',object:'pear',quantity:2});
+        const reply=compose(v,merchantStatements.price.meaning);
         events.push({speaker:'merchant',text:reply.text,meaning:reply.meaning,status:'offer'});
         feedback='The trader asks for two pears. Your request has not moved any inventory.';
       }else if(stage===1){
         if(inventory.pear<2)throw new Error('The exchange has insufficient inventory.');
         inventory.pear-=2;inventory.lantern+=1;
-        const reply=compose(v,{actor:'you',verb:'have',object:'lantern',quantity:1});
+        const reply=compose(v,merchantStatements.receipt.meaning);
         events.push({speaker:'merchant',text:reply.text,meaning:reply.meaning,status:'receipt'});
         feedback='Two pears exchanged for one lantern. Now confirm what you received.';
       }else{
