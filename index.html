@@ -9,6 +9,21 @@
 </header>
 <main>
   <div class="language-strip"><span><i class="status-dot"></i><strong id="languageName">The starter language</strong><span class="strip-divider">/</span><span id="languageVersion">Accepted version 1</span></span><span id="saveState">Save a copy to keep a portable project file.</span></div>
+  <section id="storageRecovery" class="storage-recovery" aria-labelledby="storageRecoveryTitle" hidden>
+    <div class="recovery-heading"><p class="eyebrow">YOUR SAVED DATA</p><h2 id="storageRecoveryTitle">Keep the original while you recover.</h2></div>
+    <p id="recoveryMessage" role="status"></p>
+    <p>Your current practice is separate. Use <strong>Save a copy</strong> above to keep the project in this tab. Sentence and proposal drafts are not included.</p>
+    <ul id="recoveryCopies" class="recovery-copies"></ul>
+    <p id="recoveryNoCopy" hidden>No saved text has been captured yet. Check browser storage again to see whether a recovery copy is available.</p>
+    <p class="recovery-file-note">A recovery file preserves saved text for repair. It is not a project you can open in GLOSSOPIA.</p>
+    <div class="recovery-actions"><button id="reviewRecovery" type="button">Check saved data</button><button id="replaceRecovery" type="button">Review replacement of saved data</button></div>
+    <div id="recoveryConfirm" class="recovery-confirm" role="group" aria-labelledby="recoveryConfirmTitle" hidden>
+      <h3 id="recoveryConfirmTitle">Replace the saved browser data?</h3>
+      <p id="recoveryReplacementSummary"></p>
+      <p>The previous saved value will be replaced. Sentence and proposal drafts are not part of the saved project. Requesting a recovery download does not prove that you kept the file. Cancel to keep practicing without replacing it.</p>
+      <div class="recovery-actions"><button id="confirmRecoveryReplace" type="button" class="dark">Replace browser copy</button><button id="cancelRecoveryReplace" type="button">Cancel</button></div>
+    </div>
+  </section>
   <section id="marketView" class="view" role="tabpanel" aria-labelledby="tab-market">
     <div class="hero"><div><p class="eyebrow">SMALL WORDS. SHARED POSSIBILITIES.</p><h1>Make yourself<br><em>understood.</em></h1><p class="hero-copy">A lantern for the walk home. A few pears to trade.<br>Meet a little language by using it.</p></div><div class="market-art" aria-hidden="true"><div class="art-halo"></div><svg viewBox="0 0 390 240"><path d="M40 205h310" stroke="#bbc5bb" stroke-width="2"/><path d="M90 190V90m220 100V90" stroke="#69594a" stroke-width="8"/><path d="M70 55h260l22 40H48z" fill="#d77759"/><path d="M70 55h52l-9 40H48zm104 0h52l5 40h-66zm104 0h52l22 40h-65z" fill="#f2c3a3"/><path d="M48 95h304v14q-15 20-30 0-15 20-30 0-15 20-30 0-15 20-30 0-15 20-30 0-15 20-30 0-15 20-30 0-15 20-30 0-15 20-34 0z" fill="#d77759"/><rect x="78" y="176" width="245" height="25" rx="3" fill="#c8a782"/><path d="M92 201v23m216-23v23" stroke="#69594a" stroke-width="8"/><g transform="translate(248 121)"><path d="M-10 0q0-19 14-19T18 0" fill="none" stroke="#395c5b" stroke-width="3"/><path d="M-17 0h42l-5 44h-32z" fill="#edce76" stroke="#395c5b" stroke-width="3"/><path d="M-20 0h48M-13 44h35" stroke="#395c5b" stroke-width="5"/><path d="M4 7v30" stroke="#fff5c8" stroke-width="5"/></g><g fill="#729a6c"><path d="M126 172c-28 0-22-25-13-34 6-6 4-13 13-13s7 7 13 13c9 9 15 34-13 34"/><path d="M160 175c-23 0-18-22-10-30 5-5 3-11 10-11s6 6 11 11c8 8 13 30-11 30"/></g><path d="M126 127q-3-13 9-18m25 26q-4-10 4-18" fill="none" stroke="#395c5b" stroke-width="3"/><g fill="#e2cdb1"><ellipse cx="191" cy="172" rx="15" ry="4"/><ellipse cx="191" cy="166" rx="15" ry="4"/><ellipse cx="191" cy="160" rx="15" ry="4"/></g><path d="M25 157q15-8 25 0m286-29q17-10 29 0" fill="none" stroke="#bac6b6" stroke-width="2"/></svg><span class="art-caption">THE LANTERN MARKET</span></div></div>
     <div class="market-layout">
@@ -74,7 +89,7 @@
   </section>
   <section id="historyView" class="view" role="tabpanel" aria-labelledby="tab-history" hidden><div class="section-intro"><div><p class="eyebrow">A SHARED MEMORY</p><h1>Change the language.<br><em>Keep its story.</em></h1></div><p>Every accepted revision records what changed and why. Inspect an earlier version or practice with it without rewriting the current language.</p></div><div id="versionList" class="version-list"></div><section class="card practice-history"><span class="eyebrow">YOUR PRACTICE</span><h2>Conversations belong to a version.</h2><div id="practiceRecords"></div></section></section>
   <section class="model-status"><div><span class="eyebrow">CO-CREATION, WITH CLEAR BOUNDARIES</span><h3>You decide what this local project accepts.</h3><p id="modelStatus">The local language studio is available. NVIDIA-assisted proposals through Nebius have not been configured or verified in this build.</p></div><span class="pill">LOCAL STUDIO</span></section>
-  <footer><span>GLOSSOPIA</span><p>A small language. A world to share.</p><span>PRIVATE DEVELOPMENT / 0.5</span></footer>
+  <footer><span>GLOSSOPIA</span><p>A small language. A world to share.</p><span>PRIVATE DEVELOPMENT / 0.5.1</span></footer>
 </main>
 <dialog id="languageCreationDialog" class="project-dialog" aria-labelledby="newLanguageTitle">
   <div class="dialog-heading"><div><span class="eyebrow">WORDS OF YOUR OWN</span><h2 id="newLanguageTitle">Make a language. Bring it to the market.</h2></div><button id="cancelCreation" type="button">Cancel</button></div>

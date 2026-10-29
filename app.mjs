@@ -6,15 +6,18 @@ import {analyzePracticeImpact} from './src/practice-impact.mjs';
 import {analyzeWordOrder} from './src/word-order.mjs';
 import {createLanguage} from './src/language-creation.mjs';
 import {readArchivedProjects, preserveAndReplaceProject} from './src/project-archive.mjs';
+import {createProjectRecovery, serializeRecoveryCopy} from './src/browser-recovery.mjs';
 
 const $ = id => document.getElementById(id);
 const storageKey = 'glossopia-project-v1';
+const recovery = createProjectRecovery({read: () => localStorage.getItem(storageKey), write: text => localStorage.setItem(storageKey, text), parseProject, serializeProject});
+let recoveryReview = null, recoveryNotice = '';
 let project = createProject(starterLanguage), pending = null, hintVisible = false, inspectedVersionId = null;
 let importSelection = 0, importWorkRevision = 0;
 let pendingImport = null;
 let creationContext = null, reviewedCreation = null, archiveContext = null;
 // An Open may replace only the work that existed when its file was selected.
-function noteWork() { importWorkRevision++; }
+function noteWork() { importWorkRevision++; clearRecoveryReplacement(); }
 function openIsPending() {
   return pendingImport && pendingImport.selection === importSelection && pendingImport.revision === importWorkRevision;
 }
@@ -62,10 +65,57 @@ const version = id => project.history.find(item => item.versionId === id);
 const current = () => version(project.currentVersionId);
 const viewed = () => version(project.viewVersionId);
 const session = () => project.sessions.find(item => item.id === project.activeSessionId);
+function clearRecoveryReplacement() {
+  if (recoveryReview) recoveryNotice = 'Replacement review was cleared. Your work and saved data remain separate.';
+  recoveryReview = null; recovery.cancelReplacement();
+  $('recoveryConfirm').hidden = true;
+}
+function recoveryFailure(result) {
+  const messages = {
+    'read-failed': 'Browser storage could not be checked. Nothing was replaced. Your current work stays in this tab.',
+    'write-failed': 'The browser could not save the replacement. Recovery remains active; download your current project before closing this tab.',
+    'serialize-failed': 'The current project could not be exported. Nothing was replaced.',
+    'storage-changed': 'Saved browser data changed after you reviewed it. Nothing was replaced. A recovery copy of the newly observed text is also available; check again before deciding.',
+    'project-changed': 'Your current project changed after review. Nothing was replaced. Review the replacement again.',
+    'review-required': 'Review the replacement again before confirming.',
+    'recovery-not-active': 'Recovery is no longer needed for this tab.'
+  };
+  return messages[result.reason] ?? 'Nothing was replaced. Your current work stays in this tab.';
+}
+function recoverySaveMessage() {
+  return recovery.copies().length
+    ? 'Work stays in this tab. Automatic saving is paused to preserve the unread saved text. Save a copy downloads the current project; sentence and proposal drafts are not included.'
+    : 'Browser storage could not be read. Work stays in this tab; Save a copy keeps your current project.';
+}
+function downloadText(text, filename, message) {
+  const url = URL.createObjectURL(new Blob([text], {type: 'application/json;charset=utf-8'}));
+  const link = node('a'); link.href = url; link.download = filename; document.body.append(link); link.click(); link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 30000); tell(message);
+}
+function renderStorageRecovery() {
+  const blocked = recovery.isBlocked();
+  $('storageRecovery').hidden = !blocked;
+  if (!blocked) return;
+  const copies = recovery.copies();
+  $('recoveryMessage').textContent = recoveryNotice || (copies.length
+    ? 'GLOSSOPIA could not read the saved project. This tab will not replace the original saved text automatically while you practice.'
+    : 'GLOSSOPIA could not read browser storage. Saving is paused because its previous contents are unknown.');
+  $('recoveryCopies').replaceChildren(...copies.map((raw, i) => {
+    const row = node('li');
+    const label = copies.length === 1 ? 'Download recovery copy' : 'Download recovery copy ' + (i + 1);
+    const b = button(label, () => guarded(() => downloadText(serializeRecoveryCopy(raw, storageKey), 'glossopia-browser-recovery-' + (i + 1) + '.json', 'Recovery download requested. Check your browser downloads. This file contains saved text for recovery, not a playable project.')));
+    row.append(b, node('span', i === 0 ? 'First preserved copy' : 'Later observed copy', 'recovery-copy-detail'));
+    return row;
+  }));
+  $('recoveryNoCopy').hidden = copies.length > 0;
+}
 function persist() {
-  try { localStorage.setItem(storageKey, serializeProject(project)); persistence = 'Saved in this browser. Download a copy to move or back up your project. Proposal previews stay in this tab only.'; }
-  catch { persistence = 'Browser saving is unavailable. Your project is in this tab; download a copy before closing it.'; }
+  const result = recovery.persist(project);
+  if (result.ok) persistence = 'Saved in this browser. Download a copy to move or back up your project. Proposal previews stay in this tab only.';
+  else if (result.reason === 'recovery-required') persistence = recoverySaveMessage();
+  else persistence = 'Browser saving is unavailable. Your project is in this tab; download a copy before closing it.';
   $('saveState').textContent = persistence;
+  renderStorageRecovery();
 }
 function commit(next) { project = validateProject(next); noteWork(); clearWordOrderHelp(); invalidateCreation('The open project changed. Review this draft again before creating it.'); persist(); render(); }
 function showView(name, focus = false) {
@@ -366,7 +416,7 @@ function render() {
   $('languageName').textContent = current().name;
   $('languageVersion').textContent = 'Latest accepted version ' + current().number + ' · Studio version ' + viewed().number + ' · Practice version ' + version(session().versionId).number;
   $('saveState').textContent = persistence;
-  renderMarket(); renderStudio(); renderHistory(); renderImpact();
+  renderMarket(); renderStudio(); renderHistory(); renderImpact(); renderStorageRecovery();
 }
 
 function downloadProjectCopy(value) {
@@ -391,7 +441,11 @@ function hasProjectDraft() {
   return Boolean(pending || $('sentenceInput').value || $('inspectInput').value ||
     Object.entries(defaults).some(([id, value]) => $(id).value !== value) || $('proposalAuthor').value !== $('proposalAuthor').defaultValue);
 }
+function assertActiveStorageAvailable() {
+  if (recovery.isBlocked()) throw new Error('Saving to this browser is paused because the previous saved project could not be loaded. You can still download project copies. Use the recovery panel before replacing saved data.');
+}
 function captureActiveProjectValue() {
+  assertActiveStorageAvailable();
   const value = localStorage.getItem(storageKey);
   if (value !== null && serializeProject(parseProject(value)) !== serializeProject(project)) {
     throw new Error('A different accepted project is saved in this browser. Download the open project, then reload before switching.');
@@ -453,6 +507,7 @@ function createReviewedLanguage() {
   if (!creationIsCurrent()) throw new Error('The open project or file selection changed. Review your language again before creating it.');
   if (creationContext.storageError) throw new Error(creationContext.storageError + ' Review again after resolving storage, or download the new project.');
   const name = reviewedCreation.history[0].name;
+  assertActiveStorageAvailable();
   const result = preserveAndReplaceProject(localStorage, {currentProject: project, nextProject: reviewedCreation,
     expectedActiveValue: creationContext.activeValue, snapshotId: 'snapshot-' + crypto.randomUUID(), savedAt: new Date().toISOString()});
   activateRetainedProject(result.project, name + ' is ready. Your earlier accepted project is available in Saved projects.');
@@ -477,6 +532,7 @@ function openProjectArchive() {
       const open = button('Open saved project', () => guarded(() => {
         if (!archiveContext || archiveContext.project !== project || archiveContext.selection !== importSelection) throw new Error('The current project changed. Close and reopen Saved projects before switching.');
         if (archiveContext.storageError) throw new Error(archiveContext.storageError);
+        assertActiveStorageAvailable();
         const result = preserveAndReplaceProject(localStorage, {currentProject: project, nextProject: entry.project,
           expectedActiveValue: archiveContext.activeValue, snapshotId: 'snapshot-' + crypto.randomUUID(), savedAt: new Date().toISOString()});
         activateRetainedProject(result.project, language.name + ' opened. The project you left is retained in Saved projects.');
@@ -616,10 +672,53 @@ $('projectFile').addEventListener('change', async () => {
   invalidateCreation('A different project was opened. Review the new language again before creating it.');
   guarded(() => { persist(); render(); tell('Project opened. Earlier conversations and accepted versions are available in Versions.'); });
 });
-try {
-  const stored = localStorage.getItem(storageKey);
-  if (stored) { project = parseProject(stored); persistence = 'Restored from this browser. Download a copy to back up your project. Proposal previews are not saved.'; }
-  else persist();
-} catch (error) { persistence = 'Browser storage could not be restored. This tab contains a fresh project; download a copy to keep it. Existing stored data has not been overwritten.'; tell(error.message); }
+$('reviewRecovery').addEventListener('click', () => {
+  clearRecoveryReplacement();
+  const previousCopies = recovery.copies().length;
+  const result = recovery.prepareReplacement(project);
+  recovery.cancelReplacement();
+  recoveryNotice = result.ok
+    ? (result.storedText === null ? 'Browser storage currently has no saved project. Captured recovery copies remain available.' : (recovery.copies().length > previousCopies ? 'Saved text was read and another recovery copy is available. Nothing was replaced; saving remains paused.' : 'The saved text was checked without validating it. Nothing was replaced; saving remains paused.'))
+    : recoveryFailure(result);
+  persistence = recoverySaveMessage(); $('saveState').textContent = persistence; renderStorageRecovery();
+});
+$('replaceRecovery').addEventListener('click', () => {
+  clearRecoveryReplacement();
+  const result = recovery.prepareReplacement(project);
+  if (!result.ok) { recoveryNotice = recoveryFailure(result); renderStorageRecovery(); return; }
+  recoveryReview = {id: result.reviewId, workRevision: importWorkRevision};
+  recoveryNotice = 'Review this decision. Nothing has been replaced.';
+  renderStorageRecovery();
+  $('recoveryReplacementSummary').textContent = 'Use “' + project.title + '” with ' + project.history.length + ' accepted language version' + (project.history.length === 1 ? '' : 's') + ' and ' + project.sessions.length + ' practice conversation' + (project.sessions.length === 1 ? '' : 's') + ' as the saved project in this browser.' + (result.storedText === null ? ' No saved value was present when checked.' : '');
+  $('recoveryConfirm').hidden = false; $('cancelRecoveryReplace').focus();
+});
+$('cancelRecoveryReplace').addEventListener('click', () => {
+  clearRecoveryReplacement(); recoveryNotice = 'Replacement cancelled. This tab will keep saving paused.'; renderStorageRecovery(); $('replaceRecovery').focus();
+});
+$('confirmRecoveryReplace').addEventListener('click', () => {
+  const approved = recoveryReview;
+  if (!approved || approved.workRevision !== importWorkRevision) { clearRecoveryReplacement(); recoveryNotice = 'Your work changed. Review the replacement again.'; renderStorageRecovery(); return; }
+  const result = recovery.replace(approved.id, project);
+  recoveryReview = null; $('recoveryConfirm').hidden = true;
+  if (!result.ok) { recoveryNotice = recoveryFailure(result); persistence = recoverySaveMessage(); $('saveState').textContent = persistence; renderStorageRecovery(); $('replaceRecovery').focus(); return; }
+  recoveryNotice = ''; persistence = 'Saved in this browser after your replacement decision. Download a copy to back up the current project.';
+  noteWork();
+  invalidateCreation('Saved browser data changed. Review the new language again before creating.');
+  if (creationContext) creationContext = {languageId: creationContext.languageId};
+  archiveContext = null;
+  if ($('projectArchiveDialog').open) $('archiveFeedback').textContent = 'Saved browser data changed. Close and reopen Saved projects before switching.';
+  render(); tell('The saved browser value was replaced with the current project.'); $('saveProject').focus();
+});
+const restored = recovery.load();
+if (restored.kind === 'loaded') {
+  project = restored.project; persistence = 'Restored from this browser. Download a copy to back up your project. Proposal previews are not saved.';
+} else if (restored.kind === 'empty') {
+  persist();
+} else {
+  persistence = recoverySaveMessage();
+  recoveryNotice = restored.reason === 'parse-failed'
+    ? 'GLOSSOPIA could not read the saved project: ' + restored.error.message + ' This tab will not replace it automatically while you practice.'
+    : 'GLOSSOPIA could not read browser storage. Its previous contents are unknown, so automatic saving is paused.';
+}
 $('conversation').setAttribute('aria-live', 'off');
 showView('market'); render();
