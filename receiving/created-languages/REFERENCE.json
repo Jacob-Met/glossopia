@@ -1,0 +1,69 @@
+{
+  "source_commit": "320b81e4c612bdab75d2766e99ec4e912d54d937",
+  "independent_reference_author": "pool_review",
+  "generator_executor": "estate-609204fd-20261029",
+  "fixtures": [
+    {
+      "name": "Nemi",
+      "order": "SOV",
+      "path": "fixtures/nemi-project.json",
+      "bytes": 6152,
+      "sha256": "17e7d63e9fa43eb74ac189fc825797aa0bf5456d6f81fe4330496641eb4e16e9",
+      "player": [
+        "ena ak vela vex",
+        "ena bi piri sul",
+        "ena ak vela har"
+      ],
+      "trader": [
+        "ena bi piri vex",
+        "ori ak vela har"
+      ],
+      "wrong": [
+        "ena vex ak vela",
+        "ori ak vela vex",
+        "ena bi vela vex",
+        "ena ak piri vex",
+        "ena ak vela zzz"
+      ],
+      "wrong_price": "ena ket piri sul",
+      "positive_inputs": 3,
+      "trader_semantic_replies": 2,
+      "final_inventory": {
+        "pear": 1,
+        "lantern": 1
+      },
+      "cross_role_reuse": null
+    },
+    {
+      "name": "Tavi",
+      "order": "SVO",
+      "path": "fixtures/tavi-project.json",
+      "bytes": 6144,
+      "sha256": "79a05eb77555da612ab4460d9d666633e431f19efc6b0a678d12c01e4f5a2c5a",
+      "player": [
+        "se avu se lani",
+        "se daro vi poro",
+        "se esu se lani"
+      ],
+      "trader": [
+        "se avu vi poro",
+        "ye esu se lani"
+      ],
+      "wrong": [
+        "se se lani avu",
+        "ye avu se lani",
+        "se avu vi lani",
+        "se avu se poro",
+        "se zzz se lani"
+      ],
+      "wrong_price": "se daro zu poro",
+      "positive_inputs": 3,
+      "trader_semantic_replies": 2,
+      "final_inventory": {
+        "pear": 1,
+        "lantern": 1
+      },
+      "cross_role_reuse": "se = actor i and quantity one"
+    }
+  ]
+}

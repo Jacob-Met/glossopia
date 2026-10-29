@@ -1,0 +1,204 @@
+{
+  "format": "glossopia-project",
+  "schemaVersion": 1,
+  "title": "Tavi — independent consumer fixture",
+  "history": [
+    {
+      "schemaVersion": 1,
+      "languageId": "tavi-receiver",
+      "versionId": "tavi-receiver-v1",
+      "number": 1,
+      "parentVersionId": null,
+      "name": "Tavi",
+      "grammar": {
+        "order": "SVO",
+        "quantityPosition": "before-object",
+        "author": "estate-609204fd-20261029",
+        "rationale": "Explicit SVO role order with quantity directly before its object."
+      },
+      "lexicon": [
+        {
+          "id": "actor-i",
+          "role": "actor",
+          "meaning": "i",
+          "form": "se",
+          "gloss": "I",
+          "author": "estate-609204fd-20261029",
+          "rationale": "Independently authored receiver form for the fixed actor meaning.",
+          "canonical": true
+        },
+        {
+          "id": "actor-you",
+          "role": "actor",
+          "meaning": "you",
+          "form": "ye",
+          "gloss": "you",
+          "author": "estate-609204fd-20261029",
+          "rationale": "Independently authored receiver form for the fixed actor meaning.",
+          "canonical": true
+        },
+        {
+          "id": "verb-request",
+          "role": "verb",
+          "meaning": "request",
+          "form": "avu",
+          "gloss": "want / request",
+          "author": "estate-609204fd-20261029",
+          "rationale": "Independently authored receiver form for the fixed verb meaning.",
+          "canonical": true
+        },
+        {
+          "id": "verb-give",
+          "role": "verb",
+          "meaning": "give",
+          "form": "daro",
+          "gloss": "give",
+          "author": "estate-609204fd-20261029",
+          "rationale": "Independently authored receiver form for the fixed verb meaning.",
+          "canonical": true
+        },
+        {
+          "id": "verb-have",
+          "role": "verb",
+          "meaning": "have",
+          "form": "esu",
+          "gloss": "have",
+          "author": "estate-609204fd-20261029",
+          "rationale": "Independently authored receiver form for the fixed verb meaning.",
+          "canonical": true
+        },
+        {
+          "id": "object-lantern",
+          "role": "object",
+          "meaning": "lantern",
+          "form": "lani",
+          "gloss": "lantern",
+          "author": "estate-609204fd-20261029",
+          "rationale": "Independently authored receiver form for the fixed object meaning.",
+          "canonical": true
+        },
+        {
+          "id": "object-pear",
+          "role": "object",
+          "meaning": "pear",
+          "form": "poro",
+          "gloss": "pear",
+          "author": "estate-609204fd-20261029",
+          "rationale": "Independently authored receiver form for the fixed object meaning.",
+          "canonical": true
+        },
+        {
+          "id": "quantity-one",
+          "role": "quantity",
+          "meaning": 1,
+          "form": "se",
+          "gloss": "one",
+          "author": "estate-609204fd-20261029",
+          "rationale": "Independently authored receiver form for the fixed quantity meaning.",
+          "canonical": true
+        },
+        {
+          "id": "quantity-two",
+          "role": "quantity",
+          "meaning": 2,
+          "form": "vi",
+          "gloss": "two",
+          "author": "estate-609204fd-20261029",
+          "rationale": "Independently authored receiver form for the fixed quantity meaning.",
+          "canonical": true
+        },
+        {
+          "id": "quantity-three",
+          "role": "quantity",
+          "meaning": 3,
+          "form": "zu",
+          "gloss": "three",
+          "author": "estate-609204fd-20261029",
+          "rationale": "Independently authored receiver form for the fixed quantity meaning.",
+          "canonical": true
+        }
+      ],
+      "examples": [
+        {
+          "id": "inventory-start",
+          "text": "se esu zu poro",
+          "meaning": {
+            "actor": "i",
+            "verb": "have",
+            "object": "pear",
+            "quantity": 3
+          },
+          "note": "Describe your starting inventory."
+        },
+        {
+          "id": "request-lantern",
+          "text": "se avu se lani",
+          "meaning": {
+            "actor": "i",
+            "verb": "request",
+            "object": "lantern",
+            "quantity": 1
+          },
+          "note": "Ask the trader for one lantern."
+        },
+        {
+          "id": "merchant-price",
+          "text": "se avu vi poro",
+          "meaning": {
+            "actor": "i",
+            "verb": "request",
+            "object": "pear",
+            "quantity": 2
+          },
+          "note": "Spoken by the trader: I want two pears."
+        },
+        {
+          "id": "give-pears",
+          "text": "se daro vi poro",
+          "meaning": {
+            "actor": "i",
+            "verb": "give",
+            "object": "pear",
+            "quantity": 2
+          },
+          "note": "Offer the two pears after hearing the price."
+        },
+        {
+          "id": "merchant-receipt",
+          "text": "ye esu se lani",
+          "meaning": {
+            "actor": "you",
+            "verb": "have",
+            "object": "lantern",
+            "quantity": 1
+          },
+          "note": "Spoken by the trader after the exchange: you have one lantern."
+        },
+        {
+          "id": "confirm-lantern",
+          "text": "se esu se lani",
+          "meaning": {
+            "actor": "i",
+            "verb": "have",
+            "object": "lantern",
+            "quantity": 1
+          },
+          "note": "Confirm that the lantern is now yours."
+        }
+      ],
+      "author": "estate-609204fd-20261029",
+      "rationale": "An original invented consumer fixture for author-to-practice receiving; no natural-language or learning-quality claim."
+    }
+  ],
+  "currentVersionId": "tavi-receiver-v1",
+  "viewVersionId": "tavi-receiver-v1",
+  "sessions": [
+    {
+      "id": "practice-1",
+      "versionId": "tavi-receiver-v1",
+      "inputs": [],
+      "hintsUsed": 0
+    }
+  ],
+  "activeSessionId": "practice-1"
+}
