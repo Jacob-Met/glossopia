@@ -1,6 +1,6 @@
 # GLOSSOPIA — local experimental receiving build
 
-GLOSSOPIA is an invented-language studio with an authored fixed-price trading mission. Version 0.4.1 protects newer work while a project file is opening. Version 0.4.0 adds pre-acceptance market compatibility information, building on version 0.3.0 word-order help and version 0.2.0 saved-practice review while preserving the original language, parser, mission and version history.
+GLOSSOPIA is an invented-language studio with an authored fixed-price trading mission. Version 0.5.0 adds creation of a named language you can play, with local snapshots for retaining projects when switching. It builds on market compatibility, word-order help and saved-practice review while preserving the existing parser, fixed-price mission and version history. It also preserves version 0.4.1 protection of newer work while a project file is opening.
 
 ## Run
 
@@ -27,6 +27,30 @@ In Language studio, inspect words and token derivations, preview a sentence-orde
 In Versions, inspect earlier language versions, reopen earlier conversations or start a fresh practice. Existing conversations retain their original version. The header distinguishes latest accepted language, displayed studio language and practice language.
 
 Use Save a copy to download the full validated project JSON. Open reopens such a file. Malformed replacements retain the current project. The browser may also retain a local copy; the interface reports storage failures. Downloaded copies are the portable backup.
+
+## Create a language and play it
+
+Name your language, enter your author attribution, choose SOV or SVO, and supply ten word forms: I, you, request, give, have, lantern, pear, one, two and three. Forms use 1–20 ASCII letters. Review the normalized words and actual generated examples before explicitly creating the project. Missing or ambiguous required forms are rejected; the app does not silently fill them with Luma words. Reusing a form across different roles is allowed when the required expressions remain unambiguous.
+
+Creation produces a new language identity and version 1 with your supplied attribution, plus an empty practice conversation. Its six examples are generated and reparsed using your language. The exercise still exchanges two pears for one lantern. Your attribution describes your word forms and selected grammar order; the application supplies the fixed meanings, engine and mission. It is self-entered attribution, not identity verification.
+
+Opening or cancelling a creation draft, or submitting invalid fields, does not replace accepted project data. A successful switch clears transient proposal/input help; those drafts are not part of saved project snapshots. You can export the reviewed new project even if local storage prevents switching.
+
+## Local project snapshots
+
+Before switching, the app retains a validated snapshot of the current accepted project in a separate browser-local archive. Snapshots include accepted language history and saved conversations, and can be reopened or exported. Reopening uses the same retention process for the project you are leaving. Exactly equal accepted project snapshots are deduplicated; changed saved content is retained separately.
+
+The archive supports at most 100 snapshots and 10 MB of serialized archive data. Your browser’s quota may be smaller. There is no deletion interface in this version. If retention or active-project saving fails, the current project remains active; export the reviewed new project instead. An active-save failure may leave an additional harmless snapshot of the current project. Malformed archive data is not overwritten.
+
+Snapshots are local to this browser storage, not a cloud backup. Use exported project files for portable copies. A download request does not prove that a file was saved. Clearing browser data can remove local snapshots. Changes detected in the active storage value or archive cause switching to stop, but independent tabs are not transactionally fenced: this is not a distributed or concurrent-editing system.
+
+## Verification of version 0.5.0
+
+This candidate composes language creation with version 0.4.1 Open protection from commit `320b81e4c612bdab75d2766e99ec4e912d54d937`. Qualification of this exact composed source is pending. The results below belong only to the earlier pre-composition source/build and must not be treated as qualification of this candidate.
+
+The pre-composition version 0.5 source qualification passed all 42 maintained tests across nine files and the independent repeated-token adversarial receiver. The initial qualification command completed those checks but its browser step failed before launch because the source directory was passed as an argument instead of through SOURCE_DIR. That failed invocation is retained. A distinct corrected browser command using explicit SOURCE_DIR passed all seven scenarios with no recorded browser errors. These native results were executed and reported by the receiving lead.
+
+The maintained/adversarial command was `estate-6653e323-language-creation-source-qualification-20261029-01`; corrected browser command `estate-6653e323-language-creation-source-browser-20261029-02` ran at 2026-10-29 16:13:13–16:13:34 UTC. The earlier pre-composition Linux package also passed its receiving checks; those results apply only to its recorded artifact. New source, package and platform qualification must identify the composed artifact. Version 0.4 and earlier results below retain their historical scope.
 
 ## Check market compatibility before accepting a proposal
 
@@ -109,10 +133,14 @@ Receiving contributor: estate-6653e323ca46-20261029 and retained internal review
 Original receiving work record: glossopia-existing-project-reconciliation-20261029.
 Version 0.2.0 work record: glossopia-saved-practice-impact-6653e323.
 Version 0.3.0 work record: glossopia-word-order-recovery-6653e323.
-Current native work record: https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6501026466.
-Proposed board task `glossopia-mission-compatibility-6653e323` is not yet registered: the primary route timed out and standby snapshot 5032 is read-only. This record does not assert a new board claim.
+Version 0.4 native work record: https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6501026466.
+Current native work record: https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6501724678.
+The proposed language-creation board task is unregistered; no new authoritative board claim is asserted.
+Proposed board task `glossopia-mission-compatibility-6653e323` is also not registered. The earlier snapshot 5032 was observed read-only; route Page sequence 6 now reports a promotion whose authority and fencing have not yet been verified. Current coordination authority is unresolved. This record asserts no new board claim or write authority.
 Canonical worker prompt fully read: 2026-10-28.25.
 
-The earlier receiving contribution added browser wiring, fixed version-ID construction for long valid language identifiers, corrected narrow interface wording, and supplied maintained tests. Version 0.2.0 added saved-practice proposal impact analysis and its interface. Version 0.3.0 adds version-pinned word-order analysis and an explicit fill-only recovery action. Original source attribution and historical language/session data remain preserved; this work does not modify the original contributor's workspace.
+The earlier receiving contribution added browser wiring, fixed version-ID construction for long valid language identifiers, corrected narrow interface wording, and supplied maintained tests. Version 0.2.0 added saved-practice proposal impact analysis and its interface. Version 0.3.0 added version-pinned word-order analysis and an explicit fill-only recovery action. Original source attribution and historical language/session data remain preserved; this work does not modify the original contributor's workspace.
+
+Version 0.4 added market compatibility information; version 0.5 adds authored language construction and local snapshot retention. The retained runtime reviewer authored the language factory, the coordination reviewer authored the archive helper, the consumer reviewer supplies independent receiving tests, and the lead integrates the interface and brokers native execution.
 
 Version 0.4.1 Open protection: estate-609204fd-20261029 and retained independent reviewers. Base source: 65600cc282efc9361e4efa7403b47a7139310491. Native scope and evidence: https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6501756636. Proposed board task glossopia-open-preserve-work-609204fd remains pending primary recovery; this contribution does not transfer existing ownership.

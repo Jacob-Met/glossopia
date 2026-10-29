@@ -4,13 +4,20 @@ import {replayMission, submitSentence, canPlayMission, analyzeMissionCompatibili
 import {createProject, validateProject, serializeProject, parseProject, addPractice} from './src/project.mjs';
 import {analyzePracticeImpact} from './src/practice-impact.mjs';
 import {analyzeWordOrder} from './src/word-order.mjs';
+import {createLanguage} from './src/language-creation.mjs';
+import {readArchivedProjects, preserveAndReplaceProject} from './src/project-archive.mjs';
 
 const $ = id => document.getElementById(id);
 const storageKey = 'glossopia-project-v1';
 let project = createProject(starterLanguage), pending = null, hintVisible = false, inspectedVersionId = null;
 let importSelection = 0, importWorkRevision = 0;
+let pendingImport = null;
+let creationContext = null, reviewedCreation = null, archiveContext = null;
 // An Open may replace only the work that existed when its file was selected.
 function noteWork() { importWorkRevision++; }
+function openIsPending() {
+  return pendingImport && pendingImport.selection === importSelection && pendingImport.revision === importWorkRevision;
+}
 function canFinishOpen(selection, revision) {
   if (selection !== importSelection) return false;
   if (revision !== importWorkRevision) {
@@ -60,7 +67,7 @@ function persist() {
   catch { persistence = 'Browser saving is unavailable. Your project is in this tab; download a copy before closing it.'; }
   $('saveState').textContent = persistence;
 }
-function commit(next) { project = validateProject(next); noteWork(); clearWordOrderHelp(); persist(); render(); }
+function commit(next) { project = validateProject(next); noteWork(); clearWordOrderHelp(); invalidateCreation('The open project changed. Review this draft again before creating it.'); persist(); render(); }
 function showView(name, focus = false) {
   for (const tab of document.querySelectorAll('[data-view]')) {
     const selected = tab.dataset.view === name;
@@ -362,6 +369,145 @@ function render() {
   renderMarket(); renderStudio(); renderHistory(); renderImpact();
 }
 
+function downloadProjectCopy(value) {
+  const text = serializeProject(value), url = URL.createObjectURL(new Blob([text], {type: 'application/json'}));
+  const link = node('a'); link.href = url; link.download = 'glossopia-project.json'; link.hidden = true;
+  (document.querySelector('dialog[open]') ?? document.body).append(link); link.click(); link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 30000);
+}
+function invalidateCreation(message = '') {
+  reviewedCreation = null;
+  $('creationPreview').hidden = true;
+  for (const key of ['languageId', 'versionId']) delete $('creationPreview').dataset[key];
+  $('creationExamples').replaceChildren(); $('creationMissionSummary').textContent = '';
+  $('createLanguage').disabled = true; $('exportCreatedLanguage').disabled = true;
+  if ($('languageCreationDialog').open && message) $('creationFeedback').textContent = message;
+}
+function creationIsCurrent() {
+  return reviewedCreation && creationContext && creationContext.project === project && creationContext.selection === importSelection && !openIsPending();
+}
+function hasProjectDraft() {
+  const defaults = {changeKind: 'order', proposedOrder: 'SVO', renameForm: '', newConcept: '', newWord: '', proposalRationale: ''};
+  return Boolean(pending || $('sentenceInput').value || $('inspectInput').value ||
+    Object.entries(defaults).some(([id, value]) => $(id).value !== value) || $('proposalAuthor').value !== $('proposalAuthor').defaultValue);
+}
+function captureActiveProjectValue() {
+  const value = localStorage.getItem(storageKey);
+  if (value !== null && serializeProject(parseProject(value)) !== serializeProject(project)) {
+    throw new Error('A different accepted project is saved in this browser. Download the open project, then reload before switching.');
+  }
+  return value;
+}
+function openLanguageCreation() {
+  if ($('projectArchiveDialog').open) $('projectArchiveDialog').close();
+  $('languageCreationForm').reset(); $('creationFeedback').textContent = '';
+  creationContext = {languageId: 'language-' + crypto.randomUUID()};
+  invalidateCreation();
+  $('languageCreationDialog').showModal(); $('creationName').focus();
+}
+function reviewLanguageCreation() {
+  if (reviewedCreation) noteWork();
+  invalidateCreation(); $('creationFeedback').textContent = '';
+  const forms = Object.fromEntries(starterLanguage.lexicon.map(entry => [entry.id, $('creationForm-' + entry.id).value]));
+  const draft = {languageId: creationContext.languageId, name: $('creationName').value,
+    author: $('creationAuthor').value, order: $('creationOrder').value, forms};
+  if ($('creationRationale').value.trim()) draft.rationale = $('creationRationale').value;
+  const language = createLanguage(draft);
+  const candidate = parseProject(serializeProject(createProject(language)));
+  let activeValue = null, storageError = null;
+  try { activeValue = captureActiveProjectValue(); } catch (error) { storageError = error.message; }
+  creationContext = {...creationContext, project, selection: importSelection, activeValue, storageError};
+  reviewedCreation = candidate; noteWork();
+  $('creationPreview').hidden = false;
+  $('creationPreview').dataset.languageId = language.languageId; $('creationPreview').dataset.versionId = language.versionId;
+  $('creationTitle').textContent = language.name + ' · version 1';
+  $('creationByline').textContent = 'Words and grammar attributed to ' + language.author + ' · ' + language.grammar.order;
+  $('creationExamples').replaceChildren(...language.examples.map(example => {
+    const card = node('article', undefined, 'creation-example'); card.dataset.exampleId = example.id;
+    card.append(node('h4', example.note), node('code', example.text), node('p', semanticGloss(example.meaning)));
+    return card;
+  }));
+  const compatibility = analyzeMissionCompatibility(language);
+  $('creationMissionSummary').textContent = 'All ' + compatibility.summary.readyCount + ' required market statements are verified. Your new language is ready for practice.';
+  $('creationReplacement').textContent = 'Create and open ' + language.name + ' as a separate project. The accepted versions and conversations of ' + current().name + ' will first be retained in Saved projects in this browser.';
+  $('creationDraftNotice').hidden = !hasProjectDraft();
+  $('createLanguage').disabled = false; $('exportCreatedLanguage').disabled = false;
+  $('creationFeedback').textContent = openIsPending()
+    ? 'A selected project file is still opening. Wait for it, then review again before creating.'
+    : storageError ? storageError + ' You can still download this reviewed new project without switching.'
+    : 'Preview only. Your current project is unchanged. Review the normalized words below before creating.';
+}
+function activateRetainedProject(next, message) {
+  project = next; pending = null; hintVisible = false; inspectedVersionId = null;
+  ++importSelection; pendingImport = null; noteWork();
+  clearWordOrderHelp(); practiceImpactCache = null; missionCompatibilityCache = null;
+  $('sentenceInput').value = ''; $('inspectInput').value = ''; $('inspectResult').textContent = ''; $('proposalFeedback').textContent = '';
+  $('proposalForm').reset(); $('proposalAuthor').defaultValue = current().author; $('proposalAuthor').value = current().author;
+  persistence = 'Saved in this browser. Saved projects holds earlier accepted snapshots. Download copies for backup; proposal previews stay in this tab only.';
+  if ($('languageCreationDialog').open) $('languageCreationDialog').close();
+  if ($('projectArchiveDialog').open) $('projectArchiveDialog').close();
+  invalidateCreation(); creationContext = null; archiveContext = null;
+  render(); showView('market'); $('sentenceInput').focus(); tell(message);
+}
+function createReviewedLanguage() {
+  if (!creationIsCurrent()) throw new Error('The open project or file selection changed. Review your language again before creating it.');
+  if (creationContext.storageError) throw new Error(creationContext.storageError + ' Review again after resolving storage, or download the new project.');
+  const name = reviewedCreation.history[0].name;
+  const result = preserveAndReplaceProject(localStorage, {currentProject: project, nextProject: reviewedCreation,
+    expectedActiveValue: creationContext.activeValue, snapshotId: 'snapshot-' + crypto.randomUUID(), savedAt: new Date().toISOString()});
+  activateRetainedProject(result.project, name + ' is ready. Your earlier accepted project is available in Saved projects.');
+}
+function openProjectArchive() {
+  if ($('languageCreationDialog').open) $('languageCreationDialog').close();
+  archiveContext = null; $('archivedProjects').replaceChildren(); $('archiveFeedback').textContent = '';
+  $('archiveDraftNotice').hidden = !hasProjectDraft();
+  $('projectArchiveDialog').showModal();
+  guarded(() => {
+    const entries = readArchivedProjects(localStorage);
+    let activeValue = null, storageError = null;
+    try { activeValue = captureActiveProjectValue(); } catch (error) { storageError = error.message; }
+    archiveContext = {project, selection: importSelection, activeValue, storageError};
+    if (storageError) $('archiveFeedback').textContent = storageError + ' Saved snapshots can still be downloaded.';
+    if (!entries.length) { $('archivedProjects').append(node('p', 'No earlier snapshots yet. Creating or reopening a language first retains the current accepted project here.', 'body-copy')); return; }
+    const cards = [...entries].reverse().map(entry => {
+      const language = entry.project.history.at(-1), card = node('article', undefined, 'archive-record'); card.dataset.snapshotId = entry.snapshotId;
+      card.append(node('h3', entry.project.title), node('p', language.name + ' · version ' + language.number + ' · ' + entry.project.sessions.length + ' conversations'),
+        node('p', 'Retained ' + new Date(entry.savedAt).toLocaleString(), 'note'));
+      const actions = node('div', undefined, 'archive-actions');
+      const open = button('Open saved project', () => guarded(() => {
+        if (!archiveContext || archiveContext.project !== project || archiveContext.selection !== importSelection) throw new Error('The current project changed. Close and reopen Saved projects before switching.');
+        if (archiveContext.storageError) throw new Error(archiveContext.storageError);
+        const result = preserveAndReplaceProject(localStorage, {currentProject: project, nextProject: entry.project,
+          expectedActiveValue: archiveContext.activeValue, snapshotId: 'snapshot-' + crypto.randomUUID(), savedAt: new Date().toISOString()});
+        activateRetainedProject(result.project, language.name + ' opened. The project you left is retained in Saved projects.');
+      }, 'archiveFeedback'));
+      open.dataset.action = 'open';
+      const save = button('Download snapshot', () => guarded(() => { downloadProjectCopy(entry.project); $('archiveFeedback').textContent = 'Download requested. Check your browser downloads for the project copy.'; }, 'archiveFeedback'));
+      save.dataset.action = 'export'; actions.append(open, save); card.append(actions); return card;
+    });
+    $('archivedProjects').replaceChildren(...cards);
+  }, 'archiveFeedback');
+}
+for (const entry of starterLanguage.lexicon) {
+  const label = node('label', undefined, 'creation-word-field'); label.htmlFor = 'creationForm-' + entry.id;
+  const input = node('input'); input.id = label.htmlFor; input.name = entry.id; input.maxLength = 24; input.autocomplete = 'off'; input.spellcheck = false; input.required = true;
+  label.append(node('span', entry.gloss), node('small', entry.role), input); $('creationWords').append(label);
+}
+$('newLanguage').addEventListener('click', openLanguageCreation);
+$('savedProjects').addEventListener('click', openProjectArchive);
+$('cancelCreation').addEventListener('click', () => $('languageCreationDialog').close());
+$('closeArchive').addEventListener('click', () => $('projectArchiveDialog').close());
+$('languageCreationDialog').addEventListener('close', () => { creationContext = null; invalidateCreation(); });
+$('projectArchiveDialog').addEventListener('close', () => { archiveContext = null; });
+$('languageCreationForm').addEventListener('input', () => { noteWork(); invalidateCreation('Draft changed. Review the words again before creating.'); });
+$('languageCreationForm').addEventListener('change', () => { noteWork(); invalidateCreation('Draft changed. Review the words again before creating.'); });
+$('languageCreationForm').addEventListener('submit', event => { event.preventDefault(); guarded(reviewLanguageCreation, 'creationFeedback'); });
+$('createLanguage').addEventListener('click', () => guarded(createReviewedLanguage, 'creationFeedback'));
+$('exportCreatedLanguage').addEventListener('click', () => guarded(() => {
+  if (!reviewedCreation) throw new Error('Review the new language before downloading it.');
+  downloadProjectCopy(reviewedCreation); $('creationFeedback').textContent = 'Download requested. Check your browser downloads. The current open project is unchanged.';
+}, 'creationFeedback'));
+
 for (const tab of document.querySelectorAll('[data-view]')) {
   tab.addEventListener('click', () => showView(tab.dataset.view));
   tab.addEventListener('keydown', event => {
@@ -451,22 +597,23 @@ $('inspectForm').addEventListener('submit', event => { event.preventDefault(); g
   }
 }, 'inspectResult'); });
 $('saveProject').addEventListener('click', () => guarded(() => {
-  const text = serializeProject(project), url = URL.createObjectURL(new Blob([text], {type: 'application/json'}));
-  const link = node('a'); link.href = url; link.download = 'glossopia-project.json'; document.body.append(link); link.click(); link.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 30000); tell('Download requested. Check your browser downloads for the project copy.');
+  downloadProjectCopy(project); tell('Download requested. Check your browser downloads for the project copy.');
 }));
 $('openProject').addEventListener('click', () => $('projectFile').click());
 $('projectFile').addEventListener('change', async () => {
   const file = $('projectFile').files[0]; if (!file) return;
   const selection = ++importSelection, revision = importWorkRevision;
+  pendingImport = {selection, revision};
+  invalidateCreation('A project file was selected. Review the new language again before creating it.');
   let next;
   try {
     if (file.size > 1000000) throw new Error('Choose a project smaller than 1 MB.');
     next = parseProject(await file.text());
   } catch (error) { if (canFinishOpen(selection, revision)) tell('Could not open this file: ' + error.message + ' Your current project is unchanged.'); return; }
-  finally { if (selection === importSelection) $('projectFile').value = ''; }
+  finally { if (selection === importSelection) { $('projectFile').value = ''; pendingImport = null; } }
   if (!canFinishOpen(selection, revision)) return;
   project = next; noteWork(); pending = null; hintVisible = false; clearWordOrderHelp(); $('sentenceInput').value = ''; $('inspectResult').textContent = ''; $('proposalFeedback').textContent = '';
+  invalidateCreation('A different project was opened. Review the new language again before creating it.');
   guarded(() => { persist(); render(); tell('Project opened. Earlier conversations and accepted versions are available in Versions.'); });
 });
 try {
