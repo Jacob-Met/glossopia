@@ -564,6 +564,9 @@ $('exportCreatedLanguage').addEventListener('click', () => guarded(() => {
   downloadProjectCopy(reviewedCreation); $('creationFeedback').textContent = 'Download requested. Check your browser downloads. The current open project is unchanged.';
 }, 'creationFeedback'));
 
+document.querySelector('.brand').addEventListener('click', event => {
+  event.preventDefault(); showView('market', true);
+});
 for (const tab of document.querySelectorAll('[data-view]')) {
   tab.addEventListener('click', () => showView(tab.dataset.view));
   tab.addEventListener('keydown', event => {

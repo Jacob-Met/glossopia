@@ -1,10 +1,18 @@
 # GLOSSOPIA — local experimental receiving build
 
-GLOSSOPIA is an invented-language studio with an authored fixed-price trading mission. Version 0.5.1 preserves unread browser data while you continue working, create a downloadable language, or inspect saved projects. It builds on version 0.5.0 named-language creation and local snapshots, market compatibility, word-order help and saved-practice review while preserving the existing parser, fixed-price mission and version history. It also preserves version 0.4.1 protection of newer work while a project file is opening.
+GLOSSOPIA is an invented-language studio with an authored fixed-price trading mission. Version 0.6.0 adds a standalone HTML distribution you can open directly in Chrome. It includes version 0.5.1 recovery of unread browser saves and retains version 0.5 creation of a named language you can play, with local snapshots for retaining projects when switching. It builds on market compatibility, word-order help and saved-practice review while preserving the existing parser, fixed-price mission and version history. It also preserves version 0.4.1 protection of newer work while a project file is opening.
 
-## Run
+## Open the standalone HTML
 
-Use Node.js 20 or newer. No dependency installation is needed.
+Download the release’s standalone `.html` file and open it with Chrome. Double-click it if Chrome is your default browser, or use Open with → Chrome. Keep the file on your computer; the standalone app contains its script and styling and does not need a Node server or dependency installation.
+
+The standalone app retains language creation, market practice, version history, saved-practice review, word-order help, compatibility information and local project snapshots. Use **Save a copy** to export project JSON before moving between copies. Use **Open** in the destination app to load that JSON.
+
+Browser-local autosave is not portable. A served/hosted copy, a downloaded HTML file, a moved or renamed file, and another browser may have separate storage. File-path storage behavior depends on the browser. Do not assume an existing project will appear in another copy or that changing the HTML filename transfers its snapshots. Clearing browser data can remove locally saved work. Export JSON for a durable portable copy; previously downloaded JSON is not automatically updated when you keep working.
+
+## Run the Node package instead
+
+The Node package remains available as an alternative. Extract it, open a terminal in its `package` folder, and use Node.js 20 or newer. No dependency installation is needed.
 
 ```sh
 npm start
@@ -17,6 +25,36 @@ npm test
 ```
 
 The maintained test command checks mission inventory and failure behavior, immutable histories, proposal validation, project roundtrip, bounded version identifiers, saved-practice impact semantics and word-order suggestion safety. Browser receiving is recorded separately; passing these core tests alone does not establish a working UI.
+
+## Build a standalone file from the package
+
+For maintainers with Node.js 20 or newer, run this from the extracted package directory:
+
+```sh
+npm run build:standalone -- /absolute/source /absolute/new/output.html
+```
+
+`/absolute/source` is the package source root containing the reviewed app, modules, HTML and stylesheet. The output parent directory must already exist. The output must be a new `.html` file outside the source tree; the builder refuses to overwrite an existing file or write into maintained source. Retain its emitted build report with the generated file so the source hashes and output identity remain traceable.
+
+The builder is deliberately limited to pinned source bytes and their reviewed static module syntax. It validates source hashes, preserves module-local scopes, and supports the exact acyclic named-import/export structure used by this app. It is not a general JavaScript bundler and does not implement arbitrary ES-module live-binding behavior. A source change requires reviewing dependencies, bindings, supported syntax and browser policy before updating pins. Unsupported imports, dynamic code loading, unsafe raw-text closing sequences and CSS resource loading are rejected rather than silently transformed.
+
+Inline script and style hashes authorize the embedded assets; external connections are blocked. Keep the current application modules and project codecs as the source of truth rather than maintaining a separate standalone implementation. A successful build is not browser or file-storage qualification.
+
+## Optional standalone browser receiver
+
+Developers can run the maintained standalone receiver with an existing Playwright installation and browser. These are optional test dependencies; using the downloaded HTML or starting the app does not require them. In a macOS/Linux shell:
+
+```sh
+STANDALONE_FILE=/absolute/path/glossopia.html EVIDENCE_DIR=/absolute/path/receiving-output npm run test:standalone
+```
+
+Both STANDALONE_FILE and EVIDENCE_DIR are required absolute paths. The receiver writes `standalone-runtime-receiving.json` in the evidence directory. Set PLAYWRIGHT_MODULE to an existing Playwright module path or resolvable module specifier if the default `playwright` import is unavailable. Set CHROME_PATH to an existing Chrome executable if you are not using Playwright’s installed browser. The command does not install dependencies or browsers. Record the tested standalone file’s exact hash with the resulting report; a report for an earlier prototype does not qualify a rebuilt artifact.
+
+## Verification of version 0.6.0
+
+The receiving lead reports that the earlier standalone prototype built from version 0.5 source passed six native offline browser checks. That prototype was 147,193 bytes; its recorded SHA-256 is `c79f93cca1f586438bfd651d8d68d118dce81ac5a395ba8e7009d1056881800e`. These results establish the earlier prototype, not this version 0.6 artifact.
+
+This source composes standalone distribution with unread-browser recovery from main `3817c0674560f55c855b4014b7404d4b915d02b1`. Receiving of this exact composed version 0.6 standalone HTML and package is pending. No qualified Mac offline result is claimed here. Each completed receiving report must identify the actual file hash, browser/platform and tested storage/export behavior. Earlier version evidence below retains its original source and artifact scope.
 
 ## Use
 
@@ -46,7 +84,9 @@ Snapshots are local to this browser storage, not a cloud backup. Use exported pr
 
 ## Verification of version 0.5.0
 
-This candidate composes language creation with version 0.4.1 Open protection from commit `320b81e4c612bdab75d2766e99ec4e912d54d937`. Qualification of this exact composed source is pending. The results below belong only to the earlier pre-composition source/build and must not be treated as qualification of this candidate.
+The completed version 0.5 release composed language creation with version 0.4.1 Open protection. Candidate `302ac3da70ebc1e577731c2351fec1fb3966a6ec` was merged through PR #8 as `d6d82146bfba6a1be28eacf193bc3b2987ad25c4`. Its exact package is 61,733 bytes, SHA-256 `0ffb41126fd0aa73f2fd15c638cdea55ebdec76716a79288bf7176d28af9c64a`. Linux and a fresh Mac receiving run each passed 42 maintained tests, verification of 24 manifest files and 11 public assets, and 64 browser cases. Six additional Nemi/Tavi creation-UI adoption checks passed on Linux only; no separate Mac result is claimed for those six checks. Private release 428128415 contains 44 published assets that were freshly downloaded and hash-verified. These are prior version 0.5 results and do not qualify version 0.6.
+
+The following pre-composition results and initial plumbing failure remain historical evidence for their original source/build.
 
 The pre-composition version 0.5 source qualification passed all 42 maintained tests across nine files and the independent repeated-token adversarial receiver. The initial qualification command completed those checks but its browser step failed before launch because the source directory was passed as an argument instead of through SOURCE_DIR. That failed invocation is retained. A distinct corrected browser command using explicit SOURCE_DIR passed all seven scenarios with no recorded browser errors. These native results were executed and reported by the receiving lead.
 
@@ -145,6 +185,8 @@ Version 0.4 added market compatibility information; version 0.5 adds authored la
 
 Version 0.4.1 Open protection: estate-609204fd-20261029 and retained independent reviewers. Base source: 65600cc282efc9361e4efa7403b47a7139310491. Native scope and evidence: https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6501756636. Proposed board task glossopia-open-preserve-work-609204fd remains pending primary recovery; this contribution does not transfer existing ownership.
 
+Version 0.6 adds the pinned-source standalone builder authored by the retained runtime reviewer, with independent source review by the coordination reviewer and browser receiving brokered by the lead. This distribution change preserves prior contributor attribution and project JSON semantics.
+
 ## Recover a browser copy that cannot be opened
 
 If saved browser data is malformed, uses an unsupported project format, exceeds the current size limit, or cannot be read, GLOSSOPIA keeps a fresh project usable in the current tab and pauses automatic browser saves. Practice, hints, inspection and a valid Open do not silently replace the protected browser value. Creation and archive restoration also require recovery to be resolved before switching. You can still review and download a newly created project or saved snapshot. Use **Save a copy** for your current validated project; sentence and proposal drafts are not included.
@@ -155,6 +197,6 @@ If saved browser data is malformed, uses an unsupported project format, exceeds 
 
 The immediate read-before-write comparison is not an atomic cross-tab lock. Normal valid-project autosave behavior is unchanged; this correction handles startup recovery, not general concurrent editing or remote synchronization. It does not change project format version 1, language semantics, accepted history, market inventory, or the existing Open-completion precedence rule.
 
-The independent recovery receiver is `npm run test:browser:recovery`, with the same optional Playwright and Chrome environment settings as the existing browser receiver. Runtime and package results are recorded separately for the exact delivered build.
+The independent recovery receiver is `npm run test:browser:recovery`, with the same optional Playwright and Chrome environment settings as the existing browser receiver. Runtime and package results are recorded separately for the exact delivered build. This maintained recovery receiver includes Linux-specific process and sandbox inspection. Receiving on another platform must use its separately identified checks; a Linux result does not qualify that platform.
 
 Version 0.5.1 unread-browser recovery: estate-fab0636c-20261029 and its retained internal reviewers. Composed with creator PR #8, tree f31791b361676aa5dae659cf8ead208e4d607584. Native scope: https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6502884538. Proposed task glossopia-unread-browser-recovery-fab0636c-20261029 remains unregistered while taskboard write authority is unreconciled.
