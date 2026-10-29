@@ -7,6 +7,7 @@ import {analyzeWordOrder} from './src/word-order.mjs';
 import {createLanguage} from './src/language-creation.mjs';
 import {readArchivedProjects, preserveAndReplaceProject} from './src/project-archive.mjs';
 import {createProjectRecovery, serializeRecoveryCopy} from './src/browser-recovery.mjs';
+import {compareVersionHistory} from './src/version-history.mjs';
 
 const $ = id => document.getElementById(id);
 const storageKey = 'glossopia-project-v1';
@@ -249,11 +250,38 @@ function renderStudio() {
   updateProposalFields();
 }
 function renderHistory() {
-  $('versionList').replaceChildren(...project.history.map(language => {
+  $('versionList').replaceChildren(...project.history.map((language, index) => {
     const card = node('article', undefined, 'version-card' + (language.versionId === project.currentVersionId ? ' current' : ''));
     card.append(node('h2', 'Version ' + language.number + (language.versionId === project.currentVersionId ? ' · Latest accepted' : '')),
       node('p', 'Author: ' + language.author + ' · ' + language.rationale));
     if (language.acceptance) card.append(node('p', 'Accepted locally by ' + language.acceptance.author));
+    if (index > 0) {
+      const previous = project.history[index - 1], report = compareVersionHistory(previous, language);
+      const details = node('details', undefined, 'version-changes');
+      details.open = language.versionId === project.currentVersionId;
+      details.append(node('summary', 'Words and sentence order · from version ' + previous.number),
+        node('p', 'Compares word forms, meanings, labels, preferred forms and sentence order. Examples and authorship metadata are not compared.', 'note'));
+      const labels = {order: 'Sentence order', added: 'Added word', removed: 'Removed word', form: 'Word form', meaning: 'Meaning', gloss: 'Glossary label', canonical: 'Preferred form'};
+      const roleNames = {actor: 'Speaker', verb: 'Action', object: 'Thing', quantity: 'Quantity'};
+      const orders = {SOV: 'SOV · Speaker → quantity → thing → action', SVO: 'SVO · Speaker → action → quantity → thing'};
+      const list = node('ul', undefined, 'version-change-list');
+      for (const change of report.changes) {
+        const row = node('li', undefined, 'version-change'); row.dataset.changeKind = change.kind;
+        if (change.entryId !== null) row.dataset.entryId = change.entryId;
+        row.append(node('strong', labels[change.kind]));
+        if (change.entryId !== null) {
+          const entry = language.lexicon.find(item => item.id === change.entryId) ?? previous.lexicon.find(item => item.id === change.entryId);
+          row.append(node('small', entry.form + ' · ' + roleNames[entry.role] + ': ' + String(entry.meaning), 'version-change-context'));
+        }
+        const value = node('p', undefined, 'version-change-value');
+        if (change.before !== null) value.append(node('span', change.kind === 'order' ? orders[change.before] : change.before, 'version-change-before'));
+        if (change.before !== null && change.after !== null) value.append(node('span', ' → '));
+        if (change.after !== null) value.append(node('span', change.kind === 'order' ? orders[change.after] : change.after, 'version-change-after'));
+        row.append(value); list.append(row);
+      }
+      details.append(report.changes.length ? list : node('p', 'No vocabulary or sentence-order differences in this comparison.'));
+      card.append(details);
+    }
     const actions = node('div', undefined, 'version-actions');
     actions.append(button('Inspect version ' + language.number, () => { commit({...project, viewVersionId: language.versionId}); showView('studio'); }));
     const playable = canPlayMission(language), practice = button('Practice version ' + language.number, () => startPractice(language.versionId));

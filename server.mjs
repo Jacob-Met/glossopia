@@ -5,7 +5,7 @@ import path from 'node:path';
 const root=path.dirname(fileURLToPath(import.meta.url));
 const {version: appVersion}=JSON.parse(await readFile(path.join(root,'package.json'),'utf8'));
 export const publicAssets=[
-  'index.html','style.css','app.mjs','src/language-core.mjs','src/starter-language.mjs','src/mission-core.mjs','src/project.mjs','src/practice-impact.mjs','src/word-order.mjs','src/language-creation.mjs','src/project-archive.mjs','src/browser-recovery.mjs'
+  'index.html','style.css','app.mjs','src/language-core.mjs','src/starter-language.mjs','src/mission-core.mjs','src/project.mjs','src/practice-impact.mjs','src/word-order.mjs','src/language-creation.mjs','src/project-archive.mjs','src/browser-recovery.mjs','src/version-history.mjs'
 ];
 const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.mjs':'text/javascript; charset=utf-8'};
 export function createServer(){
