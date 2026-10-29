@@ -120,6 +120,16 @@
   <div class="dialog-heading"><div><span class="eyebrow">LANGUAGES YOU HAVE KEPT</span><h2 id="archiveTitle">Saved projects</h2></div><button id="closeArchive" type="button">Close</button></div>
   <p class="body-copy">Accepted project snapshots retained before you created or reopened a language. Opening one first retains the project you are leaving. These copies are local to this browser; download a snapshot to keep it elsewhere.</p>
   <p id="archiveDraftNotice" class="notice" hidden>Opening a saved project clears the unaccepted proposal, inspection input and unsent sentences from every practice. The retained snapshot includes accepted versions and conversations.</p>
+  <section id="archiveRemoveReview" class="archive-remove-review" aria-labelledby="archiveRemoveName" hidden>
+    <span class="eyebrow">REMOVE A SAVED COPY</span><h3 id="archiveRemoveName"></h3>
+    <p class="body-copy">This removes the selected copy from Saved projects in this browser. Your open project and unfinished work stay as they are. Download a copy first if you want to keep it elsewhere.</p>
+    <div class="archive-actions"><button id="archiveRemoveDownload" type="button">Download copy</button><button id="archiveRemoveCancel" type="button">Cancel</button><button id="archiveRemoveConfirm" type="button" class="danger-button">Remove saved copy</button></div>
+  </section>
+  <section id="archiveRemovalPending" class="archive-removal-pending" aria-labelledby="archiveRemovalName" hidden>
+    <span class="eyebrow">SAVED COPY REMOVED</span><h3 id="archiveRemovalName"></h3>
+    <p class="body-copy">Undo is available in this tab until you select Done or reload, provided Saved projects has not changed. You can still download the removed copy here. Choose Undo or Done before removing another copy.</p>
+    <div class="archive-actions"><button id="archiveRemovalUndo" type="button" class="dark">Undo removal</button><button id="archiveRemovalDownload" type="button">Download removed copy</button><button id="archiveRemovalDone" type="button">Done</button></div>
+  </section>
   <p id="archiveFeedback" class="feedback" role="status"></p><div id="archivedProjects"></div>
 </dialog>
 <div id="toast" class="toast" role="status" hidden></div>

@@ -31,6 +31,44 @@ function archiveFromRaw(raw){
 }
 export function readArchivedProjects(storage){return freeze(archiveFromRaw(readRaw(storage,PROJECT_ARCHIVE_KEY)));}
 
+export function readArchiveState(storage){
+  const raw=readRaw(storage,PROJECT_ARCHIVE_KEY);
+  return freeze({raw,entries:archiveFromRaw(raw)});
+}
+function removalValue(entries){return JSON.stringify({format:'glossopia-project-archive',schemaVersion:1,entries});}
+function checkArchive(storage,expected){
+  if(readRaw(storage,PROJECT_ARCHIVE_KEY)!==expected)fail('STALE_ARCHIVE','Saved projects changed. Nothing was overwritten. Close and reopen Saved projects to review the current copies.');
+}
+/** Observed-value checks are not an atomic cross-tab transaction. */
+export function removeArchivedProject(storage,{snapshotId,expectedArchiveValue}){
+  if(expectedArchiveValue!==null&&typeof expectedArchiveValue!=='string')fail('INVALID_EXPECTATION','Capture the saved-project list and its raw storage value together before removing a copy.');
+  const beforeRaw=readRaw(storage,PROJECT_ARCHIVE_KEY),entries=archiveFromRaw(beforeRaw);
+  if(beforeRaw!==expectedArchiveValue)fail('STALE_ARCHIVE','Saved projects changed. Nothing was removed. Close and reopen Saved projects before choosing a copy.');
+  const removedEntry=entries.find(entry=>entry.snapshotId===snapshotId);
+  if(!removedEntry)fail('SNAPSHOT_NOT_FOUND','The selected saved copy is no longer in this archive.');
+  const afterRaw=removalValue(entries.filter(entry=>entry.snapshotId!==snapshotId));
+  if(bytes(afterRaw)>ARCHIVE_MAX_BYTES)fail('ARCHIVE_CAPACITY','The remaining archive exceeds its supported size. Nothing was removed.');
+  const receipt=freeze({beforeRaw,afterRaw,removedEntry});
+  checkArchive(storage,beforeRaw);
+  try{storage.setItem(PROJECT_ARCHIVE_KEY,afterRaw);}catch{fail('ARCHIVE_WRITE_FAILED','Could not remove the saved copy. It remains in Saved projects; your active work is unchanged.');}
+  return receipt;
+}
+export function undoArchivedProjectRemoval(storage,receipt){
+  try{
+    if(!plain(receipt)||typeof receipt.beforeRaw!=='string'||typeof receipt.afterRaw!=='string'||!plain(receipt.removedEntry))throw Error('shape');
+    const before=archiveFromRaw(receipt.beforeRaw);
+    archiveFromRaw(receipt.afterRaw);
+    const removed=before.find(entry=>entry.snapshotId===receipt.removedEntry.snapshotId);
+    if(!removed||JSON.stringify(removed)!==JSON.stringify(receipt.removedEntry)||
+      removalValue(before.filter(entry=>entry.snapshotId!==removed.snapshotId))!==receipt.afterRaw)throw Error('receipt mismatch');
+  }catch{fail('INVALID_REMOVAL_RECEIPT','The removal record is invalid. Saved projects has not been overwritten.');}
+  checkArchive(storage,receipt.afterRaw);
+  const result=freeze({restored:true,raw:receipt.beforeRaw});
+  checkArchive(storage,receipt.afterRaw);
+  try{storage.setItem(PROJECT_ARCHIVE_KEY,receipt.beforeRaw);}catch{fail('ARCHIVE_WRITE_FAILED','Could not undo removal. The removed copy remains available to download in this tab.');}
+  return result;
+}
+
 /** Retain accepted project data before replacing the active storage value.
  * Uses native Storage.setItem failure semantics: a failed write leaves its key
  * unchanged. Checks detect observed changes, not concurrent-tab transactions.

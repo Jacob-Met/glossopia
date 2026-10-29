@@ -5,7 +5,7 @@ import {createProject, validateProject, serializeProject, parseProject, addPract
 import {analyzePracticeImpact} from './src/practice-impact.mjs';
 import {analyzeWordOrder} from './src/word-order.mjs';
 import {createLanguage} from './src/language-creation.mjs';
-import {readArchivedProjects, preserveAndReplaceProject} from './src/project-archive.mjs';
+import {readArchiveState, removeArchivedProject, undoArchivedProjectRemoval, preserveAndReplaceProject} from './src/project-archive.mjs';
 import {createProjectRecovery, serializeRecoveryCopy} from './src/browser-recovery.mjs';
 import {compareVersionHistory} from './src/version-history.mjs';
 
@@ -20,6 +20,7 @@ let pendingImport = null;
 // The active draft lives in the input; this map holds only inactive practices.
 const practiceDrafts = new Map();
 let creationContext = null, reviewedCreation = null, archiveContext = null;
+let archiveRemovalReview = null, pendingArchiveRemoval = null;
 // An Open may replace only the work that existed when its file was selected.
 function noteWork() { importWorkRevision++; clearRecoveryReplacement(); }
 function openIsPending() {
@@ -552,13 +553,28 @@ function createReviewedLanguage() {
     expectedActiveValue: creationContext.activeValue, snapshotId: 'snapshot-' + crypto.randomUUID(), savedAt: new Date().toISOString()});
   activateRetainedProject(result.project, name + ' is ready. Your earlier accepted project is available in Saved projects.');
 }
-function openProjectArchive() {
-  if ($('languageCreationDialog').open) $('languageCreationDialog').close();
-  archiveContext = null; $('archivedProjects').replaceChildren(); $('archiveFeedback').textContent = '';
+function savedCopyName(entry) {
+  return '“' + entry.project.title + '” · ' + entry.project.history.at(-1).name + ' · version ' + entry.project.history.at(-1).number + ' · retained ' + new Date(entry.savedAt).toLocaleString();
+}
+function renderArchiveRemoval() {
+  $('archiveRemoveReview').hidden = !archiveRemovalReview;
+  $('archiveRemoveName').textContent = archiveRemovalReview ? 'Remove ' + savedCopyName(archiveRemovalReview.entry) + '?' : '';
+  $('archiveRemovalPending').hidden = !pendingArchiveRemoval;
+  $('archiveRemovalName').textContent = pendingArchiveRemoval ? 'Removed ' + savedCopyName(pendingArchiveRemoval.removedEntry) : '';
+  for (const control of $('archivedProjects').querySelectorAll('[data-action="remove"]')) control.disabled = Boolean(pendingArchiveRemoval || archiveContext?.storageError);
+}
+function focusSavedCopy(snapshotId) {
+  const card = [...$('archivedProjects').children].find(item => item.dataset.snapshotId === snapshotId);
+  const target = card?.querySelector('[data-action="remove"]:not(:disabled)') ?? $('closeArchive');
+  target.focus();
+}
+function refreshProjectArchive() {
+  $('archiveFeedback').textContent = '';
+  archiveRemovalReview = null; renderArchiveRemoval();
+  archiveContext = null; $('archivedProjects').replaceChildren();
   $('archiveDraftNotice').hidden = !hasProjectDraft();
-  $('projectArchiveDialog').showModal();
   guarded(() => {
-    const entries = readArchivedProjects(localStorage);
+    const archiveState = readArchiveState(localStorage), entries = archiveState.entries;
     let activeValue = null, storageError = null;
     try { activeValue = captureActiveProjectValue(); } catch (error) { storageError = error.message; }
     archiveContext = {project, selection: importSelection, activeValue, storageError};
@@ -579,11 +595,62 @@ function openProjectArchive() {
       }, 'archiveFeedback'));
       open.dataset.action = 'open';
       const save = button('Download snapshot', () => guarded(() => { downloadProjectCopy(entry.project); $('archiveFeedback').textContent = 'Download requested. Check your browser downloads for the project copy.'; }, 'archiveFeedback'));
-      save.dataset.action = 'export'; actions.append(open, save); card.append(actions); return card;
+      save.dataset.action = 'export';
+      const remove = button('Remove saved copy', () => {
+        if (pendingArchiveRemoval || storageError) return;
+        archiveRemovalReview = {entry, raw: archiveState.raw, trigger: remove};
+        $('archiveFeedback').textContent = ''; renderArchiveRemoval(); $('archiveRemoveCancel').focus();
+      });
+      remove.dataset.action = 'remove'; remove.disabled = Boolean(pendingArchiveRemoval || storageError);
+      actions.append(open, save, remove); card.append(actions); return card;
     });
     $('archivedProjects').replaceChildren(...cards);
   }, 'archiveFeedback');
+  return $('archiveFeedback').textContent;
 }
+function openProjectArchive() {
+  if ($('languageCreationDialog').open) $('languageCreationDialog').close();
+  $('archiveFeedback').textContent = '';
+  refreshProjectArchive(); $('projectArchiveDialog').showModal();
+}
+$('archiveRemoveCancel').addEventListener('click', () => {
+  const trigger = archiveRemovalReview?.trigger;
+  archiveRemovalReview = null; renderArchiveRemoval();
+  if (trigger?.isConnected) trigger.focus(); else $('closeArchive').focus();
+});
+$('archiveRemoveDownload').addEventListener('click', () => guarded(() => {
+  if (!archiveRemovalReview) return;
+  downloadProjectCopy(archiveRemovalReview.entry.project);
+  $('archiveFeedback').textContent = 'Download requested. Check your browser downloads before removing the saved copy.';
+}, 'archiveFeedback'));
+$('archiveRemoveConfirm').addEventListener('click', () => guarded(() => {
+  if (!archiveRemovalReview || pendingArchiveRemoval) return;
+  const reviewed = archiveRemovalReview;
+  captureActiveProjectValue();
+  pendingArchiveRemoval = removeArchivedProject(localStorage, {snapshotId: reviewed.entry.snapshotId, expectedArchiveValue: reviewed.raw});
+  const refreshNotice = refreshProjectArchive(); renderArchiveRemoval();
+  $('archiveFeedback').textContent = 'The selected browser copy was removed. Your active project and drafts are unchanged.' + (refreshNotice ? ' The list could not be fully refreshed: ' + refreshNotice : '');
+  $('archiveRemovalUndo').focus();
+}, 'archiveFeedback'));
+$('archiveRemovalUndo').addEventListener('click', () => guarded(() => {
+  if (!pendingArchiveRemoval) return;
+  const snapshotId = pendingArchiveRemoval.removedEntry.snapshotId;
+  undoArchivedProjectRemoval(localStorage, pendingArchiveRemoval);
+  pendingArchiveRemoval = null; const refreshNotice = refreshProjectArchive(); renderArchiveRemoval();
+  $('archiveFeedback').textContent = 'The saved copy was restored. Your active project and drafts are unchanged.' + (refreshNotice ? ' The list could not be fully refreshed: ' + refreshNotice : '');
+  focusSavedCopy(snapshotId);
+}, 'archiveFeedback'));
+$('archiveRemovalDownload').addEventListener('click', () => guarded(() => {
+  if (!pendingArchiveRemoval) return;
+  downloadProjectCopy(pendingArchiveRemoval.removedEntry.project);
+  $('archiveFeedback').textContent = 'Download requested. Check your browser downloads for the removed project copy.';
+}, 'archiveFeedback'));
+$('archiveRemovalDone').addEventListener('click', () => {
+  if (!pendingArchiveRemoval) return;
+  pendingArchiveRemoval = null; const refreshNotice = refreshProjectArchive(); renderArchiveRemoval();
+  $('archiveFeedback').textContent = 'Removal finished. This tab no longer holds the removed copy or its Undo record.' + (refreshNotice ? ' The list could not be fully refreshed: ' + refreshNotice : '');
+  $('closeArchive').focus();
+});
 for (const entry of starterLanguage.lexicon) {
   const label = node('label', undefined, 'creation-word-field'); label.htmlFor = 'creationForm-' + entry.id;
   const input = node('input'); input.id = label.htmlFor; input.name = entry.id; input.maxLength = 24; input.autocomplete = 'off'; input.spellcheck = false; input.required = true;
@@ -594,7 +661,7 @@ $('savedProjects').addEventListener('click', openProjectArchive);
 $('cancelCreation').addEventListener('click', () => $('languageCreationDialog').close());
 $('closeArchive').addEventListener('click', () => $('projectArchiveDialog').close());
 $('languageCreationDialog').addEventListener('close', () => { creationContext = null; invalidateCreation(); });
-$('projectArchiveDialog').addEventListener('close', () => { archiveContext = null; });
+$('projectArchiveDialog').addEventListener('close', () => { archiveContext = null; archiveRemovalReview = null; renderArchiveRemoval(); });
 $('languageCreationForm').addEventListener('input', () => { noteWork(); invalidateCreation('Draft changed. Review the words again before creating.'); });
 $('languageCreationForm').addEventListener('change', () => { noteWork(); invalidateCreation('Draft changed. Review the words again before creating.'); });
 $('languageCreationForm').addEventListener('submit', event => { event.preventDefault(); guarded(reviewLanguageCreation, 'creationFeedback'); });
