@@ -1,6 +1,6 @@
 # GLOSSOPIA — local experimental receiving build
 
-GLOSSOPIA is an invented-language studio with an authored fixed-price trading mission. Version 0.5.0 adds creation of a named language you can play, with local snapshots for retaining projects when switching. It builds on market compatibility, word-order help and saved-practice review while preserving the existing parser, fixed-price mission and version history. It also preserves version 0.4.1 protection of newer work while a project file is opening.
+GLOSSOPIA is an invented-language studio with an authored fixed-price trading mission. Version 0.5.1 preserves unread browser data while you continue working, create a downloadable language, or inspect saved projects. It builds on version 0.5.0 named-language creation and local snapshots, market compatibility, word-order help and saved-practice review while preserving the existing parser, fixed-price mission and version history. It also preserves version 0.4.1 protection of newer work while a project file is opening.
 
 ## Run
 
@@ -144,3 +144,17 @@ The earlier receiving contribution added browser wiring, fixed version-ID constr
 Version 0.4 added market compatibility information; version 0.5 adds authored language construction and local snapshot retention. The retained runtime reviewer authored the language factory, the coordination reviewer authored the archive helper, the consumer reviewer supplies independent receiving tests, and the lead integrates the interface and brokers native execution.
 
 Version 0.4.1 Open protection: estate-609204fd-20261029 and retained independent reviewers. Base source: 65600cc282efc9361e4efa7403b47a7139310491. Native scope and evidence: https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6501756636. Proposed board task glossopia-open-preserve-work-609204fd remains pending primary recovery; this contribution does not transfer existing ownership.
+
+## Recover a browser copy that cannot be opened
+
+If saved browser data is malformed, uses an unsupported project format, exceeds the current size limit, or cannot be read, GLOSSOPIA keeps a fresh project usable in the current tab and pauses automatic browser saves. Practice, hints, inspection and a valid Open do not silently replace the protected browser value. Creation and archive restoration also require recovery to be resolved before switching. You can still review and download a newly created project or saved snapshot. Use **Save a copy** for your current validated project; sentence and proposal drafts are not included.
+
+**Download recovery copy** requests a separate JSON recovery file containing the exact captured JavaScript string, including unusual Unicode code units. It is not a playable project and cannot be opened through the project importer. No original text is claimed when the browser read itself failed; **Check saved data** can try the read again. Earlier captured strings remain available in the current tab if later reads find a changed value.
+
+**Review replacement of saved data** opens a replacement review. Confirming replaces the saved value with the reviewed current project; cancelling keeps recovery active. A failed read, write, serialization, or an observed change to the project or saved value leaves protection active. A download request does not establish that a file was saved. Save any wanted recovery copy and current project before closing the tab.
+
+The immediate read-before-write comparison is not an atomic cross-tab lock. Normal valid-project autosave behavior is unchanged; this correction handles startup recovery, not general concurrent editing or remote synchronization. It does not change project format version 1, language semantics, accepted history, market inventory, or the existing Open-completion precedence rule.
+
+The independent recovery receiver is `npm run test:browser:recovery`, with the same optional Playwright and Chrome environment settings as the existing browser receiver. Runtime and package results are recorded separately for the exact delivered build.
+
+Version 0.5.1 unread-browser recovery: estate-fab0636c-20261029 and its retained internal reviewers. Composed with creator PR #8, tree f31791b361676aa5dae659cf8ead208e4d607584. Native scope: https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6502884538. Proposed task glossopia-unread-browser-recovery-fab0636c-20261029 remains unregistered while taskboard write authority is unreconciled.

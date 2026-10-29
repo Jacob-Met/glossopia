@@ -1,144 +1,181 @@
 {
-  "schema": "hamon.glossopia-build.v1",
-  "version": "0.5.0",
-  "worker": "estate-6653e323ca46-20261029",
-  "session": "estate-6653e323ca46-20261029-s1",
-  "prompt_version": "2026-10-28.25",
-  "source_role": "named-language creation and local snapshots composed with PR6 Open protection; original and concurrent contributions retained",
-  "original_source_archive_sha256": "4e9c453985c37f67f46fbe94f9830d6224d0e99e5ea981f0b9f7631d016f6750",
-  "base_git_commit": "320b81e4c612bdab75d2766e99ec4e912d54d937",
-  "base_git_tree": "bd88e6a4318f1e3b2c2ad065ded7d46aed7277cf",
-  "task_id": null,
-  "native_work_record": "https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6501724678",
-  "proposed_board_task_id": "glossopia-language-creation-6653e323",
+  "base_git_commit": "d6d82146bfba6a1be28eacf193bc3b2987ad25c4",
+  "base_git_tree": "f31791b361676aa5dae659cf8ead208e4d607584",
   "board_registration": "pending-authority-reconciliation",
-  "created_at": "2026-10-29T16:30:22.449748+00:00",
+  "concurrent_contribution": {
+    "composition_record": "https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6502333091",
+    "pull_request": 6,
+    "source_commit": "320b81e4c612bdab75d2766e99ec4e912d54d937",
+    "worker": "estate-609204fd-20261029"
+  },
+  "created_at": "2026-10-29T16:58:25.643213+00:00",
+  "creator_build_provenance": {
+    "base_git_commit": "320b81e4c612bdab75d2766e99ec4e912d54d937",
+    "base_git_tree": "bd88e6a4318f1e3b2c2ad065ded7d46aed7277cf",
+    "board_registration": "pending-authority-reconciliation",
+    "concurrent_contribution": {
+      "composition_record": "https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6502333091",
+      "pull_request": 6,
+      "source_commit": "320b81e4c612bdab75d2766e99ec4e912d54d937",
+      "worker": "estate-609204fd-20261029"
+    },
+    "created_at": "2026-10-29T16:30:22.449748+00:00",
+    "native_work_record": "https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6501724678",
+    "original_source_archive_sha256": "4e9c453985c37f67f46fbe94f9830d6224d0e99e5ea981f0b9f7631d016f6750",
+    "prompt_version": "2026-10-28.25",
+    "proposed_board_task_id": "glossopia-language-creation-6653e323",
+    "schema": "hamon.glossopia-build.v1",
+    "session": "estate-6653e323ca46-20261029-s1",
+    "source_role": "named-language creation and local snapshots composed with PR6 Open protection; original and concurrent contributions retained",
+    "task_id": null,
+    "version": "0.5.0",
+    "worker": "estate-6653e323ca46-20261029"
+  },
   "files": [
     {
+      "bytes": 20706,
       "path": "README.md",
-      "bytes": 18107,
-      "sha256": "442410092e49e5f8c068e6aba687c56c4d5e913c64c63b8821e55552ad58981f"
+      "sha256": "8a1b352a414638e99aaa814b29720684464be2e0b7660c78c97cb0f0f4a75de0"
     },
     {
+      "bytes": 56145,
       "path": "app.mjs",
-      "bytes": 48854,
-      "sha256": "4f7a5d400be050ae430dc34621c0a9a7a58efc38ef4dc6769d81c3a387476237"
+      "sha256": "95f5d303a9a54a8b91d7ecbeeeb71a710f08b5ddcbbab7449eca3bcb60b878b2"
     },
     {
+      "bytes": 20606,
       "path": "index.html",
-      "bytes": 18911,
-      "sha256": "8a240143cd5dc85165925751ab98ffa1480eee424ce834ea36d48552209e5f3c"
+      "sha256": "da954ccf136d8604e05b202ce5720a4c78c2fd64eb66a29c87bf83f4bbe22902"
     },
     {
+      "bytes": 584,
       "path": "package.json",
-      "bytes": 513,
-      "sha256": "b35c480638a0c77d683d4a151f70bee4d135b95ee283289a200cec5d4dcf3604"
+      "sha256": "6d46a18717bbc428af8d5cc4e8b626ea79286d5bff3483ae270aee3d027863d7"
     },
     {
+      "bytes": 2457,
       "path": "server.mjs",
-      "bytes": 2430,
-      "sha256": "da39d9ffb1020adfc7f10ed807c9e8fcb3f966995bcc78e52d1d4ae64ba70b21"
+      "sha256": "de346c88a8688686c27fc24419a960da4c339d3912cbb1e004a704097d432278"
     },
     {
-      "path": "src/language-core.mjs",
+      "bytes": 3475,
+      "path": "src/browser-recovery.mjs",
+      "sha256": "7f4adb3b77acca76fbb9c666fc9cf5418d579cb8095495a13bb2c00f876f0bc3"
+    },
+    {
       "bytes": 18458,
+      "path": "src/language-core.mjs",
       "sha256": "60b988221a2170e3209ee9ccefdd3fe3437d72f91a9126f16c5f7a71dd39776a"
     },
     {
-      "path": "src/language-creation.mjs",
       "bytes": 3979,
+      "path": "src/language-creation.mjs",
       "sha256": "62d16a3177bc0ee8e804737dca4f2075a7c20c240b6a059c9c77b52cae6954f6"
     },
     {
-      "path": "src/mission-core.mjs",
       "bytes": 7795,
+      "path": "src/mission-core.mjs",
       "sha256": "6b5a897246caf93e96e7c06f21221e0cf1cd5e67e8762e8350fef9fc9e04ad22"
     },
     {
-      "path": "src/practice-impact.mjs",
       "bytes": 5213,
+      "path": "src/practice-impact.mjs",
       "sha256": "5acc58332d24938a5ab38ada9eaab0525cceeb98926d848729078a33a9845d4b"
     },
     {
-      "path": "src/project-archive.mjs",
       "bytes": 5296,
+      "path": "src/project-archive.mjs",
       "sha256": "500c7cedc6dba3b291f9cd5b97f2a9ebe3d21533c6034e8ffa0985055a3d9dd9"
     },
     {
-      "path": "src/project.mjs",
       "bytes": 4163,
+      "path": "src/project.mjs",
       "sha256": "6cd2a83d961e3770de6323587c08509482cc21eddf1cf42231cf62ee16f08b1a"
     },
     {
-      "path": "src/starter-language.mjs",
       "bytes": 3879,
+      "path": "src/starter-language.mjs",
       "sha256": "08c0493f315092a813911d6028d1d0af4b2adb60453eb6b6b93ea86a091366bc"
     },
     {
-      "path": "src/word-order.mjs",
       "bytes": 3447,
+      "path": "src/word-order.mjs",
       "sha256": "bd481bed9b9369cde53ea6510202c9fa3a622a982cdf94ae80d6acb84f82afe4"
     },
     {
+      "bytes": 26479,
       "path": "style.css",
-      "bytes": 25238,
-      "sha256": "d1ba1c532aafbef2ebfc013d59f563d061fc10cc7ad062d5fc11132d12b4cacf"
+      "sha256": "0a74a2434eb67b0e4a99dae49bdbe7516a4c4fa412b6d376b611343deee46842"
     },
     {
-      "path": "test/browser/open-project.mjs",
+      "bytes": 6260,
+      "path": "test/browser-recovery.test.mjs",
+      "sha256": "ea2cfedbbb2ac5279b33279b4415b7171cc72e4c5d39b50b2a730d4e2cdcb64b"
+    },
+    {
+      "bytes": 25068,
+      "path": "test/browser/browser-recovery.mjs",
+      "sha256": "1aa9082bc7f7d7fcaa23753cefbce48dd06dcaf0b3cc0659b9a07283e512d2bb"
+    },
+    {
       "bytes": 14476,
+      "path": "test/browser/open-project.mjs",
       "sha256": "d956db4c0b66006856f914813a5523d74a8cb56880d473995804ae9145580ef5"
     },
     {
-      "path": "test/history.test.mjs",
       "bytes": 1993,
+      "path": "test/history.test.mjs",
       "sha256": "116f393a24cce3c03f55bf48ee14c9a0b713e10fa02b2741e8b04055fa11d511"
     },
     {
-      "path": "test/id-boundaries.test.mjs",
       "bytes": 1690,
+      "path": "test/id-boundaries.test.mjs",
       "sha256": "8a15f5b40e97120396af3b7e7e7aba1d473d4401640ddc82d76ffb5976052061"
     },
     {
-      "path": "test/language-creation.test.mjs",
       "bytes": 5049,
+      "path": "test/language-creation.test.mjs",
       "sha256": "e5760c70d45a5a64abebdd5548c80adec0cd7c0ce607ef3260292518df0b0c19"
     },
     {
-      "path": "test/long-language-id.test.mjs",
       "bytes": 2051,
+      "path": "test/long-language-id.test.mjs",
       "sha256": "76e07bf78891322ea5af57b08adc4e1172a54e740764d4e6e1fa2605fd0f0a74"
     },
     {
-      "path": "test/mission-compatibility.test.mjs",
       "bytes": 7154,
+      "path": "test/mission-compatibility.test.mjs",
       "sha256": "1b07383d12da0380394a3308503e3a5d1439a7716ce12a4785fcf4885c026bdd"
     },
     {
-      "path": "test/mission.test.mjs",
       "bytes": 6242,
+      "path": "test/mission.test.mjs",
       "sha256": "926b69bf09c347c431b1eb3b4458544e64183ee4b54247c24844afa52f2c9d3f"
     },
     {
-      "path": "test/practice-impact.test.mjs",
       "bytes": 8091,
+      "path": "test/practice-impact.test.mjs",
       "sha256": "db28cd588f8f2809cc7c64de296138bdd6695ad28fc3c3437f48865c9e78977a"
     },
     {
-      "path": "test/project-archive.test.mjs",
       "bytes": 7192,
+      "path": "test/project-archive.test.mjs",
       "sha256": "ac80409608134ccddd4b78d76d280a7fdfff08a27667ac4e9e300fe0170c970a"
     },
     {
-      "path": "test/word-order.test.mjs",
       "bytes": 5302,
+      "path": "test/word-order.test.mjs",
       "sha256": "62390e7118bb46640d252762d8f9fe987dc9078c1f77809249177de4f5d9f950"
     }
   ],
-  "concurrent_contribution": {
-    "source_commit": "320b81e4c612bdab75d2766e99ec4e912d54d937",
-    "worker": "estate-609204fd-20261029",
-    "pull_request": 6,
-    "composition_record": "https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6502333091"
-  }
+  "native_work_record": "https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6502884538",
+  "original_source_archive_sha256": "4e9c453985c37f67f46fbe94f9830d6224d0e99e5ea981f0b9f7631d016f6750",
+  "prompt_version": "2026-10-28.25",
+  "proposed_board_task_id": "glossopia-unread-browser-recovery-fab0636c-20261029",
+  "schema": "hamon.glossopia-build.v1",
+  "session": "estate-fab0636c-20261029-session-01",
+  "source_role": "Unread browser recovery composed with integrated named-language creation and local snapshots",
+  "task_id": null,
+  "version": "0.5.1",
+  "worker": "estate-fab0636c-20261029"
 }
