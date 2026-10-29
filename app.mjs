@@ -530,6 +530,10 @@ function reviewLanguageCreation() {
     ? 'A selected project file is still opening. Wait for it, then review again before creating.'
     : storageError ? storageError + ' You can still download this reviewed new project without switching.'
     : 'Preview only. Your current project is unchanged. Review the normalized words below before creating.';
+  const reviewHeading = $('creationTitle');
+  reviewHeading.tabIndex = -1;
+  $('creationFeedback').scrollIntoView({block: 'start', inline: 'nearest'});
+  reviewHeading.focus({preventScroll: true});
 }
 function activateRetainedProject(next, message) {
   practiceDrafts.clear();
