@@ -10,5 +10,15 @@
   "scripts": {
     "start": "node server.mjs",
     "test": "node --test test/*.test.mjs"
-  }
+  },
+  "files": [
+    "index.html",
+    "style.css",
+    "app.mjs",
+    "server.mjs",
+    "src",
+    "test",
+    "README.md",
+    "BUILD-MANIFEST.json"
+  ]
 }
