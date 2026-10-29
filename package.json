@@ -1,6 +1,6 @@
 {
   "name": "glossopia",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "private": true,
   "type": "module",
   "description": "Transparent language co-creation and newcomer trading missions",
@@ -13,7 +13,8 @@
     "test:browser": "node test/browser/open-project.mjs",
     "test:browser:recovery": "node test/browser/browser-recovery.mjs",
     "build:standalone": "node tools/build-standalone.mjs",
-    "test:standalone": "node test/browser/standalone.mjs"
+    "test:standalone": "node test/browser/standalone.mjs",
+    "test:browser:drafts": "node test/browser/practice-drafts.mjs"
   },
   "files": [
     "index.html",

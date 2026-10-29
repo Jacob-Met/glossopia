@@ -3,7 +3,7 @@ import {createHash} from 'node:crypto';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 
-// GLOSSOPIA 0.6.0 maintained experimental standalone builder.
+// GLOSSOPIA 0.6.1 maintained experimental standalone builder.
 // This tool supports only these reviewed source bytes. Updating a pin
 // requires reviewing syntax, bindings, dependencies and browser policy again.
 const SOURCE_PINS = {
@@ -16,10 +16,10 @@ const SOURCE_PINS = {
   "src/language-creation.mjs": "62d16a3177bc0ee8e804737dca4f2075a7c20c240b6a059c9c77b52cae6954f6",
   "src/project-archive.mjs": "500c7cedc6dba3b291f9cd5b97f2a9ebe3d21533c6034e8ffa0985055a3d9dd9",
   "src/browser-recovery.mjs": "7f4adb3b77acca76fbb9c666fc9cf5418d579cb8095495a13bb2c00f876f0bc3",
-  "app.mjs": "c4fe22d71e6c9dec16d6f8b30f3d6c77b53581c53a79c0e6c9be24b160d6da79",
-  "index.html": "f4ba637853a209b6b538f708a156911ab21f6f9eb9ba3c344db1d1f4839fc55f",
+  "app.mjs": "52c338f5f4e5f5358d876652c71f4548adf0a067d283f78ce420c3af46835d3a",
+  "index.html": "e1d8e04f467bb6ae1084c7c819065cd1a39166b749efc525c060b062703066fa",
   "style.css": "0a74a2434eb67b0e4a99dae49bdbe7516a4c4fa412b6d376b611343deee46842",
-  "package.json": "680a4fde3ca5f80b6e8ced4967dd84fdafee3d6802d3c908e6bf90e647f267cc"
+  "package.json": "d65bdb5a2f24d0a50f288677d5601e036fe1067d6ed78b8121c9717e4020836c"
 };
 
 const MODULES = Object.keys(SOURCE_PINS).filter(name => name.endsWith('.mjs'));
@@ -80,7 +80,7 @@ for (const [name, expected] of Object.entries(SOURCE_PINS)) {
 }
 const sourcePackage = JSON.parse(sources.get('package.json'));
 assert.equal(sourcePackage.name, 'glossopia');
-assert.equal(sourcePackage.version, '0.6.0');
+assert.equal(sourcePackage.version, '0.6.1');
 const completed = new Map();
 const javascript = 'const modules = Object.create(null);\n' + MODULES.map(name => transform(name, sources.get(name), completed)).join('\n');
 const css = sources.get('style.css');
@@ -101,4 +101,4 @@ html = once(html, '<head>', '<head><meta http-equiv="Content-Security-Policy" co
 await writeFile(outputPath, html, {flag: 'wx'});
 console.log(JSON.stringify({prototype: false, experimental: true, sourcePackage: {name: sourcePackage.name, version: sourcePackage.version, requiredNode: sourcePackage.engines.node, sha256: SOURCE_PINS['package.json']}, sourceRoot, outputPath, bytes: Buffer.byteLength(html), sha256: digest(html), sourceFiles: SOURCE_PINS,
   runtimeQualification: 'separate exact-artifact receiving required',
-  scope: 'Maintained experimental 0.6.0 build from verified source and package bytes. This build report does not establish browser, file-origin storage, CSP or usability qualification; retain the separate exact-artifact receiving reports.'}, null, 2));
+  scope: 'Maintained experimental 0.6.1 build from verified source and package bytes. This build report does not establish browser, file-origin storage, CSP or usability qualification; retain the separate exact-artifact receiving reports.'}, null, 2));
