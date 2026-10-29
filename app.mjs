@@ -15,6 +15,9 @@ let recoveryReview = null, recoveryNotice = '';
 let project = createProject(starterLanguage), pending = null, hintVisible = false, inspectedVersionId = null;
 let importSelection = 0, importWorkRevision = 0;
 let pendingImport = null;
+// Unsent sentences belong to their practice, in this tab only; project copies omit them.
+// The active draft lives in the input; this map holds only inactive practices.
+const practiceDrafts = new Map();
 let creationContext = null, reviewedCreation = null, archiveContext = null;
 // An Open may replace only the work that existed when its file was selected.
 function noteWork() { importWorkRevision++; clearRecoveryReplacement(); }
@@ -117,7 +120,15 @@ function persist() {
   $('saveState').textContent = persistence;
   renderStorageRecovery();
 }
-function commit(next) { project = validateProject(next); noteWork(); clearWordOrderHelp(); invalidateCreation('The open project changed. Review this draft again before creating it.'); persist(); render(); }
+function commit(next) {
+  const validated = validateProject(next);
+  if (validated.activeSessionId !== project.activeSessionId) {
+    practiceDrafts.set(project.activeSessionId, $('sentenceInput').value);
+    $('sentenceInput').value = practiceDrafts.get(validated.activeSessionId) ?? '';
+    practiceDrafts.delete(validated.activeSessionId);
+  }
+  project = validated; noteWork(); clearWordOrderHelp(); invalidateCreation('The open project changed. Review this draft again before creating it.'); persist(); render();
+}
 function showView(name, focus = false) {
   for (const tab of document.querySelectorAll('[data-view]')) {
     const selected = tab.dataset.view === name;
@@ -438,7 +449,7 @@ function creationIsCurrent() {
 }
 function hasProjectDraft() {
   const defaults = {changeKind: 'order', proposedOrder: 'SVO', renameForm: '', newConcept: '', newWord: '', proposalRationale: ''};
-  return Boolean(pending || $('sentenceInput').value || $('inspectInput').value ||
+  return Boolean(pending || $('sentenceInput').value || [...practiceDrafts.values()].some(text => text !== '') || $('inspectInput').value ||
     Object.entries(defaults).some(([id, value]) => $(id).value !== value) || $('proposalAuthor').value !== $('proposalAuthor').defaultValue);
 }
 function assertActiveStorageAvailable() {
@@ -492,6 +503,7 @@ function reviewLanguageCreation() {
     : 'Preview only. Your current project is unchanged. Review the normalized words below before creating.';
 }
 function activateRetainedProject(next, message) {
+  practiceDrafts.clear();
   project = next; pending = null; hintVisible = false; inspectedVersionId = null;
   ++importSelection; pendingImport = null; noteWork();
   clearWordOrderHelp(); practiceImpactCache = null; missionCompatibilityCache = null;
@@ -671,6 +683,7 @@ $('projectFile').addEventListener('change', async () => {
   } catch (error) { if (canFinishOpen(selection, revision)) tell('Could not open this file: ' + error.message + ' Your current project is unchanged.'); return; }
   finally { if (selection === importSelection) { $('projectFile').value = ''; pendingImport = null; } }
   if (!canFinishOpen(selection, revision)) return;
+  practiceDrafts.clear();
   project = next; noteWork(); pending = null; hintVisible = false; clearWordOrderHelp(); $('sentenceInput').value = ''; $('inspectResult').textContent = ''; $('proposalFeedback').textContent = '';
   invalidateCreation('A different project was opened. Review the new language again before creating it.');
   guarded(() => { persist(); render(); tell('Project opened. Earlier conversations and accepted versions are available in Versions.'); });

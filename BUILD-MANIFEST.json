@@ -1,6 +1,6 @@
 {
   "schema": "hamon.glossopia-build.v1",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "worker": "estate-6653e323ca46-20261029",
   "session": "estate-6653e323ca46-20261029-s1",
   "prompt_version": "2026-10-28.25",
@@ -23,23 +23,23 @@
   "files": [
     {
       "path": "README.md",
-      "bytes": 26539,
-      "sha256": "016241026c9493cafe87433d3992db383485dd032255b13a29cf18e3d4c81e50"
+      "bytes": 27630,
+      "sha256": "4a9226273012d9e7cea520e9247d55f1ce0663f1454d4d860a168c12eee95aa2"
     },
     {
       "path": "app.mjs",
-      "bytes": 56271,
-      "sha256": "c4fe22d71e6c9dec16d6f8b30f3d6c77b53581c53a79c0e6c9be24b160d6da79"
+      "bytes": 56898,
+      "sha256": "52c338f5f4e5f5358d876652c71f4548adf0a067d283f78ce420c3af46835d3a"
     },
     {
       "path": "index.html",
-      "bytes": 20604,
-      "sha256": "f4ba637853a209b6b538f708a156911ab21f6f9eb9ba3c344db1d1f4839fc55f"
+      "bytes": 20910,
+      "sha256": "e1d8e04f467bb6ae1084c7c819065cd1a39166b749efc525c060b062703066fa"
     },
     {
       "path": "package.json",
-      "bytes": 716,
-      "sha256": "680a4fde3ca5f80b6e8ced4967dd84fdafee3d6802d3c908e6bf90e647f267cc"
+      "bytes": 784,
+      "sha256": "d65bdb5a2f24d0a50f288677d5601e036fe1067d6ed78b8121c9717e4020836c"
     },
     {
       "path": "server.mjs",
@@ -97,6 +97,11 @@
       "sha256": "0a74a2434eb67b0e4a99dae49bdbe7516a4c4fa412b6d376b611343deee46842"
     },
     {
+      "path": "test/browser-recovery.test.mjs",
+      "bytes": 6260,
+      "sha256": "ea2cfedbbb2ac5279b33279b4415b7171cc72e4c5d39b50b2a730d4e2cdcb64b"
+    },
+    {
       "path": "test/browser/browser-recovery.mjs",
       "bytes": 25068,
       "sha256": "1aa9082bc7f7d7fcaa23753cefbce48dd06dcaf0b3cc0659b9a07283e512d2bb"
@@ -107,14 +112,14 @@
       "sha256": "d956db4c0b66006856f914813a5523d74a8cb56880d473995804ae9145580ef5"
     },
     {
+      "path": "test/browser/practice-drafts.mjs",
+      "bytes": 9952,
+      "sha256": "ed426205a94df1e108e7d768d70ab26fc3ce50cc5703839135360a8bd9c90a7f"
+    },
+    {
       "path": "test/browser/standalone.mjs",
       "bytes": 10935,
       "sha256": "e7a074773d4fc03c4e7be6c40330244f56dd09ebe6bcd65addefcae900799075"
-    },
-    {
-      "path": "test/browser-recovery.test.mjs",
-      "bytes": 6260,
-      "sha256": "ea2cfedbbb2ac5279b33279b4415b7171cc72e4c5d39b50b2a730d4e2cdcb64b"
     },
     {
       "path": "test/history.test.mjs",
@@ -164,7 +169,21 @@
     {
       "path": "tools/build-standalone.mjs",
       "bytes": 7849,
-      "sha256": "f97e7c345365fefaa970b9b01c5413cd86e7cc884a6470681b4bc1cdb806806a"
+      "sha256": "4ba538fd7db55c339ae2585d5c4a477ea5cfc1d6c5a3ecefb2d2768b2fbb015d"
     }
-  ]
+  ],
+  "practice_draft_contribution": {
+    "worker": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
+    "task_id": "glossopia-practice-sentence-drafts-02c95f09",
+    "prompt_version": "2026-10-29.32",
+    "base_commit": "d36d868386d297852556bc0d735d163d095212c2",
+    "status": "source candidate; exact artifact receiving and private integration tracked in taskboard",
+    "scope": "Per-practice in-tab unsent sentences; existing project/schema/mission behavior retained",
+    "contributors": {
+      "host_source": "app lifecycle implementation",
+      "receipt_recovery": "independent browser receiver",
+      "peer_authority": "independent lifecycle review",
+      "lead": "source recovery, consumer text, build receiving and integration"
+    }
+  }
 }

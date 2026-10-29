@@ -31,7 +31,8 @@
         <div class="card-heading"><div><span class="eyebrow">YOUR FIRST EXCHANGE</span><h2 id="missionHeading">Bring a lantern home.</h2></div><span id="missionProgress" class="pill">1 of 3</span></div>
         <div class="mission-meta"><span id="missionGoal"></span><button id="restartMission" class="text-button">Start again</button></div>
         <div id="conversation" class="conversation" aria-live="polite" aria-label="Market conversation"></div>
-        <form id="sentenceForm" class="sentence-form"><label for="sentenceInput" id="sentenceLabel">What would you say?</label><div class="input-line"><input id="sentenceInput" autocomplete="off" spellcheck="false" placeholder="Build a sentence, or type it here" maxlength="240"><button id="saySentence" class="dark" type="submit">Say it <span aria-hidden="true">→</span></button></div><p id="sentenceFeedback" class="feedback" role="status"></p></form>
+        <form id="sentenceForm" class="sentence-form"><label for="sentenceInput" id="sentenceLabel">What would you say?</label><div class="input-line"><input id="sentenceInput" aria-describedby="practiceDraftNote" autocomplete="off" spellcheck="false" placeholder="Build a sentence, or type it here" maxlength="240"><button id="saySentence" class="dark" type="submit">Say it <span aria-hidden="true">→</span></button></div><p id="sentenceFeedback" class="feedback" role="status"></p></form>
+        <p id="practiceDraftNote" class="note">Unsent sentences stay with each practice in this tab. Reloading or changing projects clears them; saved projects and downloads do not include them.</p>
         <section id="wordOrderHelp" class="word-order-help" aria-labelledby="wordOrderTitle" hidden>
           <span class="eyebrow">YOUR WORDS, IN ORDER</span><h3 id="wordOrderTitle"></h3>
           <p id="wordOrderRule" class="body-copy"></p><p class="word-order-original">You wrote: <code id="wordOrderOriginal"></code></p>
@@ -110,7 +111,7 @@
     <span class="eyebrow">YOUR WORDS, IN USE</span><h3 id="creationTitle"></h3><p id="creationByline" class="body-copy"></p>
     <p id="creationMissionSummary" class="body-copy"></p><div id="creationExamples"></div>
     <p id="creationReplacement" class="body-copy"></p>
-    <p id="creationDraftNotice" class="notice" hidden>Your current unaccepted proposal and typed input are not part of the retained snapshot. Creating clears those drafts; Cancel keeps them in the current project.</p>
+    <p id="creationDraftNotice" class="notice" hidden>Your unaccepted proposal, inspection input and unsent sentences from every practice are not part of the retained snapshot. Creating clears those drafts; Cancel keeps them in the current project.</p>
     <div class="dialog-actions"><button id="createLanguage" type="button" class="dark" disabled>Create and open language</button><button id="exportCreatedLanguage" type="button" disabled>Download new project</button></div>
     <p class="note">Saved projects stays in this browser and can be cleared by browser settings. Download copies for a portable backup. Creating changes no earlier accepted versions or conversations.</p>
   </section>
@@ -118,7 +119,7 @@
 <dialog id="projectArchiveDialog" class="project-dialog" aria-labelledby="archiveTitle">
   <div class="dialog-heading"><div><span class="eyebrow">LANGUAGES YOU HAVE KEPT</span><h2 id="archiveTitle">Saved projects</h2></div><button id="closeArchive" type="button">Close</button></div>
   <p class="body-copy">Accepted project snapshots retained before you created or reopened a language. Opening one first retains the project you are leaving. These copies are local to this browser; download a snapshot to keep it elsewhere.</p>
-  <p id="archiveDraftNotice" class="notice" hidden>Opening a saved project clears the current unaccepted proposal and typed input. The retained snapshot includes accepted versions and conversations.</p>
+  <p id="archiveDraftNotice" class="notice" hidden>Opening a saved project clears the unaccepted proposal, inspection input and unsent sentences from every practice. The retained snapshot includes accepted versions and conversations.</p>
   <p id="archiveFeedback" class="feedback" role="status"></p><div id="archivedProjects"></div>
 </dialog>
 <div id="toast" class="toast" role="status" hidden></div>
