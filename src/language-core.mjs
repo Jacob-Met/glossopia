@@ -182,7 +182,9 @@ export function proposeRevision(baseInput,requestedPatch){
   }
   assert(changes.length>0,'The proposal does not change an accepted word or grammar rule','EMPTY_REVISION');
   assert(base.number<10000,'The supported version bound has been reached','VERSION_LIMIT');
-  const rawCandidate={...base,versionId:base.languageId+'-v'+(base.number+1),number:base.number+1,parentVersionId:base.versionId,
+  const nextNumber=base.number+1,versionSuffix='-v'+nextNumber;
+  const nextVersionId=base.languageId.slice(0,64-versionSuffix.length)+versionSuffix;
+  const rawCandidate={...base,versionId:nextVersionId,number:nextNumber,parentVersionId:base.versionId,
     author:patch.author,rationale:patch.rationale,
     grammar:{...base.grammar,order:patch.order,author:patch.order===base.grammar.order?base.grammar.author:patch.author,
       rationale:patch.order===base.grammar.order?base.grammar.rationale:patch.rationale},
@@ -226,3 +228,4 @@ export function acceptRevision(historyInput,proposal,approval){
   assert(!history.some(v=>v.versionId===next.versionId),'The proposed version id already exists','DUPLICATE_VERSION');
   return freeze([...history,next]);
 }
+
