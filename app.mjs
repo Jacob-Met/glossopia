@@ -653,7 +653,7 @@ $('acceptProposal').addEventListener('click', () => guarded(() => {
   $('proposalFeedback').textContent = 'Accepted locally. Existing conversations retain their original version. ' + (playable.available ? 'Start a practice from Versions to use the new version.' : 'New practice is unavailable with this version’s current word choices. You can use an earlier version in Versions.');
 }, 'proposalFeedback'));
 $('discardProposal').addEventListener('click', () => { if (pending) noteWork(); pending = null; renderImpact(); $('proposalFeedback').textContent = 'Proposal discarded. Accepted language and practice are unchanged.'; });
-$('inspectInput').addEventListener('input', noteWork);
+$('inspectInput').addEventListener('input', () => { noteWork(); $('inspectResult').textContent = ''; });
 $('inspectForm').addEventListener('submit', event => { event.preventDefault(); guarded(() => {
   const result = parse(viewed(), $('inspectInput').value); noteWork();
   $('inspectResult').replaceChildren(node('p', 'Version ' + viewed().number + ': ' + interpretation(result)));
