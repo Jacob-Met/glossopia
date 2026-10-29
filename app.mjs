@@ -2,12 +2,15 @@ import {parse, compose, semanticGloss, proposeRevision, acceptRevision} from './
 import {starterLanguage} from './src/starter-language.mjs';
 import {replayMission, submitSentence, canPlayMission} from './src/mission-core.mjs';
 import {createProject, validateProject, serializeProject, parseProject, addPractice} from './src/project.mjs';
+import {analyzePracticeImpact} from './src/practice-impact.mjs';
 
 const $ = id => document.getElementById(id);
 const storageKey = 'glossopia-project-v1';
 let project = createProject(starterLanguage), pending = null, hintVisible = false, inspectedVersionId = null;
 let importSelection = 0;
 let toastTimer;
+let practiceImpactCache = null, practiceImpactPage = 0;
+const practiceImpactPageSize = 12;
 let persistence = 'This tab holds your project. Download a copy to keep it.';
 function node(tag, text, className) {
   const element = document.createElement(tag);
@@ -136,13 +139,74 @@ function renderHistory() {
     return row;
   }));
 }
+function renderPracticeImpact() {
+  if (!pending) {
+    practiceImpactCache = null; practiceImpactPage = 0;
+    $('practiceImpactRows').replaceChildren();
+    return;
+  }
+  try {
+    if (practiceImpactCache?.proposal !== pending || practiceImpactCache?.project !== project) {
+      if (practiceImpactCache?.proposal !== pending) $('practiceImpactFilter').value = 'affected';
+      practiceImpactCache = {proposal: pending, project, report: analyzePracticeImpact(project, pending.candidate)};
+      practiceImpactPage = 0;
+    }
+    const report = practiceImpactCache.report, summary = report.summary;
+    const rows = report.groups.flatMap(group => group.sessions.flatMap(record => record.rows.map(row => ({...row, sourceVersionNumber: group.versionNumber}))));
+    $('practiceImpactSummary').textContent = summary.utteranceCount + ' saved utterances across ' + summary.sessionCount + ' conversations: ' + summary.affectedCount + ' meanings affected, ' + summary.preservedCount + ' preserved, and ' + summary.unverifiedOriginalCount + ' original meanings unverified.';
+    const filter = $('practiceImpactFilter'); filter.disabled = false;
+    const visible = rows.filter(row => filter.value === 'all' || (filter.value === 'unverified' ? row.classification === 'original_intent_unverified' : row.affected));
+    practiceImpactPage = Math.min(practiceImpactPage, Math.max(0, Math.ceil(visible.length / practiceImpactPageSize) - 1));
+    const first = practiceImpactPage * practiceImpactPageSize, page = visible.slice(first, first + practiceImpactPageSize);
+    $('practiceImpactRange').textContent = visible.length ? 'Showing ' + (first + 1) + '–' + (first + page.length) + ' of ' + visible.length + ' utterances in this view.' : 'No utterances in this view.';
+    $('practiceImpactPrevious').disabled = practiceImpactPage === 0;
+    $('practiceImpactNext').disabled = first + page.length >= visible.length;
+    const labels = {meaning_preserved: 'Meaning preserved', meaning_changed: 'Meaning changes', meaning_unresolved: 'Meaning no longer resolved', original_intent_unverified: 'Original intent unverified'};
+    const cards = page.map(row => {
+      const card = node('article', undefined, 'practice-impact-item');
+      card.dataset.sessionId = row.sessionId; card.dataset.inputIndex = String(row.inputIndex);
+      card.dataset.sourceVersionId = row.sourceVersionId; card.dataset.classification = row.classification;
+      const heading = node('div', undefined, 'practice-impact-heading');
+      heading.append(node('h4', row.sessionId + ' · version ' + row.sourceVersionNumber + ' · utterance ' + (row.inputIndex + 1)), node('span', labels[row.classification], 'practice-impact-label'));
+      card.append(heading, node('p', row.text, 'practice-impact-words'));
+      const comparison = node('dl', undefined, 'practice-impact-comparison');
+      for (const [label, result] of [['Originally, in version ' + row.sourceVersionNumber, row.original], ['Same words under the proposal', row.candidate]]) {
+        const cell = node('div'); cell.append(node('dt', label), node('dd', interpretation(result))); comparison.append(cell);
+      }
+      card.append(comparison);
+      const equivalent = node('p', undefined, 'practice-impact-equivalent');
+      if (row.equivalent.status === 'verified') {
+        equivalent.append(node('strong', 'Verified wording under the proposal: '), node('code', row.equivalent.text));
+      } else if (row.original.status !== 'ok') {
+        equivalent.textContent = 'Original intent was not established, so no equivalent is inferred.';
+      } else {
+        equivalent.textContent = 'No verified equivalent is available under the proposed rules.';
+      }
+      const open = button('Open original conversation', () => guarded(() => {
+        hintVisible = false; commit({...project, activeSessionId: row.sessionId}); showView('market');
+        $('missionHeading').tabIndex = -1; $('missionHeading').focus(); $('missionHeading').scrollIntoView({block: 'nearest'});
+      }));
+      open.dataset.openPractice = row.sessionId;
+      open.setAttribute('aria-label', 'Open original conversation ' + row.sessionId + ', language version ' + row.sourceVersionNumber);
+      card.append(equivalent, open); return card;
+    });
+    if (!cards.length) cards.push(node('p', summary.utteranceCount === 0 ? 'There are no saved utterances yet. Practice with an accepted version to compare your own sentences here.' : filter.value === 'affected' ? 'No verified original meaning changes in this comparison. Use the filter to inspect unverified originals or all saved utterances.' : 'There are no saved utterances in this category.', 'body-copy'));
+    $('practiceImpactRows').replaceChildren(...cards);
+  } catch (error) {
+    practiceImpactCache = null;
+    $('practiceImpactSummary').textContent = 'Saved practice comparison is unavailable. The authored-example review above still applies.';
+    $('practiceImpactRange').textContent = '';
+    $('practiceImpactRows').replaceChildren(node('p', error.message, 'body-copy'));
+    $('practiceImpactFilter').disabled = true; $('practiceImpactPrevious').disabled = true; $('practiceImpactNext').disabled = true;
+  }
+}
 function renderImpact() {
   $('impactPanel').hidden = !pending;
-  if (!pending) return;
+  if (!pending) { renderPracticeImpact(); return; }
   const {summary, examples} = pending.impact;
   $('impactTitle').textContent = 'Review version ' + pending.candidate.number;
   $('impactBadge').textContent = summary.unresolved ? 'Needs resolution' : 'Ready for your decision';
-  $('impactSummary').textContent = summary.changed + ' examples change; ' + summary.migrationsAvailable + ' can retain their meaning. Acceptance applies only to this local project. Names are self-entered attribution.';
+  $('impactSummary').textContent = summary.changed + ' authored examples change; ' + summary.migrationsAvailable + ' can retain their meaning. Acceptance applies only to this local project. Names are self-entered attribution.';
   $('impactProblems').textContent = summary.unresolved ? summary.unresolved + ' examples cannot migrate safely. Accepted state is unchanged.' : 'Accepted state is unchanged until you explicitly accept.';
   const changes = pending.changes.map(change => node('p', change.type === 'grammar_order' ? 'Sentence order: ' + change.from + ' → ' + change.to : change.type === 'word_form' ? 'Word form: ' + change.from + ' → ' + change.to + ' (' + change.meaning + ')' : 'Add object word: ' + change.form + ' = ' + change.meaning));
   $('impactRows').replaceChildren(...changes, ...examples.map(example => {
@@ -153,6 +217,7 @@ function renderImpact() {
     row.append(before, node('span', '→', 'arrow'), after);
     return row;
   }));
+  renderPracticeImpact();
   $('acceptProposal').disabled = summary.unresolved > 0;
 }
 function render() {
@@ -192,6 +257,9 @@ function updateProposalFields() {
   }
 }
 $('changeKind').addEventListener('change', updateProposalFields);
+$('practiceImpactFilter').addEventListener('change', () => { practiceImpactPage = 0; renderPracticeImpact(); });
+$('practiceImpactPrevious').addEventListener('click', () => { practiceImpactPage = Math.max(0, practiceImpactPage - 1); renderPracticeImpact(); });
+$('practiceImpactNext').addEventListener('click', () => { practiceImpactPage++; renderPracticeImpact(); });
 for (const id of ['renameForm', 'newWord']) { $(id).maxLength = 20; $(id).pattern = '[A-Za-z]{1,20}'; $(id).title = 'Use 1–20 ASCII letters, without spaces or punctuation.'; }
 $('newConcept').pattern = '[a-z][a-z0-9_]{0,39}'; $('newConcept').title = 'Lowercase identifier: start with a letter, then letters, digits or underscores (up to 40 characters).';
 for (const option of $('proposedOrder').options) option.textContent = option.value === 'SOV' ? 'Speaker → quantity → thing → action' : 'Speaker → action → quantity → thing';
@@ -209,7 +277,7 @@ $('proposalForm').addEventListener('submit', event => { event.preventDefault(); 
   if ($('changeKind').value === 'rename') patch.wordChanges = [{entryId: $('renameConcept').value, form: $('renameForm').value}];
   if ($('changeKind').value === 'add') patch.addEntries = [{id: 'word-' + crypto.randomUUID(), role: 'object', meaning: $('newConcept').value.trim(), form: $('newWord').value, gloss: $('newConcept').value.trim().replaceAll('_', ' '), author, rationale, canonical: true}];
   const proposal = proposeRevision(current(), patch); pending = proposal;
-  $('proposalFeedback').textContent = 'Preview only. Review each example before accepting.'; renderImpact();
+  $('proposalFeedback').textContent = 'Preview only. Review the authored examples and saved practice effects before accepting.'; renderImpact();
   $('impactPanel').scrollIntoView({block: 'nearest'});
 }, 'proposalFeedback'); });
 $('acceptProposal').addEventListener('click', () => guarded(() => {

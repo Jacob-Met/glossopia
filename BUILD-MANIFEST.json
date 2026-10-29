@@ -1,36 +1,40 @@
 {
   "schema": "hamon.glossopia-build.v1",
+  "version": "0.2.0",
   "worker": "estate-6653e323ca46-20261029",
   "session": "estate-6653e323ca46-20261029-s1",
   "prompt_version": "2026-10-28.25",
-  "source_role": "isolated integration candidate; original owner retained",
+  "source_role": "saved-practice impact contribution; original implementation claim retained",
   "original_source_archive_sha256": "4e9c453985c37f67f46fbe94f9830d6224d0e99e5ea981f0b9f7631d016f6750",
-  "created_at": "2026-10-29T07:32:20.253079+00:00",
+  "base_git_commit": "3dcef2d1b5a5f5a86b40242e1ce0e264699caf18",
+  "base_git_tree": "23d806283108fa43352da6c219999e14b54c3e52",
+  "task_id": "glossopia-saved-practice-impact-6653e323",
+  "created_at": "2026-10-29T08:27:26.428758+00:00",
   "files": [
     {
       "path": "README.md",
-      "bytes": 3484,
-      "sha256": "b7c1e674e79cfcb868eab343b852e683964bc3e68247b35ff58ea701a7c269ef"
+      "bytes": 6629,
+      "sha256": "bb5311049916a320bff8fe67479a32e9e7990255a1e1bb3f614376eaa74da470"
     },
     {
       "path": "app.mjs",
-      "bytes": 19669,
-      "sha256": "346e39a1714d2edbf56fd56cb50990261f7859b1fa1b3cda626526a980ee0655"
+      "bytes": 25480,
+      "sha256": "77ff62fb307b1b3238d6cd7e2120c5640c432bbcd517caedb00cd792cbdab663"
     },
     {
       "path": "index.html",
-      "bytes": 11866,
-      "sha256": "750c5e71dda2b772ea04cc0d58088d3e61bbdc8c2d09952f62f94e4801024d72"
+      "bytes": 13206,
+      "sha256": "53b99fd961b8d3d19ba1beb3e2656a0f02bb48e819c89dd18c00ad6930892415"
     },
     {
       "path": "package.json",
       "bytes": 455,
-      "sha256": "54608ec15db73040fd1dcf4c484ed6afff816b0282a44327cf1a8bae4a25e8f0"
+      "sha256": "2f7722f92b9eaeca0678e74268e38b988c5449f7b4170c25f47a977f690ec913"
     },
     {
       "path": "server.mjs",
-      "bytes": 2329,
-      "sha256": "c21d611234a4697e6878e30219ba70154b29d9ff2f6b5e8c804381d5d41447ba"
+      "bytes": 2355,
+      "sha256": "4c25b508f98c3f2201164435338996b79fd9c8c434abd0d2967a0a0adb99cb0d"
     },
     {
       "path": "src/language-core.mjs",
@@ -41,6 +45,11 @@
       "path": "src/mission-core.mjs",
       "bytes": 6429,
       "sha256": "147c56a1948f7cbb78aa274d85e0605ff90da67205b83fe1ec096df4b6ab4721"
+    },
+    {
+      "path": "src/practice-impact.mjs",
+      "bytes": 5213,
+      "sha256": "5acc58332d24938a5ab38ada9eaab0525cceeb98926d848729078a33a9845d4b"
     },
     {
       "path": "src/project.mjs",
@@ -54,8 +63,8 @@
     },
     {
       "path": "style.css",
-      "bytes": 15133,
-      "sha256": "c89b57e752fec73d2a5671571671bc6f044379d474d670d59ccedbfee0c00698"
+      "bytes": 17225,
+      "sha256": "b62a79e0f8f5f2490623c44ef8a985a80399f73ebb24e6810f5e25ed2ca4f3ec"
     },
     {
       "path": "test/history.test.mjs",
@@ -76,6 +85,11 @@
       "path": "test/mission.test.mjs",
       "bytes": 6242,
       "sha256": "926b69bf09c347c431b1eb3b4458544e64183ee4b54247c24844afa52f2c9d3f"
+    },
+    {
+      "path": "test/practice-impact.test.mjs",
+      "bytes": 8091,
+      "sha256": "db28cd588f8f2809cc7c64de296138bdd6695ad28fc3c3437f48865c9e78977a"
     }
   ]
 }
