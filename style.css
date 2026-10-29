@@ -77,3 +77,6 @@
 .version-change-before,.version-change-after{padding:2px 5px;border-radius:4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 .version-change-before{background:#efe3d8}
 .version-change-after{background:#dfece3}
+
+/* Keep review feedback clear of the dialog edge when revealing the preview. */
+#creationFeedback { scroll-margin-block-start: 1rem; }

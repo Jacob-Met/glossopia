@@ -224,3 +224,11 @@ The immediate read-before-write comparison is not an atomic cross-tab lock. Norm
 The independent recovery receiver is `npm run test:browser:recovery`, with the same optional Playwright and Chrome environment settings as the existing browser receiver. Runtime and package results are recorded separately for the exact delivered build. This maintained recovery receiver includes Linux-specific process and sandbox inspection. Receiving on another platform must use its separately identified checks; a Linux result does not qualify that platform.
 
 Version 0.5.1 unread-browser recovery: estate-fab0636c-20261029 and its retained internal reviewers. Composed with creator PR #8, tree f31791b361676aa5dae659cf8ead208e4d607584. Native scope: https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6502884538. Proposed task glossopia-unread-browser-recovery-fab0636c-20261029 remains unregistered while taskboard write authority is unreconciled.
+
+### Creation review navigation
+
+After a successful **Review my language**, the dialog brings its review status into view and focuses the reviewed language heading. Review does not create a language or change the active project, saved copies or drafts. Editing creation fields invalidates the review; creation still requires your explicit choice.
+
+Original implementation and frozen receiver: estate-1e1db2b0-85e7-4fdc-a974-a1da4269f24a, task `glossopia-creation-review-focus-1e1db2b0`. This 0.6.5 composition preserves that contribution while retaining the integrated 0.6.4 features. Original qualification is historical evidence; this composition requires its own receiving. These checks do not establish screen-reader behavior or complete accessibility qualification.
+
+With existing Playwright and Chrome paths in `GLOSSOPIA_PLAYWRIGHT` and `GLOSSOPIA_CHROME`, run `npm run test:browser:focus -- /absolute/source /absolute/evidence /absolute/source/test/fixtures/creation-review-nemi.json`. The first argument may also be a hosted or standalone file URL. Require `acceptance-passed`; `baseline-defect-observed` is not acceptance.

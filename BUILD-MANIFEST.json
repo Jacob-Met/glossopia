@@ -1,77 +1,272 @@
 {
   "schema": "hamon.glossopia-build.v1",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "worker": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
   "session": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
+  "task_id": "glossopia-creation-focus-adoption-02c95f09",
   "prompt_version": "2026-10-29.32",
-  "task_id": "glossopia-saved-library-capacity-02c95f09",
-  "created_at": "2026-10-29T22:21:28.652592+00:00",
-  "source_role": "Explicit chosen saved-copy removal and one retained Undo using observed raw archive checks; preserves active project, transient drafts, unread-save recovery and existing authored-scene/creation-focus ownership.",
-  "base_git_commit": "ed2db8c9abb313d7a01020484d98aea636ba3e11",
-  "base_git_tree": "a8ff632a157156755d1b40a3fe7e8b7bd90333a5",
+  "created_at": "2026-10-29T23:23:13.299298+00:00",
+  "source_role": "Minimal credited adoption of original creation-review navigation onto integrated saved-copy management; receiving pending.",
+  "base_git_commit": "a47652e9aa11c3ee798027c927f0251342bde095",
   "base_source": {
-    "manifest_sha256": "734b0f615121417c893dde0f4ea692163567cbd3dc23e07844a3bf8d2dd438f4",
+    "manifest_sha256": "011b84746cbde11fb1edd21f634304b20cffaeea169779ffb6fff958bbd2857f",
     "manifest": {
       "schema": "hamon.glossopia-build.v1",
-      "version": "0.6.3",
+      "version": "0.6.4",
       "worker": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
       "session": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
       "prompt_version": "2026-10-29.32",
-      "task_id": "glossopia-accepted-version-changes-02c95f09",
-      "created_at": "2026-10-29T21:39:46.848147+00:00",
-      "source_role": "Read-only accepted vocabulary and sentence-order comparisons from adjacent saved versions; preserves integrated practice drafts, step-meaning feedback, package-derived health and original44 inspection-input currency.",
-      "base_git_commit": "bd45749db9ae5abf8eb7794e1423b7ad151ebc67",
-      "base_git_tree": "a521be913a7819834b712b4e9cf2623df4c4f3df",
+      "task_id": "glossopia-saved-library-capacity-02c95f09",
+      "created_at": "2026-10-29T22:21:28.652592+00:00",
+      "source_role": "Explicit chosen saved-copy removal and one retained Undo using observed raw archive checks; preserves active project, transient drafts, unread-save recovery and existing authored-scene/creation-focus ownership.",
+      "base_git_commit": "ed2db8c9abb313d7a01020484d98aea636ba3e11",
+      "base_git_tree": "a8ff632a157156755d1b40a3fe7e8b7bd90333a5",
       "base_source": {
-        "manifest_sha256": "4ca3626639d601b9a805822e561b328a3777da33e3e80c7b216219abe36a3c53",
+        "manifest_sha256": "734b0f615121417c893dde0f4ea692163567cbd3dc23e07844a3bf8d2dd438f4",
         "manifest": {
           "schema": "hamon.glossopia-build.v1",
-          "version": "0.6.2",
-          "candidate_id": "v0.6.2-inspection-currency.20261029.c8542f28",
-          "worker": "estate-c8542f28-df9f-44c7-b872-71acca28c3e9",
-          "session": "estate-c8542f28-df9f-44c7-b872-71acca28c3e9",
-          "task_id": "glossopia-inspection-text-currency-44aabdd5",
+          "version": "0.6.3",
+          "worker": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
+          "session": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
           "prompt_version": "2026-10-29.32",
-          "created_at": "2026-10-29T21:39:16.059272+00:00",
-          "source_role": "Integrate original44aa inspection input currency correction into maintained0.6.2 with PR12temporarydrafts, PR13feedback and mergedPR14 package-derivedhealth preserved. Original0.7scene candidate remains separate.",
-          "base_git_commit": "6e20b6d3fe9dfca7117e976db1b2567ff666eadf",
-          "base_git_tree": "97b9a6aa00a9097a09228d42efbceca312895bc3",
+          "task_id": "glossopia-accepted-version-changes-02c95f09",
+          "created_at": "2026-10-29T21:39:46.848147+00:00",
+          "source_role": "Read-only accepted vocabulary and sentence-order comparisons from adjacent saved versions; preserves integrated practice drafts, step-meaning feedback, package-derived health and original44 inspection-input currency.",
+          "base_git_commit": "bd45749db9ae5abf8eb7794e1423b7ad151ebc67",
+          "base_git_tree": "a521be913a7819834b712b4e9cf2623df4c4f3df",
           "base_source": {
-            "manifest_sha256": "6357ab3d639882aedb7916ca14bd8ae9dd6d160fba03a541497b2924c8e3979c",
+            "manifest_sha256": "4ca3626639d601b9a805822e561b328a3777da33e3e80c7b216219abe36a3c53",
             "manifest": {
               "schema": "hamon.glossopia-build.v1",
               "version": "0.6.2",
+              "candidate_id": "v0.6.2-inspection-currency.20261029.c8542f28",
               "worker": "estate-c8542f28-df9f-44c7-b872-71acca28c3e9",
               "session": "estate-c8542f28-df9f-44c7-b872-71acca28c3e9",
+              "task_id": "glossopia-inspection-text-currency-44aabdd5",
               "prompt_version": "2026-10-29.32",
-              "task_id": "glossopia-step-meaning-feedback-c8542f28",
-              "created_at": "2026-10-29T21:17:23.207802+00:00",
-              "source_role": "Explain off-goal meaning in the fixed market while preserving integrated PR12 practice drafts and all current application behavior. Unpublished0.7 authored scenes retain their original owner.",
-              "base_git_commit": "4c748d9c693cf508a84a190d15a98a10fda4dc2c",
+              "created_at": "2026-10-29T21:39:16.059272+00:00",
+              "source_role": "Integrate original44aa inspection input currency correction into maintained0.6.2 with PR12temporarydrafts, PR13feedback and mergedPR14 package-derivedhealth preserved. Original0.7scene candidate remains separate.",
+              "base_git_commit": "6e20b6d3fe9dfca7117e976db1b2567ff666eadf",
+              "base_git_tree": "97b9a6aa00a9097a09228d42efbceca312895bc3",
               "base_source": {
-                "manifest_sha256": "f541c1a9a5fab7ebd78687230d48e6bbc45f834940ce3e5e0b8ad281f618cea5",
+                "manifest_sha256": "6357ab3d639882aedb7916ca14bd8ae9dd6d160fba03a541497b2924c8e3979c",
                 "manifest": {
                   "schema": "hamon.glossopia-build.v1",
-                  "version": "0.6.1",
-                  "worker": "estate-6653e323ca46-20261029",
-                  "session": "estate-6653e323ca46-20261029-s1",
-                  "prompt_version": "2026-10-28.25",
-                  "source_role": "Self-contained offline HTML distribution with maintained builder and receiver; existing Node package retained; Home returns to Market without discarding draft",
-                  "original_source_archive_sha256": "4e9c453985c37f67f46fbe94f9830d6224d0e99e5ea981f0b9f7631d016f6750",
-                  "base_git_commit": "3817c0674560f55c855b4014b7404d4b915d02b1",
-                  "base_git_tree": "8af53fc86c82cb8d16e9db2b4becd0cc2e1681a8",
-                  "task_id": null,
-                  "native_work_record": "https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6502602012",
-                  "proposed_board_task_id": "glossopia-standalone-browser-6653e323",
-                  "board_registration": "pending-authority-reconciliation",
-                  "composition_record": "https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6503266905",
-                  "concurrent_contribution": {
-                    "worker": "estate-fab0636c-20261029",
-                    "pull_request": 9,
-                    "source_commit": "3817c0674560f55c855b4014b7404d4b915d02b1",
-                    "scope": "Unread browser recovery; original module and 21-case maintained receiver unchanged"
+                  "version": "0.6.2",
+                  "worker": "estate-c8542f28-df9f-44c7-b872-71acca28c3e9",
+                  "session": "estate-c8542f28-df9f-44c7-b872-71acca28c3e9",
+                  "prompt_version": "2026-10-29.32",
+                  "task_id": "glossopia-step-meaning-feedback-c8542f28",
+                  "created_at": "2026-10-29T21:17:23.207802+00:00",
+                  "source_role": "Explain off-goal meaning in the fixed market while preserving integrated PR12 practice drafts and all current application behavior. Unpublished0.7 authored scenes retain their original owner.",
+                  "base_git_commit": "4c748d9c693cf508a84a190d15a98a10fda4dc2c",
+                  "base_source": {
+                    "manifest_sha256": "f541c1a9a5fab7ebd78687230d48e6bbc45f834940ce3e5e0b8ad281f618cea5",
+                    "manifest": {
+                      "schema": "hamon.glossopia-build.v1",
+                      "version": "0.6.1",
+                      "worker": "estate-6653e323ca46-20261029",
+                      "session": "estate-6653e323ca46-20261029-s1",
+                      "prompt_version": "2026-10-28.25",
+                      "source_role": "Self-contained offline HTML distribution with maintained builder and receiver; existing Node package retained; Home returns to Market without discarding draft",
+                      "original_source_archive_sha256": "4e9c453985c37f67f46fbe94f9830d6224d0e99e5ea981f0b9f7631d016f6750",
+                      "base_git_commit": "3817c0674560f55c855b4014b7404d4b915d02b1",
+                      "base_git_tree": "8af53fc86c82cb8d16e9db2b4becd0cc2e1681a8",
+                      "task_id": null,
+                      "native_work_record": "https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6502602012",
+                      "proposed_board_task_id": "glossopia-standalone-browser-6653e323",
+                      "board_registration": "pending-authority-reconciliation",
+                      "composition_record": "https://github.com/Jacob-Met/glossopia/issues/1#issuecomment-6503266905",
+                      "concurrent_contribution": {
+                        "worker": "estate-fab0636c-20261029",
+                        "pull_request": 9,
+                        "source_commit": "3817c0674560f55c855b4014b7404d4b915d02b1",
+                        "scope": "Unread browser recovery; original module and 21-case maintained receiver unchanged"
+                      },
+                      "created_at": "2026-10-29T17:08:03.795386+00:00",
+                      "files": [
+                        {
+                          "path": "README.md",
+                          "bytes": 27630,
+                          "sha256": "4a9226273012d9e7cea520e9247d55f1ce0663f1454d4d860a168c12eee95aa2"
+                        },
+                        {
+                          "path": "app.mjs",
+                          "bytes": 56898,
+                          "sha256": "52c338f5f4e5f5358d876652c71f4548adf0a067d283f78ce420c3af46835d3a"
+                        },
+                        {
+                          "path": "index.html",
+                          "bytes": 20910,
+                          "sha256": "e1d8e04f467bb6ae1084c7c819065cd1a39166b749efc525c060b062703066fa"
+                        },
+                        {
+                          "path": "package.json",
+                          "bytes": 784,
+                          "sha256": "d65bdb5a2f24d0a50f288677d5601e036fe1067d6ed78b8121c9717e4020836c"
+                        },
+                        {
+                          "path": "server.mjs",
+                          "bytes": 2457,
+                          "sha256": "813494dae4963e55201c47d96c4918861a678dd2f2b87c5ca45bceda6618f7af"
+                        },
+                        {
+                          "path": "src/browser-recovery.mjs",
+                          "bytes": 3475,
+                          "sha256": "7f4adb3b77acca76fbb9c666fc9cf5418d579cb8095495a13bb2c00f876f0bc3"
+                        },
+                        {
+                          "path": "src/language-core.mjs",
+                          "bytes": 18458,
+                          "sha256": "60b988221a2170e3209ee9ccefdd3fe3437d72f91a9126f16c5f7a71dd39776a"
+                        },
+                        {
+                          "path": "src/language-creation.mjs",
+                          "bytes": 3979,
+                          "sha256": "62d16a3177bc0ee8e804737dca4f2075a7c20c240b6a059c9c77b52cae6954f6"
+                        },
+                        {
+                          "path": "src/mission-core.mjs",
+                          "bytes": 7795,
+                          "sha256": "6b5a897246caf93e96e7c06f21221e0cf1cd5e67e8762e8350fef9fc9e04ad22"
+                        },
+                        {
+                          "path": "src/practice-impact.mjs",
+                          "bytes": 5213,
+                          "sha256": "5acc58332d24938a5ab38ada9eaab0525cceeb98926d848729078a33a9845d4b"
+                        },
+                        {
+                          "path": "src/project-archive.mjs",
+                          "bytes": 5296,
+                          "sha256": "500c7cedc6dba3b291f9cd5b97f2a9ebe3d21533c6034e8ffa0985055a3d9dd9"
+                        },
+                        {
+                          "path": "src/project.mjs",
+                          "bytes": 4163,
+                          "sha256": "6cd2a83d961e3770de6323587c08509482cc21eddf1cf42231cf62ee16f08b1a"
+                        },
+                        {
+                          "path": "src/starter-language.mjs",
+                          "bytes": 3879,
+                          "sha256": "08c0493f315092a813911d6028d1d0af4b2adb60453eb6b6b93ea86a091366bc"
+                        },
+                        {
+                          "path": "src/word-order.mjs",
+                          "bytes": 3447,
+                          "sha256": "bd481bed9b9369cde53ea6510202c9fa3a622a982cdf94ae80d6acb84f82afe4"
+                        },
+                        {
+                          "path": "style.css",
+                          "bytes": 26479,
+                          "sha256": "0a74a2434eb67b0e4a99dae49bdbe7516a4c4fa412b6d376b611343deee46842"
+                        },
+                        {
+                          "path": "test/browser-recovery.test.mjs",
+                          "bytes": 6260,
+                          "sha256": "ea2cfedbbb2ac5279b33279b4415b7171cc72e4c5d39b50b2a730d4e2cdcb64b"
+                        },
+                        {
+                          "path": "test/browser/browser-recovery.mjs",
+                          "bytes": 25068,
+                          "sha256": "1aa9082bc7f7d7fcaa23753cefbce48dd06dcaf0b3cc0659b9a07283e512d2bb"
+                        },
+                        {
+                          "path": "test/browser/open-project.mjs",
+                          "bytes": 14476,
+                          "sha256": "d956db4c0b66006856f914813a5523d74a8cb56880d473995804ae9145580ef5"
+                        },
+                        {
+                          "path": "test/browser/practice-drafts.mjs",
+                          "bytes": 9952,
+                          "sha256": "ed426205a94df1e108e7d768d70ab26fc3ce50cc5703839135360a8bd9c90a7f"
+                        },
+                        {
+                          "path": "test/browser/standalone.mjs",
+                          "bytes": 10935,
+                          "sha256": "e7a074773d4fc03c4e7be6c40330244f56dd09ebe6bcd65addefcae900799075"
+                        },
+                        {
+                          "path": "test/history.test.mjs",
+                          "bytes": 1993,
+                          "sha256": "116f393a24cce3c03f55bf48ee14c9a0b713e10fa02b2741e8b04055fa11d511"
+                        },
+                        {
+                          "path": "test/id-boundaries.test.mjs",
+                          "bytes": 1690,
+                          "sha256": "8a15f5b40e97120396af3b7e7e7aba1d473d4401640ddc82d76ffb5976052061"
+                        },
+                        {
+                          "path": "test/language-creation.test.mjs",
+                          "bytes": 5049,
+                          "sha256": "e5760c70d45a5a64abebdd5548c80adec0cd7c0ce607ef3260292518df0b0c19"
+                        },
+                        {
+                          "path": "test/long-language-id.test.mjs",
+                          "bytes": 2051,
+                          "sha256": "76e07bf78891322ea5af57b08adc4e1172a54e740764d4e6e1fa2605fd0f0a74"
+                        },
+                        {
+                          "path": "test/mission-compatibility.test.mjs",
+                          "bytes": 7154,
+                          "sha256": "1b07383d12da0380394a3308503e3a5d1439a7716ce12a4785fcf4885c026bdd"
+                        },
+                        {
+                          "path": "test/mission.test.mjs",
+                          "bytes": 6242,
+                          "sha256": "926b69bf09c347c431b1eb3b4458544e64183ee4b54247c24844afa52f2c9d3f"
+                        },
+                        {
+                          "path": "test/practice-impact.test.mjs",
+                          "bytes": 8091,
+                          "sha256": "db28cd588f8f2809cc7c64de296138bdd6695ad28fc3c3437f48865c9e78977a"
+                        },
+                        {
+                          "path": "test/project-archive.test.mjs",
+                          "bytes": 7192,
+                          "sha256": "ac80409608134ccddd4b78d76d280a7fdfff08a27667ac4e9e300fe0170c970a"
+                        },
+                        {
+                          "path": "test/word-order.test.mjs",
+                          "bytes": 5302,
+                          "sha256": "62390e7118bb46640d252762d8f9fe987dc9078c1f77809249177de4f5d9f950"
+                        },
+                        {
+                          "path": "tools/build-standalone.mjs",
+                          "bytes": 7849,
+                          "sha256": "4ba538fd7db55c339ae2585d5c4a477ea5cfc1d6c5a3ecefb2d2768b2fbb015d"
+                        }
+                      ],
+                      "practice_draft_contribution": {
+                        "worker": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
+                        "task_id": "glossopia-practice-sentence-drafts-02c95f09",
+                        "prompt_version": "2026-10-29.32",
+                        "base_commit": "d36d868386d297852556bc0d735d163d095212c2",
+                        "status": "source candidate; exact artifact receiving and private integration tracked in taskboard",
+                        "scope": "Per-practice in-tab unsent sentences; existing project/schema/mission behavior retained",
+                        "contributors": {
+                          "host_source": "app lifecycle implementation",
+                          "receipt_recovery": "independent browser receiver",
+                          "peer_authority": "independent lifecycle review",
+                          "lead": "source recovery, consumer text, build receiving and integration"
+                        }
+                      }
+                    }
                   },
-                  "created_at": "2026-10-29T17:08:03.795386+00:00",
+                  "preserved_contribution": {
+                    "pull_request": 12,
+                    "worker": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
+                    "task_id": "glossopia-practice-sentence-drafts-02c95f09",
+                    "merge_commit": "4c748d9c693cf508a84a190d15a98a10fda4dc2c",
+                    "tree": "c8a6cb8fda1c0acc046f7bd46b4ba72907aff2b3"
+                  },
+                  "changes": [
+                    "BUILD-MANIFEST.json",
+                    "package.json",
+                    "server.mjs",
+                    "src/mission-core.mjs",
+                    "test/step-feedback.test.mjs",
+                    "tools/build-standalone.mjs"
+                  ],
                   "files": [
                     {
                       "path": "README.md",
@@ -91,12 +286,12 @@
                     {
                       "path": "package.json",
                       "bytes": 784,
-                      "sha256": "d65bdb5a2f24d0a50f288677d5601e036fe1067d6ed78b8121c9717e4020836c"
+                      "sha256": "9f35d7d16ae2dab9c7c569b8d8eca7d033bc31d1874feba5acbec21c7dcb7dab"
                     },
                     {
                       "path": "server.mjs",
-                      "bytes": 2457,
-                      "sha256": "813494dae4963e55201c47d96c4918861a678dd2f2b87c5ca45bceda6618f7af"
+                      "bytes": 2555,
+                      "sha256": "f486f709372d114eae2c7c877c43ee64225e17aa7074e6acb8f01963a8009c32"
                     },
                     {
                       "path": "src/browser-recovery.mjs",
@@ -115,8 +310,8 @@
                     },
                     {
                       "path": "src/mission-core.mjs",
-                      "bytes": 7795,
-                      "sha256": "6b5a897246caf93e96e7c06f21221e0cf1cd5e67e8762e8350fef9fc9e04ad22"
+                      "bytes": 8697,
+                      "sha256": "50f8f2655464bfa08bfcf2c06043cfaf0b77c5b1045f7f33716345028b253a4b"
                     },
                     {
                       "path": "src/practice-impact.mjs",
@@ -214,6 +409,11 @@
                       "sha256": "ac80409608134ccddd4b78d76d280a7fdfff08a27667ac4e9e300fe0170c970a"
                     },
                     {
+                      "path": "test/step-feedback.test.mjs",
+                      "bytes": 1742,
+                      "sha256": "5066369c215e19432bd2cc07276577f818473df4bee3faa1961092204fba20fa"
+                    },
+                    {
                       "path": "test/word-order.test.mjs",
                       "bytes": 5302,
                       "sha256": "62390e7118bb46640d252762d8f9fe987dc9078c1f77809249177de4f5d9f950"
@@ -221,38 +421,28 @@
                     {
                       "path": "tools/build-standalone.mjs",
                       "bytes": 7849,
-                      "sha256": "4ba538fd7db55c339ae2585d5c4a477ea5cfc1d6c5a3ecefb2d2768b2fbb015d"
+                      "sha256": "c0f30d2bef2db633230934dbb189aa03e6a5813bc787d9dab9aa05284c93b7e9"
                     }
                   ],
-                  "practice_draft_contribution": {
+                  "health_identity_contribution": {
                     "worker": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
                     "task_id": "glossopia-practice-sentence-drafts-02c95f09",
-                    "prompt_version": "2026-10-29.32",
-                    "base_commit": "d36d868386d297852556bc0d735d163d095212c2",
-                    "status": "source candidate; exact artifact receiving and private integration tracked in taskboard",
-                    "scope": "Per-practice in-tab unsent sentences; existing project/schema/mission behavior retained",
-                    "contributors": {
-                      "host_source": "app lifecycle implementation",
-                      "receipt_recovery": "independent browser receiver",
-                      "peer_authority": "independent lifecycle review",
-                      "lead": "source recovery, consumer text, build receiving and integration"
-                    }
+                    "base_commit": "9cccb2b3434439aa6981287ffef7aa6383708692",
+                    "previous_reviewed_head": "4e358c222635cc0eb5c7f5db5b36536d037349e0",
+                    "scope": "Read health version from included package metadata while preserving the integrated step feedback and practice drafts",
+                    "receiving": "Separate exact-package npm-start receipt; original 0.6.1 candidate and conflict receipt preserved"
                   }
                 }
               },
-              "preserved_contribution": {
-                "pull_request": 12,
-                "worker": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
-                "task_id": "glossopia-practice-sentence-drafts-02c95f09",
-                "merge_commit": "4c748d9c693cf508a84a190d15a98a10fda4dc2c",
-                "tree": "c8a6cb8fda1c0acc046f7bd46b4ba72907aff2b3"
+              "producer_contribution": {
+                "worker": "estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594",
+                "task_id": "glossopia-inspection-text-currency-44aabdd5",
+                "source_sha256": "bc25e3097b2e454770e7fb8eb15c32994494f1dcbb548dee67343af8d3859720",
+                "scope": "Original one-line clear while preserving noteWork; retained exact original receivers. Root provides current-source adaptation and integration assistance; task ownership unchanged."
               },
               "changes": [
                 "BUILD-MANIFEST.json",
-                "package.json",
-                "server.mjs",
-                "src/mission-core.mjs",
-                "test/step-feedback.test.mjs",
+                "app.mjs",
                 "tools/build-standalone.mjs"
               ],
               "files": [
@@ -263,8 +453,8 @@
                 },
                 {
                   "path": "app.mjs",
-                  "bytes": 56898,
-                  "sha256": "52c338f5f4e5f5358d876652c71f4548adf0a067d283f78ce420c3af46835d3a"
+                  "bytes": 56948,
+                  "sha256": "0f1a066249dc6c25583df3e02ce1206a66a68655cd06183fee7eacf17c0f6852"
                 },
                 {
                   "path": "index.html",
@@ -409,40 +599,62 @@
                 {
                   "path": "tools/build-standalone.mjs",
                   "bytes": 7849,
-                  "sha256": "c0f30d2bef2db633230934dbb189aa03e6a5813bc787d9dab9aa05284c93b7e9"
+                  "sha256": "827ac849a496c4ed491befa156bd5247797eb4a68d9dcc5b372a4c9ff70f5830"
                 }
               ],
-              "health_identity_contribution": {
-                "worker": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
-                "task_id": "glossopia-practice-sentence-drafts-02c95f09",
-                "base_commit": "9cccb2b3434439aa6981287ffef7aa6383708692",
-                "previous_reviewed_head": "4e358c222635cc0eb5c7f5db5b36536d037349e0",
-                "scope": "Read health version from included package metadata while preserving the integrated step feedback and practice drafts",
-                "receiving": "Separate exact-package npm-start receipt; original 0.6.1 candidate and conflict receipt preserved"
-              }
+              "preserved_contributions": [
+                {
+                  "pull_request": 14,
+                  "worker": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
+                  "task_id": "glossopia-practice-sentence-drafts-02c95f09",
+                  "merge_commit": "6e20b6d3fe9dfca7117e976db1b2567ff666eadf",
+                  "reviewed_head": "0a34ebb7724127a9b7f997c54e54cc97cf2a7f12",
+                  "tree": "97b9a6aa00a9097a09228d42efbceca312895bc3",
+                  "server_sha256": "f486f709372d114eae2c7c877c43ee64225e17aa7074e6acb8f01963a8009c32"
+                },
+                {
+                  "pull_request": 13,
+                  "worker": "estate-c8542f28-df9f-44c7-b872-71acca28c3e9",
+                  "merge_commit": "9cccb2b3434439aa6981287ffef7aa6383708692",
+                  "tree": "27dc3f62d14f3645825947003023849bd707426d"
+                },
+                {
+                  "pull_request": 12,
+                  "worker": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
+                  "merge_commit": "4c748d9c693cf508a84a190d15a98a10fda4dc2c"
+                }
+              ]
             }
           },
-          "producer_contribution": {
-            "worker": "estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594",
-            "task_id": "glossopia-inspection-text-currency-44aabdd5",
-            "source_sha256": "bc25e3097b2e454770e7fb8eb15c32994494f1dcbb548dee67343af8d3859720",
-            "scope": "Original one-line clear while preserving noteWork; retained exact original receivers. Root provides current-source adaptation and integration assistance; task ownership unchanged."
+          "history_contribution": {
+            "implementation": "retained host_source",
+            "independent_review": "retained peer_authority",
+            "independent_receiving_author": "retained receipt_recovery",
+            "lead": "source composition, consumer layout/docs, exact artifact receiving and private integration",
+            "receiving": "Separate runtime/visual/delivery evidence is required for the exact generated artifacts; source hashes do not establish execution."
           },
           "changes": [
-            "BUILD-MANIFEST.json",
+            "README.md",
             "app.mjs",
-            "tools/build-standalone.mjs"
+            "package.json",
+            "server.mjs",
+            "src/version-history.mjs",
+            "style.css",
+            "test/browser/version-history.mjs",
+            "test/version-history.test.mjs",
+            "tools/build-standalone.mjs",
+            "BUILD-MANIFEST.json"
           ],
           "files": [
             {
               "path": "README.md",
-              "bytes": 27630,
-              "sha256": "4a9226273012d9e7cea520e9247d55f1ce0663f1454d4d860a168c12eee95aa2"
+              "bytes": 29482,
+              "sha256": "42faf6a488acb9ebac745496ec0ff6ee76b73c6b9e0fe735702360fef7fa670c"
             },
             {
               "path": "app.mjs",
-              "bytes": 56948,
-              "sha256": "0f1a066249dc6c25583df3e02ce1206a66a68655cd06183fee7eacf17c0f6852"
+              "bytes": 59327,
+              "sha256": "a7f0a35cbc11aa6c76888c038d97bf4d637c168b81b20b3bec27cdbfd050efb1"
             },
             {
               "path": "index.html",
@@ -451,13 +663,13 @@
             },
             {
               "path": "package.json",
-              "bytes": 784,
-              "sha256": "9f35d7d16ae2dab9c7c569b8d8eca7d033bc31d1874feba5acbec21c7dcb7dab"
+              "bytes": 853,
+              "sha256": "761bb3ae3466c80a42986bc52407b6bec518e7526a85d08503a7cfa4682001d0"
             },
             {
               "path": "server.mjs",
-              "bytes": 2555,
-              "sha256": "f486f709372d114eae2c7c877c43ee64225e17aa7074e6acb8f01963a8009c32"
+              "bytes": 2581,
+              "sha256": "a90a3d13c86f0083ef15a872de292b82d59517ca9aadf9f6fd592f6c7c71ace5"
             },
             {
               "path": "src/browser-recovery.mjs",
@@ -500,19 +712,19 @@
               "sha256": "08c0493f315092a813911d6028d1d0af4b2adb60453eb6b6b93ea86a091366bc"
             },
             {
+              "path": "src/version-history.mjs",
+              "bytes": 2161,
+              "sha256": "30d1f90e1937da652b4e3b9c6a79bf099ff2e24ac74945d50fb508b9741e4482"
+            },
+            {
               "path": "src/word-order.mjs",
               "bytes": 3447,
               "sha256": "bd481bed9b9369cde53ea6510202c9fa3a622a982cdf94ae80d6acb84f82afe4"
             },
             {
               "path": "style.css",
-              "bytes": 26479,
-              "sha256": "0a74a2434eb67b0e4a99dae49bdbe7516a4c4fa412b6d376b611343deee46842"
-            },
-            {
-              "path": "test/browser-recovery.test.mjs",
-              "bytes": 6260,
-              "sha256": "ea2cfedbbb2ac5279b33279b4415b7171cc72e4c5d39b50b2a730d4e2cdcb64b"
+              "bytes": 27606,
+              "sha256": "69049064a1ea0f13e1bb43dad84de1ef82eb7031c65e953bc9f6d1af53926fa4"
             },
             {
               "path": "test/browser/browser-recovery.mjs",
@@ -533,6 +745,16 @@
               "path": "test/browser/standalone.mjs",
               "bytes": 10935,
               "sha256": "e7a074773d4fc03c4e7be6c40330244f56dd09ebe6bcd65addefcae900799075"
+            },
+            {
+              "path": "test/browser/version-history.mjs",
+              "bytes": 7573,
+              "sha256": "fed86e59a197962360496e43ea58f2d5dd1489c7dfe09037850cddb0a28c98a2"
+            },
+            {
+              "path": "test/browser-recovery.test.mjs",
+              "bytes": 6260,
+              "sha256": "ea2cfedbbb2ac5279b33279b4415b7171cc72e4c5d39b50b2a730d4e2cdcb64b"
             },
             {
               "path": "test/history.test.mjs",
@@ -580,79 +802,70 @@
               "sha256": "5066369c215e19432bd2cc07276577f818473df4bee3faa1961092204fba20fa"
             },
             {
+              "path": "test/version-history.test.mjs",
+              "bytes": 3337,
+              "sha256": "768f44ca6180620cbc0e1a3507ea58464a0b33cf361738acde4e137c74cab224"
+            },
+            {
               "path": "test/word-order.test.mjs",
               "bytes": 5302,
               "sha256": "62390e7118bb46640d252762d8f9fe987dc9078c1f77809249177de4f5d9f950"
             },
             {
               "path": "tools/build-standalone.mjs",
-              "bytes": 7849,
-              "sha256": "827ac849a496c4ed491befa156bd5247797eb4a68d9dcc5b372a4c9ff70f5830"
+              "bytes": 7946,
+              "sha256": "67f4c7494c7ba7c078a40e7857b7b4da5078cd374f8a7dc6e317037f73dab0d7"
             }
           ],
-          "preserved_contributions": [
-            {
-              "pull_request": 14,
-              "worker": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
-              "task_id": "glossopia-practice-sentence-drafts-02c95f09",
-              "merge_commit": "6e20b6d3fe9dfca7117e976db1b2567ff666eadf",
-              "reviewed_head": "0a34ebb7724127a9b7f997c54e54cc97cf2a7f12",
-              "tree": "97b9a6aa00a9097a09228d42efbceca312895bc3",
-              "server_sha256": "f486f709372d114eae2c7c877c43ee64225e17aa7074e6acb8f01963a8009c32"
-            },
-            {
-              "pull_request": 13,
-              "worker": "estate-c8542f28-df9f-44c7-b872-71acca28c3e9",
-              "merge_commit": "9cccb2b3434439aa6981287ffef7aa6383708692",
-              "tree": "27dc3f62d14f3645825947003023849bd707426d"
-            },
-            {
-              "pull_request": 12,
-              "worker": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
-              "merge_commit": "4c748d9c693cf508a84a190d15a98a10fda4dc2c"
-            }
-          ]
+          "preserved_contribution": {
+            "pull_request": 15,
+            "author": "estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594",
+            "integration_by": "estate-c8542f28-df9f-44c7-b872-71acca28c3e9",
+            "merge_commit": "bd45749db9ae5abf8eb7794e1423b7ad151ebc67",
+            "scope": "Original inspection input clear retained exactly; all earlier source provenance retained in base_source."
+          }
         }
       },
-      "history_contribution": {
-        "implementation": "retained host_source",
-        "independent_review": "retained peer_authority",
-        "independent_receiving_author": "retained receipt_recovery",
-        "lead": "source composition, consumer layout/docs, exact artifact receiving and private integration",
-        "receiving": "Separate runtime/visual/delivery evidence is required for the exact generated artifacts; source hashes do not establish execution."
+      "archive_contribution": {
+        "reconciliation_source_sha256": "fdb1a120866ffcb3808ee62e254e91531424728c6adcc1a60301039ad8202540",
+        "implementation": "retained host_source worker",
+        "independent_contract_receivers": "retained receipt_recovery worker",
+        "independent_review": "retained peer_authority worker; source blockers resolved before qualification",
+        "root_work": "consumer markup, scoped CSS/docs, packaging/pins, native execution, reviewed integration and delivery",
+        "qualification": "pending exact artifact execution; source review does not imply runtime success",
+        "limits": "No automatic eviction, real-user data removed by worker, project/archive schema redesign or concurrent-tab transaction guarantee."
       },
       "changes": [
         "README.md",
         "app.mjs",
+        "index.html",
         "package.json",
-        "server.mjs",
-        "src/version-history.mjs",
+        "src/project-archive.mjs",
         "style.css",
-        "test/browser/version-history.mjs",
-        "test/version-history.test.mjs",
-        "tools/build-standalone.mjs",
-        "BUILD-MANIFEST.json"
+        "test/archive-management.test.mjs",
+        "test/browser/archive-management.mjs",
+        "tools/build-standalone.mjs"
       ],
       "files": [
         {
           "path": "README.md",
-          "bytes": 29482,
-          "sha256": "42faf6a488acb9ebac745496ec0ff6ee76b73c6b9e0fe735702360fef7fa670c"
+          "bytes": 31424,
+          "sha256": "fd6107e40c0c4931cf41581120645ad568413ecb591aca343c227ebc2506a632"
         },
         {
           "path": "app.mjs",
-          "bytes": 59327,
-          "sha256": "a7f0a35cbc11aa6c76888c038d97bf4d637c168b81b20b3bec27cdbfd050efb1"
+          "bytes": 63857,
+          "sha256": "466c658fdba5470719ac94124dd821d628988d71a91c4e336ecc311c6d67c3d5"
         },
         {
           "path": "index.html",
-          "bytes": 20910,
-          "sha256": "e1d8e04f467bb6ae1084c7c819065cd1a39166b749efc525c060b062703066fa"
+          "bytes": 22297,
+          "sha256": "a7c03d613e983c64379d84cd8ca677348d6d20a379488a5e42d173be13c3d735"
         },
         {
           "path": "package.json",
-          "bytes": 853,
-          "sha256": "761bb3ae3466c80a42986bc52407b6bec518e7526a85d08503a7cfa4682001d0"
+          "bytes": 925,
+          "sha256": "1669531e6a247b865c46786c6ec199ab809e90d55f1c3971fa0621af62dec05c"
         },
         {
           "path": "server.mjs",
@@ -686,8 +899,8 @@
         },
         {
           "path": "src/project-archive.mjs",
-          "bytes": 5296,
-          "sha256": "500c7cedc6dba3b291f9cd5b97f2a9ebe3d21533c6034e8ffa0985055a3d9dd9"
+          "bytes": 8169,
+          "sha256": "97d193e244b514ba32fac8c51d4a7442e391481dc54e8acb8c5d5baa7921ccd8"
         },
         {
           "path": "src/project.mjs",
@@ -711,8 +924,23 @@
         },
         {
           "path": "style.css",
-          "bytes": 27606,
-          "sha256": "69049064a1ea0f13e1bb43dad84de1ef82eb7031c65e953bc9f6d1af53926fa4"
+          "bytes": 28323,
+          "sha256": "cc8d16b476b0a453b0c99afe127e7246636c2b7f7f33ccd2a81723c36dc192ab"
+        },
+        {
+          "path": "test/archive-management.test.mjs",
+          "bytes": 6031,
+          "sha256": "9ac81d000685e23bce1161090346a1caf2cab55e7b94cb78b497408998654a9d"
+        },
+        {
+          "path": "test/browser-recovery.test.mjs",
+          "bytes": 6260,
+          "sha256": "ea2cfedbbb2ac5279b33279b4415b7171cc72e4c5d39b50b2a730d4e2cdcb64b"
+        },
+        {
+          "path": "test/browser/archive-management.mjs",
+          "bytes": 9380,
+          "sha256": "12d02df4ed14c21f7cbc06899263eb33210c7ceec0b274e447275138dcc7337c"
         },
         {
           "path": "test/browser/browser-recovery.mjs",
@@ -738,11 +966,6 @@
           "path": "test/browser/version-history.mjs",
           "bytes": 7573,
           "sha256": "fed86e59a197962360496e43ea58f2d5dd1489c7dfe09037850cddb0a28c98a2"
-        },
-        {
-          "path": "test/browser-recovery.test.mjs",
-          "bytes": 6260,
-          "sha256": "ea2cfedbbb2ac5279b33279b4415b7171cc72e4c5d39b50b2a730d4e2cdcb64b"
         },
         {
           "path": "test/history.test.mjs",
@@ -802,48 +1025,347 @@
         {
           "path": "tools/build-standalone.mjs",
           "bytes": 7946,
-          "sha256": "67f4c7494c7ba7c078a40e7857b7b4da5078cd374f8a7dc6e317037f73dab0d7"
+          "sha256": "4b8027fbbcec15e0932bfadd96c34b40e9e6e160b8cd6b29d9e3d5d42e019ea7"
         }
       ],
-      "preserved_contribution": {
-        "pull_request": 15,
-        "author": "estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594",
-        "integration_by": "estate-c8542f28-df9f-44c7-b872-71acca28c3e9",
-        "merge_commit": "bd45749db9ae5abf8eb7794e1423b7ad151ebc67",
-        "scope": "Original inspection input clear retained exactly; all earlier source provenance retained in base_source."
+      "preserved_contribution": "Includes original scene-independent0.6.3 PR16 history, PR15 original44 inspection, PR14 health, PR13 feedback and PR12 drafts. Active c854 authored-scene adoption and1e creation-review focus remain separate; reconcile current main before integration."
+    },
+    "verified_files": [
+      {
+        "path": ".gitattributes",
+        "bytes": 25,
+        "sha256": "a7d2b9a7fe44b92c25bf61fac460336cb67961288da1000f9c3ccb88638d7e95"
+      },
+      {
+        "path": ".gitignore",
+        "bytes": 50,
+        "sha256": "8fe1278375491c263d5aca375665ebfdbd619a36ec1cd43a8f9becb804668a69"
+      },
+      {
+        "path": "BUILD-MANIFEST.json",
+        "bytes": 43656,
+        "sha256": "011b84746cbde11fb1edd21f634304b20cffaeea169779ffb6fff958bbd2857f"
+      },
+      {
+        "path": "README.md",
+        "bytes": 31424,
+        "sha256": "fd6107e40c0c4931cf41581120645ad568413ecb591aca343c227ebc2506a632"
+      },
+      {
+        "path": "app.mjs",
+        "bytes": 63857,
+        "sha256": "466c658fdba5470719ac94124dd821d628988d71a91c4e336ecc311c6d67c3d5"
+      },
+      {
+        "path": "index.html",
+        "bytes": 22297,
+        "sha256": "a7c03d613e983c64379d84cd8ca677348d6d20a379488a5e42d173be13c3d735"
+      },
+      {
+        "path": "package.json",
+        "bytes": 925,
+        "sha256": "1669531e6a247b865c46786c6ec199ab809e90d55f1c3971fa0621af62dec05c"
+      },
+      {
+        "path": "server.mjs",
+        "bytes": 2581,
+        "sha256": "a90a3d13c86f0083ef15a872de292b82d59517ca9aadf9f6fd592f6c7c71ace5"
+      },
+      {
+        "path": "src/browser-recovery.mjs",
+        "bytes": 3475,
+        "sha256": "7f4adb3b77acca76fbb9c666fc9cf5418d579cb8095495a13bb2c00f876f0bc3"
+      },
+      {
+        "path": "src/language-core.mjs",
+        "bytes": 18458,
+        "sha256": "60b988221a2170e3209ee9ccefdd3fe3437d72f91a9126f16c5f7a71dd39776a"
+      },
+      {
+        "path": "src/language-creation.mjs",
+        "bytes": 3979,
+        "sha256": "62d16a3177bc0ee8e804737dca4f2075a7c20c240b6a059c9c77b52cae6954f6"
+      },
+      {
+        "path": "src/mission-core.mjs",
+        "bytes": 8697,
+        "sha256": "50f8f2655464bfa08bfcf2c06043cfaf0b77c5b1045f7f33716345028b253a4b"
+      },
+      {
+        "path": "src/practice-impact.mjs",
+        "bytes": 5213,
+        "sha256": "5acc58332d24938a5ab38ada9eaab0525cceeb98926d848729078a33a9845d4b"
+      },
+      {
+        "path": "src/project-archive.mjs",
+        "bytes": 8169,
+        "sha256": "97d193e244b514ba32fac8c51d4a7442e391481dc54e8acb8c5d5baa7921ccd8"
+      },
+      {
+        "path": "src/project.mjs",
+        "bytes": 4163,
+        "sha256": "6cd2a83d961e3770de6323587c08509482cc21eddf1cf42231cf62ee16f08b1a"
+      },
+      {
+        "path": "src/starter-language.mjs",
+        "bytes": 3879,
+        "sha256": "08c0493f315092a813911d6028d1d0af4b2adb60453eb6b6b93ea86a091366bc"
+      },
+      {
+        "path": "src/version-history.mjs",
+        "bytes": 2161,
+        "sha256": "30d1f90e1937da652b4e3b9c6a79bf099ff2e24ac74945d50fb508b9741e4482"
+      },
+      {
+        "path": "src/word-order.mjs",
+        "bytes": 3447,
+        "sha256": "bd481bed9b9369cde53ea6510202c9fa3a622a982cdf94ae80d6acb84f82afe4"
+      },
+      {
+        "path": "style.css",
+        "bytes": 28323,
+        "sha256": "cc8d16b476b0a453b0c99afe127e7246636c2b7f7f33ccd2a81723c36dc192ab"
+      },
+      {
+        "path": "test/archive-management.test.mjs",
+        "bytes": 6031,
+        "sha256": "9ac81d000685e23bce1161090346a1caf2cab55e7b94cb78b497408998654a9d"
+      },
+      {
+        "path": "test/browser/archive-management.mjs",
+        "bytes": 9380,
+        "sha256": "12d02df4ed14c21f7cbc06899263eb33210c7ceec0b274e447275138dcc7337c"
+      },
+      {
+        "path": "test/browser/browser-recovery.mjs",
+        "bytes": 25068,
+        "sha256": "1aa9082bc7f7d7fcaa23753cefbce48dd06dcaf0b3cc0659b9a07283e512d2bb"
+      },
+      {
+        "path": "test/browser/open-project.mjs",
+        "bytes": 14476,
+        "sha256": "d956db4c0b66006856f914813a5523d74a8cb56880d473995804ae9145580ef5"
+      },
+      {
+        "path": "test/browser/practice-drafts.mjs",
+        "bytes": 9952,
+        "sha256": "ed426205a94df1e108e7d768d70ab26fc3ce50cc5703839135360a8bd9c90a7f"
+      },
+      {
+        "path": "test/browser/standalone.mjs",
+        "bytes": 10935,
+        "sha256": "e7a074773d4fc03c4e7be6c40330244f56dd09ebe6bcd65addefcae900799075"
+      },
+      {
+        "path": "test/browser/version-history.mjs",
+        "bytes": 7573,
+        "sha256": "fed86e59a197962360496e43ea58f2d5dd1489c7dfe09037850cddb0a28c98a2"
+      },
+      {
+        "path": "test/browser-recovery.test.mjs",
+        "bytes": 6260,
+        "sha256": "ea2cfedbbb2ac5279b33279b4415b7171cc72e4c5d39b50b2a730d4e2cdcb64b"
+      },
+      {
+        "path": "test/history.test.mjs",
+        "bytes": 1993,
+        "sha256": "116f393a24cce3c03f55bf48ee14c9a0b713e10fa02b2741e8b04055fa11d511"
+      },
+      {
+        "path": "test/id-boundaries.test.mjs",
+        "bytes": 1690,
+        "sha256": "8a15f5b40e97120396af3b7e7e7aba1d473d4401640ddc82d76ffb5976052061"
+      },
+      {
+        "path": "test/language-creation.test.mjs",
+        "bytes": 5049,
+        "sha256": "e5760c70d45a5a64abebdd5548c80adec0cd7c0ce607ef3260292518df0b0c19"
+      },
+      {
+        "path": "test/long-language-id.test.mjs",
+        "bytes": 2051,
+        "sha256": "76e07bf78891322ea5af57b08adc4e1172a54e740764d4e6e1fa2605fd0f0a74"
+      },
+      {
+        "path": "test/mission-compatibility.test.mjs",
+        "bytes": 7154,
+        "sha256": "1b07383d12da0380394a3308503e3a5d1439a7716ce12a4785fcf4885c026bdd"
+      },
+      {
+        "path": "test/mission.test.mjs",
+        "bytes": 6242,
+        "sha256": "926b69bf09c347c431b1eb3b4458544e64183ee4b54247c24844afa52f2c9d3f"
+      },
+      {
+        "path": "test/practice-impact.test.mjs",
+        "bytes": 8091,
+        "sha256": "db28cd588f8f2809cc7c64de296138bdd6695ad28fc3c3437f48865c9e78977a"
+      },
+      {
+        "path": "test/project-archive.test.mjs",
+        "bytes": 7192,
+        "sha256": "ac80409608134ccddd4b78d76d280a7fdfff08a27667ac4e9e300fe0170c970a"
+      },
+      {
+        "path": "test/step-feedback.test.mjs",
+        "bytes": 1742,
+        "sha256": "5066369c215e19432bd2cc07276577f818473df4bee3faa1961092204fba20fa"
+      },
+      {
+        "path": "test/version-history.test.mjs",
+        "bytes": 3337,
+        "sha256": "768f44ca6180620cbc0e1a3507ea58464a0b33cf361738acde4e137c74cab224"
+      },
+      {
+        "path": "test/word-order.test.mjs",
+        "bytes": 5302,
+        "sha256": "62390e7118bb46640d252762d8f9fe987dc9078c1f77809249177de4f5d9f950"
+      },
+      {
+        "path": "tools/build-standalone.mjs",
+        "bytes": 7946,
+        "sha256": "4b8027fbbcec15e0932bfadd96c34b40e9e6e160b8cd6b29d9e3d5d42e019ea7"
       }
-    }
+    ]
   },
-  "archive_contribution": {
-    "reconciliation_source_sha256": "fdb1a120866ffcb3808ee62e254e91531424728c6adcc1a60301039ad8202540",
-    "implementation": "retained host_source worker",
-    "independent_contract_receivers": "retained receipt_recovery worker",
-    "independent_review": "retained peer_authority worker; source blockers resolved before qualification",
-    "root_work": "consumer markup, scoped CSS/docs, packaging/pins, native execution, reviewed integration and delivery",
-    "qualification": "pending exact artifact execution; source review does not imply runtime success",
-    "limits": "No automatic eviction, real-user data removed by worker, project/archive schema redesign or concurrent-tab transaction guarantee."
+  "original_contribution": {
+    "worker": "estate-1e1db2b0-85e7-4fdc-a974-a1da4269f24a",
+    "task_id": "glossopia-creation-review-focus-1e1db2b0",
+    "original_v2_source_sha256": "ff11593f3dcb1f82d2db5a7ac0ac73b366381bd06180cfde96eaa34dc9835aa1",
+    "original_v2_base": "9cccb2b3434439aa6981287ffef7aa6383708692",
+    "original_v2_archive": {
+      "sha256": "eacd673b4a6215206e957016260d6ecbfc89eb66eb8975929f1e7c79b1dd2811",
+      "bytes": 92031
+    },
+    "original_v2_patch": {
+      "sha256": "212e7a794b326a98be58d35a79062203af38a9bdcffd01a697d9f261762909ca",
+      "bytes": 37943
+    },
+    "composed_proof_sha256": "3c7a7a92b6bf860c5c3c62f39850ab772f9c6b972f3d0bbacce63be63514b29a",
+    "composed_base": "ed2db8c9abb313d7a01020484d98aea636ba3e11",
+    "composed_payload_identities": {
+      "candidate.patch": {
+        "bytes": 54654,
+        "sha256": "80df12776492846aa5a86662227a5bf1e2bfbcfdc513e8b974361a7638af7fe2"
+      },
+      "implementation.json": {
+        "bytes": 2094,
+        "sha256": "87efd8edf349a64c9433ecdc60d4f9440056a51a55dbcca807cb3a088884f862"
+      },
+      "glossopia-review-status-receiver.mjs": {
+        "bytes": 5804,
+        "sha256": "e10255f817582e66bbaca4ecac8d12daabdc2ad1b5f43d3d767a161e64d21fa7"
+      },
+      "receiving/receiving.json": {
+        "bytes": 42934,
+        "sha256": "2408edb5accba5af17a22e06497e3ee17c9076b6bc038a8085ec3c1eb9381b37"
+      },
+      "receiving/glossopia-0.6.3.tgz": {
+        "bytes": 99264,
+        "sha256": "979bd00efa9bc7710d147dcc9c9e1a4da9be07db87ad38629c7978fb0a4b5bb7"
+      },
+      "receiving/hosted-focus/receipt.json": {
+        "bytes": 4642,
+        "sha256": "69aa3ece6cd4a5d21f37c42f503409c2720f5c4bda8a5e4baac152f365df910d"
+      },
+      "receiving/hosted-status/receipt.json": {
+        "bytes": 2111,
+        "sha256": "23674105936fb26a692db7c13a286a2913eae3a7bfe5279aff5bfa14c4a4213b"
+      },
+      "receiving/extracted-focus/receipt.json": {
+        "bytes": 4642,
+        "sha256": "69aa3ece6cd4a5d21f37c42f503409c2720f5c4bda8a5e4baac152f365df910d"
+      },
+      "receiving/extracted-status/receipt.json": {
+        "bytes": 2111,
+        "sha256": "23674105936fb26a692db7c13a286a2913eae3a7bfe5279aff5bfa14c4a4213b"
+      },
+      "receiving/standalone-focus/receipt.json": {
+        "bytes": 4642,
+        "sha256": "69aa3ece6cd4a5d21f37c42f503409c2720f5c4bda8a5e4baac152f365df910d"
+      },
+      "receiving/standalone-status/receipt.json": {
+        "bytes": 2111,
+        "sha256": "23674105936fb26a692db7c13a286a2913eae3a7bfe5279aff5bfa14c4a4213b"
+      }
+    },
+    "original_unknown_operation": {
+      "owner": "node-824445595d172c3ede05a19b3ff70854",
+      "incarnation": "553416fdd7e9f06297eb2b209c6ec2ad",
+      "generation": 3,
+      "outer_operation_id": "estate-1e1db2b0-85e7-4fdc-a974-a1da4269f24a-glossopia-review-focus-receiving-start-01",
+      "command_id": "estate-1e1db2b0-85e7-4fdc-a974-a1da4269f24a-glossopia-review-focus-receiving-01",
+      "observations": [
+        "Launch gateway returned ENOSPC persisting result artifact.",
+        "Original node_operation returned404 with explicit no-nondispatch/no-replay warning.",
+        "Native command status read without operation_id reached owner and reported request.json absent."
+      ],
+      "interpretation": "UNKNOWN. Neither missing receipt nor absent request.json establishes non-dispatch. No replay, relaunch or cleanup authorized by this checkpoint."
+    },
+    "historical_qualification": {
+      "native": {
+        "tests": 56,
+        "passed": 56,
+        "origin": "candidate1 unchanged native logic/test suite",
+        "rerun_on_v2": false
+      },
+      "focus": {
+        "cases_per_context": 4,
+        "contexts": [
+          "hosted actual npm start",
+          "npm extracted actual npm start",
+          "standalone file URL"
+        ],
+        "all_status": "acceptance-passed"
+      },
+      "status_feedback": {
+        "cases_per_context": 2,
+        "conditions": [
+          "normal storage80characterheading",
+          "isolated blocked-storage fault80characterheading"
+        ],
+        "contexts": 3,
+        "all_status": "passed",
+        "strict_oracle_unchanged": true,
+        "normal_top_margin_css_px": 15.875
+      },
+      "standalone_journey": {
+        "groups": 6,
+        "offline": true,
+        "passed": true,
+        "forbiddenRequests": [],
+        "browserErrors": [],
+        "consoleErrors": []
+      },
+      "artifacts": {
+        "html_sha256": "bd277ade9fd014aa97e3677e31f29e680ad79e79ff38c06a533bd826dfe15f3f",
+        "html_bytes": 163349,
+        "npm_sha256": "2b46fccdaeae32a7edd848f247dc8b587825b9964d5cbcd7c8f98d309b689f95",
+        "npm_bytes": 91755,
+        "extracted_rebuild_identical": true,
+        "source_files_unchanged": 36,
+        "payload_files": 34,
+        "manifest_files": 33
+      }
+    },
+    "historical_limits": [
+      "Private local source/artifacts only; noGitHubintegration,release,actualreleasedownload,orJacobaccessclaim.",
+      "ExacttestedChrome156.0.8078.47; nobroaderOS/browser/accessibility/screenreaderqualification.",
+      "No learningbenefit/provider/modelqualityclaim.",
+      "No fullaudiodemo orcompletefinishedsequence review inferred fromscreens."
+    ]
   },
-  "changes": [
-    "README.md",
-    "app.mjs",
-    "index.html",
-    "package.json",
-    "src/project-archive.mjs",
-    "style.css",
-    "test/archive-management.test.mjs",
-    "test/browser/archive-management.mjs",
-    "tools/build-standalone.mjs"
-  ],
+  "reconciliation_source_sha256": "4e0553d7dbc7fe02059d2e79f6f0bce827d056deaf17ff3f17697c88cc59911a",
   "files": [
     {
       "path": "README.md",
-      "bytes": 31424,
-      "sha256": "fd6107e40c0c4931cf41581120645ad568413ecb591aca343c227ebc2506a632"
+      "bytes": 32557,
+      "sha256": "bb1a0ea1e610b3e5d0779f0f27b908f063951afc9f4abb3bc18e404729edb044"
     },
     {
       "path": "app.mjs",
-      "bytes": 63857,
-      "sha256": "466c658fdba5470719ac94124dd821d628988d71a91c4e336ecc311c6d67c3d5"
+      "bytes": 64055,
+      "sha256": "032e914fdf8d46f6d542405dc89aee12d3829f79716318cb3c0c48a8565b378a"
     },
     {
       "path": "index.html",
@@ -852,8 +1374,8 @@
     },
     {
       "path": "package.json",
-      "bytes": 925,
-      "sha256": "1669531e6a247b865c46786c6ec199ab809e90d55f1c3971fa0621af62dec05c"
+      "bytes": 992,
+      "sha256": "d540cc94a6753df07e946721cc6b7b6e5a415c88a8c9995d4b8ee4164ef87dd0"
     },
     {
       "path": "server.mjs",
@@ -912,18 +1434,13 @@
     },
     {
       "path": "style.css",
-      "bytes": 28323,
-      "sha256": "cc8d16b476b0a453b0c99afe127e7246636c2b7f7f33ccd2a81723c36dc192ab"
+      "bytes": 28459,
+      "sha256": "70bfe9623482d50393a6efe5b6c5ab2d70f66e7c5c26c34d3dbf9326720ef59a"
     },
     {
       "path": "test/archive-management.test.mjs",
       "bytes": 6031,
       "sha256": "9ac81d000685e23bce1161090346a1caf2cab55e7b94cb78b497408998654a9d"
-    },
-    {
-      "path": "test/browser-recovery.test.mjs",
-      "bytes": 6260,
-      "sha256": "ea2cfedbbb2ac5279b33279b4415b7171cc72e4c5d39b50b2a730d4e2cdcb64b"
     },
     {
       "path": "test/browser/archive-management.mjs",
@@ -934,6 +1451,11 @@
       "path": "test/browser/browser-recovery.mjs",
       "bytes": 25068,
       "sha256": "1aa9082bc7f7d7fcaa23753cefbce48dd06dcaf0b3cc0659b9a07283e512d2bb"
+    },
+    {
+      "path": "test/browser/creation-review.mjs",
+      "bytes": 6057,
+      "sha256": "fa8847d31cc18a6781447a6f6d512721d5cb23670cd09fbfa9a385a3736c8292"
     },
     {
       "path": "test/browser/open-project.mjs",
@@ -954,6 +1476,16 @@
       "path": "test/browser/version-history.mjs",
       "bytes": 7573,
       "sha256": "fed86e59a197962360496e43ea58f2d5dd1489c7dfe09037850cddb0a28c98a2"
+    },
+    {
+      "path": "test/browser-recovery.test.mjs",
+      "bytes": 6260,
+      "sha256": "ea2cfedbbb2ac5279b33279b4415b7171cc72e4c5d39b50b2a730d4e2cdcb64b"
+    },
+    {
+      "path": "test/fixtures/creation-review-nemi.json",
+      "bytes": 6152,
+      "sha256": "17e7d63e9fa43eb74ac189fc825797aa0bf5456d6f81fe4330496641eb4e16e9"
     },
     {
       "path": "test/history.test.mjs",
@@ -1013,8 +1545,8 @@
     {
       "path": "tools/build-standalone.mjs",
       "bytes": 7946,
-      "sha256": "4b8027fbbcec15e0932bfadd96c34b40e9e6e160b8cd6b29d9e3d5d42e019ea7"
+      "sha256": "3ace0ea3299cfa0ba31f11bda7ad090421ab95c1a528403d56dc67445fc2432d"
     }
   ],
-  "preserved_contribution": "Includes original scene-independent0.6.3 PR16 history, PR15 original44 inspection, PR14 health, PR13 feedback and PR12 drafts. Active c854 authored-scene adoption and1e creation-review focus remain separate; reconcile current main before integration."
+  "file_inventory_scope": "Deliverable npm package files, excluding this manifest itself and repository-only .gitattributes/.gitignore; all39 original repository files remain preserved in base_source provenance."
 }
