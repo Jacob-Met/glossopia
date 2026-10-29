@@ -1,6 +1,6 @@
 # GLOSSOPIA — local experimental receiving build
 
-GLOSSOPIA is an invented-language studio with an authored fixed-price trading mission. Version 0.2.0 adds proposal impact review for saved practice sentences while preserving the original Luma language, transparent parser, mission and immutable version history.
+GLOSSOPIA is an invented-language studio with an authored fixed-price trading mission. Version 0.3.0 adds word-order help in practice, building on version 0.2.0 saved-practice proposal review while preserving the original Luma language, transparent parser, mission and immutable version history.
 
 ## Run
 
@@ -16,7 +16,7 @@ Open http://127.0.0.1:4183 in a modern browser. The server binds only to loopbac
 npm test
 ```
 
-The maintained test command checks mission inventory and failure behavior, immutable histories, proposal validation, project roundtrip, bounded version identifiers and saved-practice impact semantics. Browser receiving is recorded separately; passing these core tests alone does not establish a working UI.
+The maintained test command checks mission inventory and failure behavior, immutable histories, proposal validation, project roundtrip, bounded version identifiers, saved-practice impact semantics and word-order suggestion safety. Browser receiving is recorded separately; passing these core tests alone does not establish a working UI.
 
 ## Use
 
@@ -27,6 +27,24 @@ In Language studio, inspect words and token derivations, preview a sentence-orde
 In Versions, inspect earlier language versions, reopen earlier conversations or start a fresh practice. Existing conversations retain their original version. The header distinguishes latest accepted language, displayed studio language and practice language.
 
 Use Save a copy to download the full validated project JSON. Open reopens such a file. Malformed replacements retain the current project. The browser may also retain a local copy; the interface reports storage failures. Downloaded copies are the portable backup.
+
+## Recover from a word-order error
+
+After you submit four accepted words in an invalid role order, practice can show how those same words fit its sentence pattern. The help uses the active conversation’s pinned language version, which may differ from the latest accepted version or the version displayed in the studio. It shows that version’s role order and labels suggested tokens with roles from the actual parser interpretation. The gloss toggle controls the additional meaning labels.
+
+A suggestion is offered only when all valid rearrangements of those words support one meaning and a suggested expression parses unambiguously. The helper checks every distinct ordering, up to 24, including the meanings of ambiguous parses. It keeps your words and synonyms, applying the parser’s normal case, whitespace and terminal-period normalization. It does not replace them with a canonical mission answer or infer what you intended.
+
+**Use this order** only fills the sentence input. Review it, then press **Say it** to submit. Filling the input does not add a conversation turn, advance the mission or transfer inventory. Your original unsuccessful submission remains in the conversation. A grammatical suggestion can still be off goal; normal mission checks apply when you submit it.
+
+Unknown words, already valid or ambiguous sentences, unsupported token counts and malformed input are not automatically repaired. When rearrangements allow different meanings, no suggestion is offered. When the words cannot fill all four roles, the help asks you to choose words from the word bank.
+
+Help is transient and is not saved or exported. Editing or clearing the input, adding a word from the bank, switching conversations or changing the project clears it. The apply action also checks the project, conversation, language version and empty input before filling, so an obsolete suggestion cannot overwrite new typing. Reopening a project does not restore an old help panel.
+
+## Verification of version 0.3.0
+
+Source qualification completed successfully on Linux with Node.js 22.23.4, npm 10.9.9 and Chrome 156.0.8078.47. All 20 maintained tests across six files, the independent cross-role adversarial receiver and six actual-browser checks passed, with no recorded browser errors. The browser checks include equality of persisted storage before and after applying a suggestion, verifying that Apply fills the input without a persisted project mutation.
+
+Package and platform receiving are recorded separately in each release’s exact-artifact reports. Source qualification does not establish those receiving results. Version 0.2.0 results below remain historical evidence for that earlier feature.
 
 ## Review changes against your saved practice
 
@@ -67,7 +85,8 @@ Original contributor: estate-b79ee09d97e1 and its retained team.
 Original uncommitted source snapshot SHA-256: 4e9c453985c37f67f46fbe94f9830d6224d0e99e5ea981f0b9f7631d016f6750.
 Receiving contributor: estate-6653e323ca46-20261029 and retained internal reviewers.
 Original receiving work record: glossopia-existing-project-reconciliation-20261029.
-Current work record: glossopia-saved-practice-impact-6653e323.
+Version 0.2.0 work record: glossopia-saved-practice-impact-6653e323.
+Current work record: glossopia-word-order-recovery-6653e323.
 Canonical worker prompt fully read: 2026-10-28.25.
 
-The earlier receiving contribution added browser wiring, fixed version-ID construction for long valid language identifiers, corrected narrow interface wording, and supplied maintained tests. Version 0.2.0 adds saved-practice proposal impact analysis and its interface. Original source attribution and historical language/session data remain preserved; this work does not modify the original contributor's workspace.
+The earlier receiving contribution added browser wiring, fixed version-ID construction for long valid language identifiers, corrected narrow interface wording, and supplied maintained tests. Version 0.2.0 added saved-practice proposal impact analysis and its interface. Version 0.3.0 adds version-pinned word-order analysis and an explicit fill-only recovery action. Original source attribution and historical language/session data remain preserved; this work does not modify the original contributor's workspace.

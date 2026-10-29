@@ -17,6 +17,17 @@
         <div class="mission-meta"><span id="missionGoal"></span><button id="restartMission" class="text-button">Start again</button></div>
         <div id="conversation" class="conversation" aria-live="polite" aria-label="Market conversation"></div>
         <form id="sentenceForm" class="sentence-form"><label for="sentenceInput" id="sentenceLabel">What would you say?</label><div class="input-line"><input id="sentenceInput" autocomplete="off" spellcheck="false" placeholder="Build a sentence, or type it here" maxlength="240"><button id="saySentence" class="dark" type="submit">Say it <span aria-hidden="true">→</span></button></div><p id="sentenceFeedback" class="feedback" role="status"></p></form>
+        <section id="wordOrderHelp" class="word-order-help" aria-labelledby="wordOrderTitle" hidden>
+          <span class="eyebrow">YOUR WORDS, IN ORDER</span><h3 id="wordOrderTitle"></h3>
+          <p id="wordOrderRule" class="body-copy"></p><p class="word-order-original">You wrote: <code id="wordOrderOriginal"></code></p>
+          <p id="wordOrderMessage" class="body-copy" role="status"></p>
+          <div id="wordOrderSuggestion" hidden>
+            <p class="word-order-sentence"><code id="wordOrderSentence"></code></p><div id="wordOrderTokens" class="word-order-tokens"></div>
+            <p id="wordOrderMeaning" class="body-copy"></p>
+            <button id="applyWordOrder" type="button" aria-describedby="wordOrderActionNote">Use this order</button>
+            <p id="wordOrderActionNote" class="note">Use this order fills the input. Press Say it when you want to submit.</p>
+          </div>
+        </section>
         <div class="bank-header"><span>YOUR WORDS</span><button id="clearSentence" class="text-button">Clear sentence</button></div>
         <div id="wordBank" class="word-bank" aria-label="Add accepted words to your sentence"></div>
         <div class="conversation-bottom"><button id="showHint" class="quiet">A little help</button><label class="inline-label"><input id="showGlosses" type="checkbox" checked> Show word meanings</label></div>
@@ -54,7 +65,7 @@
   </section>
   <section id="historyView" class="view" role="tabpanel" aria-labelledby="tab-history" hidden><div class="section-intro"><div><p class="eyebrow">A SHARED MEMORY</p><h1>Change the language.<br><em>Keep its story.</em></h1></div><p>Every accepted revision records what changed and why. Inspect an earlier version or practice with it without rewriting the current language.</p></div><div id="versionList" class="version-list"></div><section class="card practice-history"><span class="eyebrow">YOUR PRACTICE</span><h2>Conversations belong to a version.</h2><div id="practiceRecords"></div></section></section>
   <section class="model-status"><div><span class="eyebrow">CO-CREATION, WITH CLEAR BOUNDARIES</span><h3>You decide what this local project accepts.</h3><p id="modelStatus">The local language studio is available. NVIDIA-assisted proposals through Nebius have not been configured or verified in this build.</p></div><span class="pill">LOCAL STUDIO</span></section>
-  <footer><span>GLOSSOPIA</span><p>A small language. A world to share.</p><span>PRIVATE DEVELOPMENT / 0.2</span></footer>
+  <footer><span>GLOSSOPIA</span><p>A small language. A world to share.</p><span>PRIVATE DEVELOPMENT / 0.3</span></footer>
 </main>
 <div id="toast" class="toast" role="status" hidden></div>
 </body></html>
