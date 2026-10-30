@@ -507,7 +507,14 @@ function renderImpact() {
   $('impactBadge').textContent = summary.unresolved ? 'Needs resolution' : 'Ready for your decision';
   $('impactSummary').textContent = summary.changed + ' authored examples change; ' + summary.migrationsAvailable + ' can retain their meaning. Acceptance applies only to this local project. Names are self-entered attribution.';
   $('impactProblems').textContent = summary.unresolved ? summary.unresolved + ' examples cannot migrate safely. Accepted state is unchanged.' : 'Accepted state is unchanged until you explicitly accept.';
-  const changes = pending.changes.map(change => node('p', change.type === 'grammar_order' ? 'Sentence order: ' + change.from + ' → ' + change.to : change.type === 'word_form' ? 'Word form: ' + change.from + ' → ' + change.to + ' (' + change.meaning + ')' : 'Add object word: ' + change.form + ' = ' + change.meaning));
+  const changes = pending.changes.map(change => {
+    let text;
+    if (change.type === 'grammar_order') text = 'Sentence order: ' + change.from + ' → ' + change.to;
+    else if (change.type === 'word_form') text = 'Word form: ' + change.from + ' → ' + change.to + ' (' + change.meaning + ')';
+    else if (change.type === 'word_preference') text = 'Preferred word for ' + workbenchRoleLabels[change.role].toLowerCase() + ' ' + workbenchLabel(change.role, change.meaning) + ': ' + change.form + ' — ' + (change.from ? 'Preferred form' : 'Not marked preferred') + ' → ' + (change.to ? 'Preferred form' : 'Not marked preferred');
+    else text = 'Add object word: ' + change.form + ' = ' + change.meaning;
+    return node('p', text);
+  });
   $('impactRows').replaceChildren(...changes, ...examples.map(example => {
     const row = node('div', undefined, 'impact-row');
     const before = node('div', example.oldText, 'before'), after = node('div', example.migration.status === 'ok' ? example.migration.text : 'No verified equivalent', 'after');
@@ -777,14 +784,45 @@ $('showHint').addEventListener('click', () => guarded(() => {
 }));
 $('showGlosses').addEventListener('change', renderMarket);
 $('inspectLanguage').addEventListener('click', () => { commit({...project, viewVersionId: session().versionId}); showView('studio'); });
+function renderPreferenceFields() {
+  const groups = new Map();
+  for (const entry of current().lexicon) {
+    const key = JSON.stringify([entry.role, entry.meaning]);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(entry);
+  }
+  const eligible = [...groups].filter(([, entries]) => entries.length > 1);
+  const meaningControl = $('preferredMeaning'), entryControl = $('preferredEntry');
+  const selectedMeaning = meaningControl.value, selectedEntry = entryControl.value;
+  meaningControl.replaceChildren(...eligible.map(([key, entries]) => {
+    const entry = entries[0], option = node('option', workbenchRoleLabels[entry.role] + ': ' + workbenchLabel(entry.role, entry.meaning));
+    option.value = key; return option;
+  }));
+  if (eligible.some(([key]) => key === selectedMeaning)) meaningControl.value = selectedMeaning;
+  const entries = groups.get(meaningControl.value) ?? [];
+  entryControl.replaceChildren(...entries.map(entry => {
+    const option = node('option', entry.form + ' — ' + (entry.canonical ? 'currently preferred' : 'not marked preferred'));
+    option.value = entry.id; return option;
+  }));
+  if (entries.some(entry => entry.id === selectedEntry)) entryControl.value = selectedEntry;
+  else if (entries.some(entry => entry.canonical)) entryControl.value = entries.find(entry => entry.canonical).id;
+  const preferred = entries.find(entry => entry.canonical);
+  $('preferenceStatus').textContent = !entries.length
+    ? 'No meanings have multiple accepted words in the latest version. This proposal chooses among existing synonyms; it does not add a word.'
+    : 'Latest accepted version ' + current().number + ': ' + (preferred ? 'the preferred word is ' + preferred.form + '.' : 'none of these words is marked preferred.') + ' Review the effects before accepting a choice.';
+  return entries.length > 0;
+}
 function updateProposalFields() {
-  for (const kind of ['order', 'rename', 'add']) {
+  const hasPreferenceChoices = renderPreferenceFields();
+  for (const kind of ['order', 'rename', 'add', 'preference']) {
     const inactive = $('changeKind').value !== kind;
     $(kind + 'Fields').hidden = inactive;
-    for (const control of $(kind + 'Fields').querySelectorAll('input,select')) control.disabled = inactive || project.viewVersionId !== project.currentVersionId;
+    for (const control of $(kind + 'Fields').querySelectorAll('input,select')) control.disabled = inactive || project.viewVersionId !== project.currentVersionId || (kind === 'preference' && !hasPreferenceChoices);
   }
+  $('proposalForm').querySelector('button[type="submit"]').disabled = project.viewVersionId !== project.currentVersionId || ($('changeKind').value === 'preference' && !hasPreferenceChoices);
 }
 $('changeKind').addEventListener('change', updateProposalFields);
+$('preferredMeaning').addEventListener('change', updateProposalFields);
 $('practiceImpactFilter').addEventListener('change', () => { practiceImpactPage = 0; renderPracticeImpact(); });
 $('practiceImpactPrevious').addEventListener('click', () => { practiceImpactPage = Math.max(0, practiceImpactPage - 1); renderPracticeImpact(); });
 $('practiceImpactNext').addEventListener('click', () => { practiceImpactPage++; renderPracticeImpact(); });
@@ -805,6 +843,7 @@ $('proposalForm').addEventListener('submit', event => { event.preventDefault(); 
   const patch = {id, author, rationale};
   if ($('changeKind').value === 'order') patch.order = $('proposedOrder').value;
   if ($('changeKind').value === 'rename') patch.wordChanges = [{entryId: $('renameConcept').value, form: $('renameForm').value}];
+  if ($('changeKind').value === 'preference') patch.preferredEntries = [$('preferredEntry').value];
   if ($('changeKind').value === 'add') patch.addEntries = [{id: 'word-' + crypto.randomUUID(), role: 'object', meaning: $('newConcept').value.trim(), form: $('newWord').value, gloss: $('newConcept').value.trim().replaceAll('_', ' '), author, rationale, canonical: true}];
   const proposal = proposeRevision(current(), patch); pending = proposal; noteWork();
   $('proposalFeedback').textContent = 'Preview only. Review the authored examples, market readiness and saved practice effects before accepting.'; renderImpact();
