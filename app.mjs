@@ -786,6 +786,7 @@ $('projectFile').addEventListener('change', async () => {
   if (!canFinishOpen(selection, revision)) return;
   practiceDrafts.clear();
   project = next; noteWork(); pending = null; hintVisible = false; clearWordOrderHelp(); $('sentenceInput').value = ''; $('inspectResult').textContent = ''; $('proposalFeedback').textContent = '';
+  $('proposalForm').reset(); $('proposalAuthor').defaultValue = current().author; $('proposalAuthor').value = current().author;
   invalidateCreation('A different project was opened. Review the new language again before creating it.');
   guarded(() => { persist(); render(); tell('Project opened. Earlier conversations and accepted versions are available in Versions.'); });
 });

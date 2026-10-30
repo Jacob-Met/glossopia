@@ -1,17 +1,17 @@
 {
   "schema": "hamon.glossopia-build.v1",
-  "version": "0.6.6",
+  "version": "0.6.7",
   "worker": "estate-astra-619f17c2-7816-4e66-807f-734c83eacdad",
   "session": "estate-astra-619f17c2-7816-4e66-807f-734c83eacdad",
-  "task_id": "glossopia-proposal-target-history-619f17c2",
+  "task_id": "glossopia-open-proposal-isolation-619f17c2",
   "prompt_version": "2026-10-29.32",
-  "created_at": "2026-10-29T23:56:20.971370+00:00",
-  "source_role": "Proposal target preservation source; separate receiving reports identify the exact qualified package and standalone bytes.",
-  "base_git_commit": "bc1f8821d86e81bff4d6cefec6f45ab9e9481804",
+  "created_at": "2026-10-30T00:09:23.413494+00:00",
+  "source_role": "Successful Open proposal isolation source; separate receiving reports identify the exact qualified package and standalone bytes.",
+  "base_git_commit": "2ccbf3db9c8732c1859e0b038c473dc273f52bc9",
   "base_source": {
-    "git_tree": "a7a4ac05233b4587258a896cf98520ced9024cdd",
-    "manifest_sha256": "511467e26b5b7d39c528c9b6851efeb785c8fd1c79c1a193abccecb639a2dc0b",
-    "verified_repository_files": 41,
+    "git_tree": "2bae036352f1d2fd549b030f5720f9cb207e3756",
+    "manifest_sha256": "034b734ce22f340f498dd2f4d54346077426284cab51cdd7e1d9a51fb4751fdb",
+    "verified_repository_files": 42,
     "provenance": "Complete original source, prior manifest and contributor attribution remain preserved at the base Git commit; no prior receiving evidence is rewritten."
   },
   "contribution": {
@@ -21,19 +21,19 @@
       "/root/custody_review"
     ],
     "integration_and_native_execution": "estate-astra-619f17c2-7816-4e66-807f-734c83eacdad",
-    "reconciliation_source_sha256": "59cde81317aad84762ab2b09c156b8cda24f1ee8ec16366996486fab05a71c4b",
-    "scope": "Latest accepted proposal-selector vocabulary; unchanged historical display, parser, mission and project formats."
+    "reconciliation_source_sha256": "8b403663891fc404fa15b032bb2b81cf83ea38c61ff6cc67c95dabf769413bcf",
+    "scope": "Reset proposal fields only after successful Open replacement; preserve failed and superseded Open work, historical selector behavior, inspection-input handler, parser, mission and project formats."
   },
   "files": [
     {
       "path": "README.md",
-      "bytes": 33636,
-      "sha256": "00fcb10b57fbd54bc3bb73b0c618186140d42c29462b83b2e007d1f5f165b16f"
+      "bytes": 34638,
+      "sha256": "b0d039c11c3a5964ee2333decb2cd25426a7aa799e8be602056614a19ada9e6d"
     },
     {
       "path": "app.mjs",
-      "bytes": 64200,
-      "sha256": "f4b29d6d310b8184b462f5c98ef913ffb8f73ae36f620f20ab4725c1c19e4d8c"
+      "bytes": 64328,
+      "sha256": "b33b58b303fac55611e53b2bb70e341e19c172b4ceb002857a2d1d7ecd3887a8"
     },
     {
       "path": "index.html",
@@ -42,8 +42,8 @@
     },
     {
       "path": "package.json",
-      "bytes": 1069,
-      "sha256": "dcfa285b3759f288c116a33900a298feb11e0eb26091939e706bd91da61e7f24"
+      "bytes": 1152,
+      "sha256": "6992ab79e59f8580394192ed06e86f9d5f98d410e22e5cfe0e9325be16b41f3f"
     },
     {
       "path": "server.mjs",
@@ -129,6 +129,11 @@
       "path": "test/browser/open-project.mjs",
       "bytes": 14476,
       "sha256": "d956db4c0b66006856f914813a5523d74a8cb56880d473995804ae9145580ef5"
+    },
+    {
+      "path": "test/browser/open-proposal-isolation.mjs",
+      "bytes": 8030,
+      "sha256": "4cdc4777487c8a1b14a61ee264ed2a56b2792b4c8894af2430df566c982f43eb"
     },
     {
       "path": "test/browser/practice-drafts.mjs",
@@ -218,7 +223,7 @@
     {
       "path": "tools/build-standalone.mjs",
       "bytes": 7946,
-      "sha256": "b89bbf1e5582bb4832a8f17ff9ed451661ecd1dc7ee6cd3e88777d8e28017a92"
+      "sha256": "9d00030e66f39c01b95195da4b693667d085cf8dd8c3d5e3e9cecd94de3cafd2"
     }
   ],
   "file_inventory_scope": "All deliverable package files except this manifest itself and repository-only .gitattributes/.gitignore."
