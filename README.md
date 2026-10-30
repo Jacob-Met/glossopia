@@ -244,3 +244,7 @@ Developers can run the actual-browser regression with `npm run test:browser:prop
 Successfully opening a project clears the previous project’s proposal fields and preview, and sets the proposal author to the opened language’s author. An invalid file or an Open skipped because you made later changes preserves your existing proposal work. The same reset already applies when creating a language or switching saved projects.
 
 With existing Playwright and Chrome paths, run `npm run test:browser:open-proposal`. The receiver uses `GLOSSOPIA_PLAYWRIGHT`, `GLOSSOPIA_CHROME`, `GLOSSOPIA_APP_ROOT`, `GLOSSOPIA_URL` and `GLOSSOPIA_EVIDENCE`. It checks successful replacement with shared and disjoint word identities, incoming author defaults, and preservation of reviewed proposals after invalid or superseded Open attempts. Exact package and standalone runtime receiving are recorded separately.
+
+### Worked project: one market, two ways to speak
+
+Open the [two-orders exercise](examples/two-orders/README.md) for an authored comparison of historical SOV and current SVO conversations. Its original project bytes and independent receiver are preserved; the release's RECEIVING.json records exact 0.6.8 qualification. This is content delivery, not a parser or trading-rule change.
