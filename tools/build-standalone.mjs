@@ -3,7 +3,7 @@ import {createHash} from 'node:crypto';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 
-// GLOSSOPIA 0.6.7 maintained experimental standalone builder.
+// GLOSSOPIA 0.6.8 maintained experimental standalone builder.
 // This tool supports only these reviewed source bytes. Updating a pin
 // requires reviewing syntax, bindings, dependencies and browser policy again.
 const SOURCE_PINS = {
@@ -20,7 +20,7 @@ const SOURCE_PINS = {
   "app.mjs": "b33b58b303fac55611e53b2bb70e341e19c172b4ceb002857a2d1d7ecd3887a8",
   "index.html": "a7c03d613e983c64379d84cd8ca677348d6d20a379488a5e42d173be13c3d735",
   "style.css": "70bfe9623482d50393a6efe5b6c5ab2d70f66e7c5c26c34d3dbf9326720ef59a",
-  "package.json": "6992ab79e59f8580394192ed06e86f9d5f98d410e22e5cfe0e9325be16b41f3f"
+  "package.json": "c498792bf81d663dc7f339453a2777579513cf365b00c3489242a78d1effc175"
 };
 
 const MODULES = Object.keys(SOURCE_PINS).filter(name => name.endsWith('.mjs'));
@@ -81,7 +81,7 @@ for (const [name, expected] of Object.entries(SOURCE_PINS)) {
 }
 const sourcePackage = JSON.parse(sources.get('package.json'));
 assert.equal(sourcePackage.name, 'glossopia');
-assert.equal(sourcePackage.version, '0.6.7');
+assert.equal(sourcePackage.version, '0.6.8');
 const completed = new Map();
 const javascript = 'const modules = Object.create(null);\n' + MODULES.map(name => transform(name, sources.get(name), completed)).join('\n');
 const css = sources.get('style.css');
@@ -102,4 +102,4 @@ html = once(html, '<head>', '<head><meta http-equiv="Content-Security-Policy" co
 await writeFile(outputPath, html, {flag: 'wx'});
 console.log(JSON.stringify({prototype: false, experimental: true, sourcePackage: {name: sourcePackage.name, version: sourcePackage.version, requiredNode: sourcePackage.engines.node, sha256: SOURCE_PINS['package.json']}, sourceRoot, outputPath, bytes: Buffer.byteLength(html), sha256: digest(html), sourceFiles: SOURCE_PINS,
   runtimeQualification: 'separate exact-artifact receiving required',
-  scope: 'Maintained experimental 0.6.7 build from verified source and package bytes. This build report does not establish browser, file-origin storage, CSP or usability qualification; retain the separate exact-artifact receiving reports.'}, null, 2));
+  scope: 'Maintained experimental 0.6.8 build from verified source and package bytes. This build report does not establish browser, file-origin storage, CSP or usability qualification; retain the separate exact-artifact receiving reports.'}, null, 2));

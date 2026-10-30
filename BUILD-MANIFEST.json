@@ -1,39 +1,682 @@
 {
   "schema": "hamon.glossopia-build.v1",
-  "version": "0.6.7",
-  "worker": "estate-astra-619f17c2-7816-4e66-807f-734c83eacdad",
-  "session": "estate-astra-619f17c2-7816-4e66-807f-734c83eacdad",
-  "task_id": "glossopia-open-proposal-isolation-619f17c2",
-  "prompt_version": "2026-10-29.32",
-  "created_at": "2026-10-30T00:09:23.413494+00:00",
-  "source_role": "Successful Open proposal isolation source; separate receiving reports identify the exact qualified package and standalone bytes.",
-  "base_git_commit": "2ccbf3db9c8732c1859e0b038c473dc273f52bc9",
+  "version": "0.6.8",
+  "worker": "estate-02c95f09-7656-4694-bbb3-d51b060f8be5",
+  "task_id": "glossopia-worked-project-adoption-02c95f09",
+  "created_at": "2026-10-30T00:25:25.020027+00:00",
+  "source_role": "Exact original worked project content composed onto integrated proposal-target and successful Open proposal isolation fixes; qualification tracked separately.",
+  "base_git_commit": "33b352f09dec6e99b38b6da7ceca7b8495704f60",
+  "base_git_tree": "5d7f7b8688c2edf7feeb66dcbb1614794ba83cb0",
   "base_source": {
-    "git_tree": "2bae036352f1d2fd549b030f5720f9cb207e3756",
-    "manifest_sha256": "034b734ce22f340f498dd2f4d54346077426284cab51cdd7e1d9a51fb4751fdb",
-    "verified_repository_files": 42,
-    "provenance": "Complete original source, prior manifest and contributor attribution remain preserved at the base Git commit; no prior receiving evidence is rewritten."
+    "manifest_sha256": "318552e60f332e92bd25735005e46dfaa67b7c956c3eed5311f54b7638ef2e03",
+    "manifest": {
+      "schema": "hamon.glossopia-build.v1",
+      "version": "0.6.7",
+      "worker": "estate-astra-619f17c2-7816-4e66-807f-734c83eacdad",
+      "session": "estate-astra-619f17c2-7816-4e66-807f-734c83eacdad",
+      "task_id": "glossopia-open-proposal-isolation-619f17c2",
+      "prompt_version": "2026-10-29.32",
+      "created_at": "2026-10-30T00:09:23.413494+00:00",
+      "source_role": "Successful Open proposal isolation source; separate receiving reports identify the exact qualified package and standalone bytes.",
+      "base_git_commit": "2ccbf3db9c8732c1859e0b038c473dc273f52bc9",
+      "base_source": {
+        "git_tree": "2bae036352f1d2fd549b030f5720f9cb207e3756",
+        "manifest_sha256": "034b734ce22f340f498dd2f4d54346077426284cab51cdd7e1d9a51fb4751fdb",
+        "verified_repository_files": 42,
+        "provenance": "Complete original source, prior manifest and contributor attribution remain preserved at the base Git commit; no prior receiving evidence is rewritten."
+      },
+      "contribution": {
+        "implementation_author": "/root/priority_recovery",
+        "independent_source_reviewers": [
+          "/root/consumer_recovery",
+          "/root/custody_review"
+        ],
+        "integration_and_native_execution": "estate-astra-619f17c2-7816-4e66-807f-734c83eacdad",
+        "reconciliation_source_sha256": "8b403663891fc404fa15b032bb2b81cf83ea38c61ff6cc67c95dabf769413bcf",
+        "scope": "Reset proposal fields only after successful Open replacement; preserve failed and superseded Open work, historical selector behavior, inspection-input handler, parser, mission and project formats."
+      },
+      "files": [
+        {
+          "path": "README.md",
+          "bytes": 34638,
+          "sha256": "b0d039c11c3a5964ee2333decb2cd25426a7aa799e8be602056614a19ada9e6d"
+        },
+        {
+          "path": "app.mjs",
+          "bytes": 64328,
+          "sha256": "b33b58b303fac55611e53b2bb70e341e19c172b4ceb002857a2d1d7ecd3887a8"
+        },
+        {
+          "path": "index.html",
+          "bytes": 22297,
+          "sha256": "a7c03d613e983c64379d84cd8ca677348d6d20a379488a5e42d173be13c3d735"
+        },
+        {
+          "path": "package.json",
+          "bytes": 1152,
+          "sha256": "6992ab79e59f8580394192ed06e86f9d5f98d410e22e5cfe0e9325be16b41f3f"
+        },
+        {
+          "path": "server.mjs",
+          "bytes": 2581,
+          "sha256": "a90a3d13c86f0083ef15a872de292b82d59517ca9aadf9f6fd592f6c7c71ace5"
+        },
+        {
+          "path": "src/browser-recovery.mjs",
+          "bytes": 3475,
+          "sha256": "7f4adb3b77acca76fbb9c666fc9cf5418d579cb8095495a13bb2c00f876f0bc3"
+        },
+        {
+          "path": "src/language-core.mjs",
+          "bytes": 18458,
+          "sha256": "60b988221a2170e3209ee9ccefdd3fe3437d72f91a9126f16c5f7a71dd39776a"
+        },
+        {
+          "path": "src/language-creation.mjs",
+          "bytes": 3979,
+          "sha256": "62d16a3177bc0ee8e804737dca4f2075a7c20c240b6a059c9c77b52cae6954f6"
+        },
+        {
+          "path": "src/mission-core.mjs",
+          "bytes": 8697,
+          "sha256": "50f8f2655464bfa08bfcf2c06043cfaf0b77c5b1045f7f33716345028b253a4b"
+        },
+        {
+          "path": "src/practice-impact.mjs",
+          "bytes": 5213,
+          "sha256": "5acc58332d24938a5ab38ada9eaab0525cceeb98926d848729078a33a9845d4b"
+        },
+        {
+          "path": "src/project-archive.mjs",
+          "bytes": 8169,
+          "sha256": "97d193e244b514ba32fac8c51d4a7442e391481dc54e8acb8c5d5baa7921ccd8"
+        },
+        {
+          "path": "src/project.mjs",
+          "bytes": 4163,
+          "sha256": "6cd2a83d961e3770de6323587c08509482cc21eddf1cf42231cf62ee16f08b1a"
+        },
+        {
+          "path": "src/starter-language.mjs",
+          "bytes": 3879,
+          "sha256": "08c0493f315092a813911d6028d1d0af4b2adb60453eb6b6b93ea86a091366bc"
+        },
+        {
+          "path": "src/version-history.mjs",
+          "bytes": 2161,
+          "sha256": "30d1f90e1937da652b4e3b9c6a79bf099ff2e24ac74945d50fb508b9741e4482"
+        },
+        {
+          "path": "src/word-order.mjs",
+          "bytes": 3447,
+          "sha256": "bd481bed9b9369cde53ea6510202c9fa3a622a982cdf94ae80d6acb84f82afe4"
+        },
+        {
+          "path": "style.css",
+          "bytes": 28459,
+          "sha256": "70bfe9623482d50393a6efe5b6c5ab2d70f66e7c5c26c34d3dbf9326720ef59a"
+        },
+        {
+          "path": "test/archive-management.test.mjs",
+          "bytes": 6031,
+          "sha256": "9ac81d000685e23bce1161090346a1caf2cab55e7b94cb78b497408998654a9d"
+        },
+        {
+          "path": "test/browser/archive-management.mjs",
+          "bytes": 9380,
+          "sha256": "12d02df4ed14c21f7cbc06899263eb33210c7ceec0b274e447275138dcc7337c"
+        },
+        {
+          "path": "test/browser/browser-recovery.mjs",
+          "bytes": 25068,
+          "sha256": "1aa9082bc7f7d7fcaa23753cefbce48dd06dcaf0b3cc0659b9a07283e512d2bb"
+        },
+        {
+          "path": "test/browser/creation-review.mjs",
+          "bytes": 6057,
+          "sha256": "fa8847d31cc18a6781447a6f6d512721d5cb23670cd09fbfa9a385a3736c8292"
+        },
+        {
+          "path": "test/browser/open-project.mjs",
+          "bytes": 14476,
+          "sha256": "d956db4c0b66006856f914813a5523d74a8cb56880d473995804ae9145580ef5"
+        },
+        {
+          "path": "test/browser/open-proposal-isolation.mjs",
+          "bytes": 8030,
+          "sha256": "4cdc4777487c8a1b14a61ee264ed2a56b2792b4c8894af2430df566c982f43eb"
+        },
+        {
+          "path": "test/browser/practice-drafts.mjs",
+          "bytes": 9952,
+          "sha256": "ed426205a94df1e108e7d768d70ab26fc3ce50cc5703839135360a8bd9c90a7f"
+        },
+        {
+          "path": "test/browser/proposal-target.mjs",
+          "bytes": 5801,
+          "sha256": "4be7d321a6c6d242d4db9629156fde20ccf3c3c246cb8aaa22e03781feca994c"
+        },
+        {
+          "path": "test/browser/standalone.mjs",
+          "bytes": 10935,
+          "sha256": "e7a074773d4fc03c4e7be6c40330244f56dd09ebe6bcd65addefcae900799075"
+        },
+        {
+          "path": "test/browser/version-history.mjs",
+          "bytes": 7573,
+          "sha256": "fed86e59a197962360496e43ea58f2d5dd1489c7dfe09037850cddb0a28c98a2"
+        },
+        {
+          "path": "test/browser-recovery.test.mjs",
+          "bytes": 6260,
+          "sha256": "ea2cfedbbb2ac5279b33279b4415b7171cc72e4c5d39b50b2a730d4e2cdcb64b"
+        },
+        {
+          "path": "test/fixtures/creation-review-nemi.json",
+          "bytes": 6152,
+          "sha256": "17e7d63e9fa43eb74ac189fc825797aa0bf5456d6f81fe4330496641eb4e16e9"
+        },
+        {
+          "path": "test/history.test.mjs",
+          "bytes": 1993,
+          "sha256": "116f393a24cce3c03f55bf48ee14c9a0b713e10fa02b2741e8b04055fa11d511"
+        },
+        {
+          "path": "test/id-boundaries.test.mjs",
+          "bytes": 1690,
+          "sha256": "8a15f5b40e97120396af3b7e7e7aba1d473d4401640ddc82d76ffb5976052061"
+        },
+        {
+          "path": "test/language-creation.test.mjs",
+          "bytes": 5049,
+          "sha256": "e5760c70d45a5a64abebdd5548c80adec0cd7c0ce607ef3260292518df0b0c19"
+        },
+        {
+          "path": "test/long-language-id.test.mjs",
+          "bytes": 2051,
+          "sha256": "76e07bf78891322ea5af57b08adc4e1172a54e740764d4e6e1fa2605fd0f0a74"
+        },
+        {
+          "path": "test/mission-compatibility.test.mjs",
+          "bytes": 7154,
+          "sha256": "1b07383d12da0380394a3308503e3a5d1439a7716ce12a4785fcf4885c026bdd"
+        },
+        {
+          "path": "test/mission.test.mjs",
+          "bytes": 6242,
+          "sha256": "926b69bf09c347c431b1eb3b4458544e64183ee4b54247c24844afa52f2c9d3f"
+        },
+        {
+          "path": "test/practice-impact.test.mjs",
+          "bytes": 8091,
+          "sha256": "db28cd588f8f2809cc7c64de296138bdd6695ad28fc3c3437f48865c9e78977a"
+        },
+        {
+          "path": "test/project-archive.test.mjs",
+          "bytes": 7192,
+          "sha256": "ac80409608134ccddd4b78d76d280a7fdfff08a27667ac4e9e300fe0170c970a"
+        },
+        {
+          "path": "test/step-feedback.test.mjs",
+          "bytes": 1742,
+          "sha256": "5066369c215e19432bd2cc07276577f818473df4bee3faa1961092204fba20fa"
+        },
+        {
+          "path": "test/version-history.test.mjs",
+          "bytes": 3337,
+          "sha256": "768f44ca6180620cbc0e1a3507ea58464a0b33cf361738acde4e137c74cab224"
+        },
+        {
+          "path": "test/word-order.test.mjs",
+          "bytes": 5302,
+          "sha256": "62390e7118bb46640d252762d8f9fe987dc9078c1f77809249177de4f5d9f950"
+        },
+        {
+          "path": "tools/build-standalone.mjs",
+          "bytes": 7946,
+          "sha256": "9d00030e66f39c01b95195da4b693667d085cf8dd8c3d5e3e9cecd94de3cafd2"
+        }
+      ],
+      "file_inventory_scope": "All deliverable package files except this manifest itself and repository-only .gitattributes/.gitignore."
+    },
+    "verified_files": [
+      {
+        "path": ".gitattributes",
+        "bytes": 25,
+        "sha256": "a7d2b9a7fe44b92c25bf61fac460336cb67961288da1000f9c3ccb88638d7e95"
+      },
+      {
+        "path": ".gitignore",
+        "bytes": 50,
+        "sha256": "8fe1278375491c263d5aca375665ebfdbd619a36ec1cd43a8f9becb804668a69"
+      },
+      {
+        "path": "BUILD-MANIFEST.json",
+        "bytes": 8093,
+        "sha256": "318552e60f332e92bd25735005e46dfaa67b7c956c3eed5311f54b7638ef2e03"
+      },
+      {
+        "path": "README.md",
+        "bytes": 34638,
+        "sha256": "b0d039c11c3a5964ee2333decb2cd25426a7aa799e8be602056614a19ada9e6d"
+      },
+      {
+        "path": "app.mjs",
+        "bytes": 64328,
+        "sha256": "b33b58b303fac55611e53b2bb70e341e19c172b4ceb002857a2d1d7ecd3887a8"
+      },
+      {
+        "path": "index.html",
+        "bytes": 22297,
+        "sha256": "a7c03d613e983c64379d84cd8ca677348d6d20a379488a5e42d173be13c3d735"
+      },
+      {
+        "path": "package.json",
+        "bytes": 1152,
+        "sha256": "6992ab79e59f8580394192ed06e86f9d5f98d410e22e5cfe0e9325be16b41f3f"
+      },
+      {
+        "path": "server.mjs",
+        "bytes": 2581,
+        "sha256": "a90a3d13c86f0083ef15a872de292b82d59517ca9aadf9f6fd592f6c7c71ace5"
+      },
+      {
+        "path": "src/browser-recovery.mjs",
+        "bytes": 3475,
+        "sha256": "7f4adb3b77acca76fbb9c666fc9cf5418d579cb8095495a13bb2c00f876f0bc3"
+      },
+      {
+        "path": "src/language-core.mjs",
+        "bytes": 18458,
+        "sha256": "60b988221a2170e3209ee9ccefdd3fe3437d72f91a9126f16c5f7a71dd39776a"
+      },
+      {
+        "path": "src/language-creation.mjs",
+        "bytes": 3979,
+        "sha256": "62d16a3177bc0ee8e804737dca4f2075a7c20c240b6a059c9c77b52cae6954f6"
+      },
+      {
+        "path": "src/mission-core.mjs",
+        "bytes": 8697,
+        "sha256": "50f8f2655464bfa08bfcf2c06043cfaf0b77c5b1045f7f33716345028b253a4b"
+      },
+      {
+        "path": "src/practice-impact.mjs",
+        "bytes": 5213,
+        "sha256": "5acc58332d24938a5ab38ada9eaab0525cceeb98926d848729078a33a9845d4b"
+      },
+      {
+        "path": "src/project-archive.mjs",
+        "bytes": 8169,
+        "sha256": "97d193e244b514ba32fac8c51d4a7442e391481dc54e8acb8c5d5baa7921ccd8"
+      },
+      {
+        "path": "src/project.mjs",
+        "bytes": 4163,
+        "sha256": "6cd2a83d961e3770de6323587c08509482cc21eddf1cf42231cf62ee16f08b1a"
+      },
+      {
+        "path": "src/starter-language.mjs",
+        "bytes": 3879,
+        "sha256": "08c0493f315092a813911d6028d1d0af4b2adb60453eb6b6b93ea86a091366bc"
+      },
+      {
+        "path": "src/version-history.mjs",
+        "bytes": 2161,
+        "sha256": "30d1f90e1937da652b4e3b9c6a79bf099ff2e24ac74945d50fb508b9741e4482"
+      },
+      {
+        "path": "src/word-order.mjs",
+        "bytes": 3447,
+        "sha256": "bd481bed9b9369cde53ea6510202c9fa3a622a982cdf94ae80d6acb84f82afe4"
+      },
+      {
+        "path": "style.css",
+        "bytes": 28459,
+        "sha256": "70bfe9623482d50393a6efe5b6c5ab2d70f66e7c5c26c34d3dbf9326720ef59a"
+      },
+      {
+        "path": "test/archive-management.test.mjs",
+        "bytes": 6031,
+        "sha256": "9ac81d000685e23bce1161090346a1caf2cab55e7b94cb78b497408998654a9d"
+      },
+      {
+        "path": "test/browser/archive-management.mjs",
+        "bytes": 9380,
+        "sha256": "12d02df4ed14c21f7cbc06899263eb33210c7ceec0b274e447275138dcc7337c"
+      },
+      {
+        "path": "test/browser/browser-recovery.mjs",
+        "bytes": 25068,
+        "sha256": "1aa9082bc7f7d7fcaa23753cefbce48dd06dcaf0b3cc0659b9a07283e512d2bb"
+      },
+      {
+        "path": "test/browser/creation-review.mjs",
+        "bytes": 6057,
+        "sha256": "fa8847d31cc18a6781447a6f6d512721d5cb23670cd09fbfa9a385a3736c8292"
+      },
+      {
+        "path": "test/browser/open-project.mjs",
+        "bytes": 14476,
+        "sha256": "d956db4c0b66006856f914813a5523d74a8cb56880d473995804ae9145580ef5"
+      },
+      {
+        "path": "test/browser/open-proposal-isolation.mjs",
+        "bytes": 8030,
+        "sha256": "4cdc4777487c8a1b14a61ee264ed2a56b2792b4c8894af2430df566c982f43eb"
+      },
+      {
+        "path": "test/browser/practice-drafts.mjs",
+        "bytes": 9952,
+        "sha256": "ed426205a94df1e108e7d768d70ab26fc3ce50cc5703839135360a8bd9c90a7f"
+      },
+      {
+        "path": "test/browser/proposal-target.mjs",
+        "bytes": 5801,
+        "sha256": "4be7d321a6c6d242d4db9629156fde20ccf3c3c246cb8aaa22e03781feca994c"
+      },
+      {
+        "path": "test/browser/standalone.mjs",
+        "bytes": 10935,
+        "sha256": "e7a074773d4fc03c4e7be6c40330244f56dd09ebe6bcd65addefcae900799075"
+      },
+      {
+        "path": "test/browser/version-history.mjs",
+        "bytes": 7573,
+        "sha256": "fed86e59a197962360496e43ea58f2d5dd1489c7dfe09037850cddb0a28c98a2"
+      },
+      {
+        "path": "test/browser-recovery.test.mjs",
+        "bytes": 6260,
+        "sha256": "ea2cfedbbb2ac5279b33279b4415b7171cc72e4c5d39b50b2a730d4e2cdcb64b"
+      },
+      {
+        "path": "test/fixtures/creation-review-nemi.json",
+        "bytes": 6152,
+        "sha256": "17e7d63e9fa43eb74ac189fc825797aa0bf5456d6f81fe4330496641eb4e16e9"
+      },
+      {
+        "path": "test/history.test.mjs",
+        "bytes": 1993,
+        "sha256": "116f393a24cce3c03f55bf48ee14c9a0b713e10fa02b2741e8b04055fa11d511"
+      },
+      {
+        "path": "test/id-boundaries.test.mjs",
+        "bytes": 1690,
+        "sha256": "8a15f5b40e97120396af3b7e7e7aba1d473d4401640ddc82d76ffb5976052061"
+      },
+      {
+        "path": "test/language-creation.test.mjs",
+        "bytes": 5049,
+        "sha256": "e5760c70d45a5a64abebdd5548c80adec0cd7c0ce607ef3260292518df0b0c19"
+      },
+      {
+        "path": "test/long-language-id.test.mjs",
+        "bytes": 2051,
+        "sha256": "76e07bf78891322ea5af57b08adc4e1172a54e740764d4e6e1fa2605fd0f0a74"
+      },
+      {
+        "path": "test/mission-compatibility.test.mjs",
+        "bytes": 7154,
+        "sha256": "1b07383d12da0380394a3308503e3a5d1439a7716ce12a4785fcf4885c026bdd"
+      },
+      {
+        "path": "test/mission.test.mjs",
+        "bytes": 6242,
+        "sha256": "926b69bf09c347c431b1eb3b4458544e64183ee4b54247c24844afa52f2c9d3f"
+      },
+      {
+        "path": "test/practice-impact.test.mjs",
+        "bytes": 8091,
+        "sha256": "db28cd588f8f2809cc7c64de296138bdd6695ad28fc3c3437f48865c9e78977a"
+      },
+      {
+        "path": "test/project-archive.test.mjs",
+        "bytes": 7192,
+        "sha256": "ac80409608134ccddd4b78d76d280a7fdfff08a27667ac4e9e300fe0170c970a"
+      },
+      {
+        "path": "test/step-feedback.test.mjs",
+        "bytes": 1742,
+        "sha256": "5066369c215e19432bd2cc07276577f818473df4bee3faa1961092204fba20fa"
+      },
+      {
+        "path": "test/version-history.test.mjs",
+        "bytes": 3337,
+        "sha256": "768f44ca6180620cbc0e1a3507ea58464a0b33cf361738acde4e137c74cab224"
+      },
+      {
+        "path": "test/word-order.test.mjs",
+        "bytes": 5302,
+        "sha256": "62390e7118bb46640d252762d8f9fe987dc9078c1f77809249177de4f5d9f950"
+      },
+      {
+        "path": "tools/build-standalone.mjs",
+        "bytes": 7946,
+        "sha256": "9d00030e66f39c01b95195da4b693667d085cf8dd8c3d5e3e9cecd94de3cafd2"
+      }
+    ]
   },
-  "contribution": {
-    "implementation_author": "/root/priority_recovery",
-    "independent_source_reviewers": [
-      "/root/consumer_recovery",
-      "/root/custody_review"
-    ],
-    "integration_and_native_execution": "estate-astra-619f17c2-7816-4e66-807f-734c83eacdad",
-    "reconciliation_source_sha256": "8b403663891fc404fa15b032bb2b81cf83ea38c61ff6cc67c95dabf769413bcf",
-    "scope": "Reset proposal fields only after successful Open replacement; preserve failed and superseded Open work, historical selector behavior, inspection-input handler, parser, mission and project formats."
+  "original_contribution": {
+    "source_sha256": "a7866c47185c007dce872fef611695ef866a9fac7230ead2d1216fc6847cb632",
+    "actor": "estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594",
+    "task_id": "glossopia-version-pinning-worked-project-44aabdd5",
+    "original_manifest": {
+      "schema": "hamon.glossopia-worked-project-adoption.v1",
+      "actor": "estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594",
+      "task_id": "glossopia-version-pinning-worked-project-44aabdd5",
+      "prompt_version": "2026-10-29.30",
+      "purpose": "A portable worked comparison lets a newcomer inspect a completed historical SOV conversation, test the same words under accepted SVO grammar, finish a new practice and keep the result.",
+      "scope": "Authored content and a bundled existing exact app artifact only; no new product code, source schema, parsing, trading rules or original owner workspace edits.",
+      "source_attribution": {
+        "original_product_owner": "estate-b79ee09d97e1",
+        "current_product_contributor": "estate-6653e323ca46-20261029",
+        "base_source_snapshot": "/home/ubuntu/hamon-work/estate-6653e323ca46-20261029/glossopia-receiving/authored-scenes-20261029/iteration-02/candidate",
+        "inspection_adoption_source_sha256": "bc25e3097b2e454770e7fb8eb15c32994494f1dcbb548dee67343af8d3859720"
+      },
+      "team": {
+        "generator": "/root/implementation",
+        "guide": "/root/consumer_review (lead edited final compatibility section)",
+        "independent_receiver": "/root/independent_verification",
+        "execution": "Lead through authorized Renpo coord3 binding",
+        "visual_review": "Lead viewed retained0.6 historical and candidate0.7 new completed practice screenshots; independent consumer review pending separately."
+      },
+      "source_binding": {
+        "owner": "node-778708ac1c0e22400d5539652ac58414",
+        "incarnation": "a433c4b5210c4b159cc4d7552078cfd8",
+        "generation": 1
+      },
+      "board_binding": {
+        "owner": "node-8163b1e2ce4ea51daa3506e3034d407c",
+        "incarnation": "869c57e7bc2f60978611d85d68122a36",
+        "generation": 2
+      },
+      "project": {
+        "path": "/home/ubuntu/hamon-work/estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594/glossopia-worked-project/iteration-01/examples/two-orders/two-orders.glossopia.json",
+        "bytes": 11455,
+        "sha256": "7c77b5171d39c99c96a27d062dd379db7136e6210bd6c39669de63de99e94571"
+      },
+      "semantic_expectations": {
+        "schema": "hamon.glossopia-worked-example.v1",
+        "purpose": "Observe historical session pinning while practicing a changed sentence order.",
+        "sourceDirectory": "/home/ubuntu/hamon-work/estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594/glossopia-baseline-0.7.0",
+        "actor": "estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594",
+        "taskId": "glossopia-version-pinning-worked-project-44aabdd5",
+        "projectFormat": 1,
+        "history": [
+          {
+            "versionId": "luma-v1",
+            "order": "SOV",
+            "sessionId": "practice-1",
+            "complete": true,
+            "inputs": [
+              "mi un lum na",
+              "mi du pon di",
+              "mi un lum si"
+            ]
+          },
+          {
+            "versionId": "luma-v2",
+            "order": "SVO",
+            "sessionId": "practice-2",
+            "complete": false,
+            "inputs": []
+          }
+        ],
+        "v2Solutions": [
+          "mi na un lum",
+          "mi di du pon",
+          "mi si un lum"
+        ],
+        "expectedCompletedInventory": {
+          "pear": 1,
+          "lantern": 1
+        },
+        "qualification": "Generator semantic assertions only; browser usability and prior-release compatibility require separate receiving. Human learning efficacy untested."
+      },
+      "receiving": {
+        "project_file": "/home/ubuntu/hamon-work/estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594/glossopia-worked-project/iteration-01/examples/two-orders/two-orders.glossopia.json",
+        "project_sha256": "7c77b5171d39c99c96a27d062dd379db7136e6210bd6c39669de63de99e94571",
+        "project_unchanged": true,
+        "receiver_sha256": "53dd10cc532a35e5b709b1a239207dc97cb1a78093d899f4316423738949669a",
+        "results": [
+          {
+            "label": "retained-0.6-npm-start",
+            "exit_code": 0,
+            "evidence": "/home/ubuntu/hamon-work/estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594/glossopia-worked-project/iteration-01/receiving/retained-0.6-npm-start"
+          },
+          {
+            "label": "retained-0.6-standalone",
+            "exit_code": 0,
+            "evidence": "/home/ubuntu/hamon-work/estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594/glossopia-worked-project/iteration-01/receiving/retained-0.6-standalone"
+          },
+          {
+            "label": "candidate-0.7-npm-start",
+            "exit_code": 0,
+            "evidence": "/home/ubuntu/hamon-work/estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594/glossopia-worked-project/iteration-01/receiving/candidate-0.7-npm-start"
+          },
+          {
+            "label": "candidate-0.7-standalone",
+            "exit_code": 0,
+            "evidence": "/home/ubuntu/hamon-work/estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594/glossopia-worked-project/iteration-01/receiving/candidate-0.7-standalone"
+          }
+        ],
+        "claim": "Runtime content and compatibility receiving only; no measured learning efficacy or current GitHub delivery claim."
+      },
+      "prior_release_artifacts": [
+        {
+          "path": "/home/ubuntu/hamon-work/estate-6653e323ca46-20261029/glossopia-receiving/standalone-composed-20261029/packages/glossopia-0.6.0.tgz",
+          "bytes": 82029,
+          "sha256": "1d741f99daef202bdd6cf311eef30906ee645918dc1cae7d6803da7121e1d57e",
+          "isolated_path": "/home/ubuntu/hamon-work/estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594/glossopia-worked-project/compatibility-0.6/glossopia-0.6.0.tgz"
+        },
+        {
+          "path": "/home/ubuntu/hamon-work/estate-6653e323ca46-20261029/glossopia-receiving/standalone-composed-20261029/standalone/glossopia-0.6.0-standalone.html",
+          "bytes": 161180,
+          "sha256": "1043319a80487488a34c2d74eaf450cbbb6cf63229c1138169c2ce98d3f1c218",
+          "isolated_path": "/home/ubuntu/hamon-work/estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594/glossopia-worked-project/compatibility-0.6/glossopia-0.6.0-standalone.html"
+        }
+      ],
+      "bundle": {
+        "schema": "hamon.glossopia-worked-bundle.v1",
+        "actor": "estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594",
+        "task_id": "glossopia-version-pinning-worked-project-44aabdd5",
+        "created_at": "2026-10-29T20:31:41.137062+00:00",
+        "bundle": "/home/ubuntu/hamon-work/estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594/glossopia-worked-project/delivery-20261029/GLOSSOPIA-Two-Orders",
+        "zip": {
+          "path": "/home/ubuntu/hamon-work/estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594/glossopia-worked-project/delivery-20261029/glossopia-two-orders-20261029.44aabdd5.zip",
+          "bytes": 50361,
+          "sha256": "903ba4ee936b8c91f2c68a99dbb7f1acfdc2a615b701c4ed3c431a92085656eb"
+        },
+        "files": [
+          {
+            "name": "GLOSSOPIA.html",
+            "bytes": 182928,
+            "sha256": "eccc5d6fc199e2097ccb9ae6bc1233f44fb0a8d9a06ba4d020ca2450c1198488"
+          },
+          {
+            "name": "README.md",
+            "bytes": 4796,
+            "sha256": "f70e03f5091383949077ddce86b6383c338e8720738e2e57ae973bc3588f2c22"
+          },
+          {
+            "name": "two-orders.glossopia.json",
+            "bytes": 11455,
+            "sha256": "7c77b5171d39c99c96a27d062dd379db7136e6210bd6c39669de63de99e94571"
+          }
+        ],
+        "fresh_extraction": "/home/ubuntu/hamon-work/estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594/glossopia-worked-project/delivery-20261029/extracted-check/GLOSSOPIA-Two-Orders",
+        "entry_list_and_exact_bytes_verified": true,
+        "qualification": "Exact included app/project previously received across four runtime paths; this extraction check verifies final ZIP contents and bytes. No GitHub integration/release or human learning-efficacy claim."
+      },
+      "screenshots": [
+        {
+          "path": "/home/ubuntu/hamon-work/estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594/glossopia-worked-project/iteration-01/receiving/retained-0.6-standalone/historical-complete.png",
+          "bytes": 123661,
+          "sha256": "15491614ef2cec968014360fe430b80e06fdca5fefc1b291c9d06fa2f328fe56"
+        },
+        {
+          "path": "/home/ubuntu/hamon-work/estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594/glossopia-worked-project/iteration-01/receiving/candidate-0.7-standalone/v2-complete.png",
+          "bytes": 105132,
+          "sha256": "b7e60b25cec63b86e924d919838538e0ee840bfc28958ad1128d3e2d7788d8e3"
+        }
+      ],
+      "validation_limits": [
+        "Four native browser/runtime paths passed; original history and historical session remain exact; new practice completes with one pear and one lantern; project Save/Open roundtrip stable.",
+        "Final ZIP freshly extracted on the authorized host and checked against all exact files/checksums; its downloaded scratch copy hash/CRC also verified.",
+        "No claim of measured newcomer learning, preference, human trial, other browser/platform compatibility, original-owner adoption, current GitHub head, merge or release.",
+        "Available gh route HTTP401 Bad credentials remains the repository integration dependency. No alternative credential/access route used."
+      ],
+      "native_operations": {
+        "generation": "estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594-worked-project-generate-01",
+        "compatibility_stage": "estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594-worked-project-compatibility-stage-01",
+        "browser": "estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594-worked-project-browser-receiving-01",
+        "bundle": "estate-44aabdd5-1b0d-4ba7-9d5a-c7859a58f594-worked-project-bundle-01"
+      },
+      "delivery": {
+        "zip_local": "/workspace/scratch/e1479970c16a/glossopia_two_orders/glossopia-two-orders-20261029.44aabdd5.zip",
+        "project_local": "/workspace/scratch/e1479970c16a/glossopia_two_orders/two-orders.glossopia.json",
+        "user_download_link_presented": true,
+        "user_open_or_learning_not_observed": true
+      },
+      "next_action": "Original product owner can adopt examples/two-orders (project and guide) through normal private review/release after refreshing source. Exact legacy format1 project also works with the retained0.6 app and is usable without the inspection patch. Preserve all current owners and uncertain effects.",
+      "created_at": "2026-10-29T20:35:57.550625+00:00"
+    },
+    "original_guide_sha256": "f70e03f5091383949077ddce86b6383c338e8720738e2e57ae973bc3588f2c22",
+    "project_sha256": "7c77b5171d39c99c96a27d062dd379db7136e6210bd6c39669de63de99e94571",
+    "receiver_sha256": "53dd10cc532a35e5b709b1a239207dc97cb1a78093d899f4316423738949669a"
+  },
+  "prior_qualified_content_candidate": {
+    "version": "0.6.7",
+    "qualified_source_sha256": "b65c9972b2f722fc9a8ec5b91068dc94737793cac977399cfc5afdf49fca2ddb",
+    "manifest_sha256": "5bfff83c8c91c964232083a17e206b15950925b92e97437cc98a9cde0db6f6ab",
+    "scope": "Prior content qualification retained separately; does not establish current artifact acceptance."
   },
   "files": [
     {
       "path": "README.md",
-      "bytes": 34638,
-      "sha256": "b0d039c11c3a5964ee2333decb2cd25426a7aa799e8be602056614a19ada9e6d"
+      "bytes": 35022,
+      "sha256": "de2eda16e6a5b8eeff42adf2c3387192c4710059deb05ba71bd96fce33bd949e"
     },
     {
       "path": "app.mjs",
       "bytes": 64328,
       "sha256": "b33b58b303fac55611e53b2bb70e341e19c172b4ceb002857a2d1d7ecd3887a8"
+    },
+    {
+      "path": "examples/two-orders/README.md",
+      "bytes": 5614,
+      "sha256": "964a0b7c6071044a94526e8214b38778694d06792339269f8ae1a568c4dac26b"
+    },
+    {
+      "path": "examples/two-orders/checksums.sha256",
+      "bytes": 168,
+      "sha256": "03e0d401038a46db761062fccedb7a7971f3d246505487326735c01d637602e7"
+    },
+    {
+      "path": "examples/two-orders/two-orders.glossopia.json",
+      "bytes": 11455,
+      "sha256": "7c77b5171d39c99c96a27d062dd379db7136e6210bd6c39669de63de99e94571"
     },
     {
       "path": "index.html",
@@ -42,8 +685,8 @@
     },
     {
       "path": "package.json",
-      "bytes": 1152,
-      "sha256": "6992ab79e59f8580394192ed06e86f9d5f98d410e22e5cfe0e9325be16b41f3f"
+      "bytes": 1235,
+      "sha256": "c498792bf81d663dc7f339453a2777579513cf365b00c3489242a78d1effc175"
     },
     {
       "path": "server.mjs",
@@ -156,6 +799,11 @@
       "sha256": "fed86e59a197962360496e43ea58f2d5dd1489c7dfe09037850cddb0a28c98a2"
     },
     {
+      "path": "test/browser/worked-example.mjs",
+      "bytes": 5951,
+      "sha256": "53dd10cc532a35e5b709b1a239207dc97cb1a78093d899f4316423738949669a"
+    },
+    {
       "path": "test/browser-recovery.test.mjs",
       "bytes": 6260,
       "sha256": "ea2cfedbbb2ac5279b33279b4415b7171cc72e4c5d39b50b2a730d4e2cdcb64b"
@@ -223,7 +871,7 @@
     {
       "path": "tools/build-standalone.mjs",
       "bytes": 7946,
-      "sha256": "9d00030e66f39c01b95195da4b693667d085cf8dd8c3d5e3e9cecd94de3cafd2"
+      "sha256": "e9e63af930bb3f4908b762bba07ec726acebd9b38f1d906700015b7f00304d69"
     }
   ],
   "file_inventory_scope": "All deliverable package files except this manifest itself and repository-only .gitattributes/.gitignore."

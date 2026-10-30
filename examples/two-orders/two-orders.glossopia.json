@@ -1,0 +1,404 @@
+{
+  "format": "glossopia-project",
+  "schemaVersion": 1,
+  "title": "One language, two sentence orders",
+  "history": [
+    {
+      "schemaVersion": 1,
+      "languageId": "luma",
+      "versionId": "luma-v1",
+      "number": 1,
+      "parentVersionId": null,
+      "name": "Luma",
+      "grammar": {
+        "order": "SOV",
+        "quantityPosition": "before-object",
+        "author": "starter-author",
+        "rationale": "Version 1 places the speaker first, then a quantity and object, and the action last. The quantity stays directly before its object."
+      },
+      "lexicon": [
+        {
+          "id": "actor-i",
+          "role": "actor",
+          "meaning": "i",
+          "form": "mi",
+          "gloss": "I",
+          "author": "starter-author",
+          "rationale": "The speaker refers to themself.",
+          "canonical": true
+        },
+        {
+          "id": "actor-you",
+          "role": "actor",
+          "meaning": "you",
+          "form": "tu",
+          "gloss": "you",
+          "author": "starter-author",
+          "rationale": "The speaker addresses the other participant.",
+          "canonical": true
+        },
+        {
+          "id": "verb-request",
+          "role": "verb",
+          "meaning": "request",
+          "form": "na",
+          "gloss": "want / request",
+          "author": "starter-author",
+          "rationale": "Asks for an item; speaking this verb alone does not transfer it.",
+          "canonical": true
+        },
+        {
+          "id": "verb-give",
+          "role": "verb",
+          "meaning": "give",
+          "form": "di",
+          "gloss": "give",
+          "author": "starter-author",
+          "rationale": "Names a transfer from the speaker, subject to the mission state.",
+          "canonical": true
+        },
+        {
+          "id": "verb-have",
+          "role": "verb",
+          "meaning": "have",
+          "form": "si",
+          "gloss": "have",
+          "author": "starter-author",
+          "rationale": "States possession; it does not create inventory.",
+          "canonical": true
+        },
+        {
+          "id": "object-lantern",
+          "role": "object",
+          "meaning": "lantern",
+          "form": "lum",
+          "gloss": "lantern",
+          "author": "starter-author",
+          "rationale": "The useful item needed for the evening crossing.",
+          "canonical": true
+        },
+        {
+          "id": "object-pear",
+          "role": "object",
+          "meaning": "pear",
+          "form": "pon",
+          "gloss": "pear",
+          "author": "starter-author",
+          "rationale": "The item offered in this market exchange.",
+          "canonical": true
+        },
+        {
+          "id": "quantity-one",
+          "role": "quantity",
+          "meaning": 1,
+          "form": "un",
+          "gloss": "one",
+          "author": "starter-author",
+          "rationale": "Exactly one item.",
+          "canonical": true
+        },
+        {
+          "id": "quantity-two",
+          "role": "quantity",
+          "meaning": 2,
+          "form": "du",
+          "gloss": "two",
+          "author": "starter-author",
+          "rationale": "Exactly two items.",
+          "canonical": true
+        },
+        {
+          "id": "quantity-three",
+          "role": "quantity",
+          "meaning": 3,
+          "form": "tri",
+          "gloss": "three",
+          "author": "starter-author",
+          "rationale": "Exactly three items.",
+          "canonical": true
+        }
+      ],
+      "examples": [
+        {
+          "id": "inventory-start",
+          "text": "mi tri pon si",
+          "meaning": {
+            "actor": "i",
+            "verb": "have",
+            "object": "pear",
+            "quantity": 3
+          },
+          "note": "Describe your starting inventory."
+        },
+        {
+          "id": "request-lantern",
+          "text": "mi un lum na",
+          "meaning": {
+            "actor": "i",
+            "verb": "request",
+            "object": "lantern",
+            "quantity": 1
+          },
+          "note": "Ask the trader for one lantern."
+        },
+        {
+          "id": "merchant-price",
+          "text": "mi du pon na",
+          "meaning": {
+            "actor": "i",
+            "verb": "request",
+            "object": "pear",
+            "quantity": 2
+          },
+          "note": "Spoken by the trader: I want two pears."
+        },
+        {
+          "id": "give-pears",
+          "text": "mi du pon di",
+          "meaning": {
+            "actor": "i",
+            "verb": "give",
+            "object": "pear",
+            "quantity": 2
+          },
+          "note": "Offer the two pears after hearing the price."
+        },
+        {
+          "id": "merchant-receipt",
+          "text": "tu un lum si",
+          "meaning": {
+            "actor": "you",
+            "verb": "have",
+            "object": "lantern",
+            "quantity": 1
+          },
+          "note": "Spoken by the trader after the exchange: you have one lantern."
+        },
+        {
+          "id": "confirm-lantern",
+          "text": "mi un lum si",
+          "meaning": {
+            "actor": "i",
+            "verb": "have",
+            "object": "lantern",
+            "quantity": 1
+          },
+          "note": "Confirm that the lantern is now yours."
+        }
+      ],
+      "author": "starter-author",
+      "rationale": "An original, deliberately small starter language for this trading mission. These forms and rules are authored examples, not claims about a natural language."
+    },
+    {
+      "schemaVersion": 1,
+      "languageId": "luma",
+      "versionId": "luma-v2",
+      "number": 2,
+      "parentVersionId": "luma-v1",
+      "name": "Luma",
+      "grammar": {
+        "order": "SVO",
+        "quantityPosition": "before-object",
+        "author": "HAMON worked-example contributor",
+        "rationale": "Compare a completed SOV conversation with new practice under SVO."
+      },
+      "lexicon": [
+        {
+          "id": "actor-i",
+          "role": "actor",
+          "meaning": "i",
+          "form": "mi",
+          "gloss": "I",
+          "author": "starter-author",
+          "rationale": "The speaker refers to themself.",
+          "canonical": true
+        },
+        {
+          "id": "actor-you",
+          "role": "actor",
+          "meaning": "you",
+          "form": "tu",
+          "gloss": "you",
+          "author": "starter-author",
+          "rationale": "The speaker addresses the other participant.",
+          "canonical": true
+        },
+        {
+          "id": "verb-request",
+          "role": "verb",
+          "meaning": "request",
+          "form": "na",
+          "gloss": "want / request",
+          "author": "starter-author",
+          "rationale": "Asks for an item; speaking this verb alone does not transfer it.",
+          "canonical": true
+        },
+        {
+          "id": "verb-give",
+          "role": "verb",
+          "meaning": "give",
+          "form": "di",
+          "gloss": "give",
+          "author": "starter-author",
+          "rationale": "Names a transfer from the speaker, subject to the mission state.",
+          "canonical": true
+        },
+        {
+          "id": "verb-have",
+          "role": "verb",
+          "meaning": "have",
+          "form": "si",
+          "gloss": "have",
+          "author": "starter-author",
+          "rationale": "States possession; it does not create inventory.",
+          "canonical": true
+        },
+        {
+          "id": "object-lantern",
+          "role": "object",
+          "meaning": "lantern",
+          "form": "lum",
+          "gloss": "lantern",
+          "author": "starter-author",
+          "rationale": "The useful item needed for the evening crossing.",
+          "canonical": true
+        },
+        {
+          "id": "object-pear",
+          "role": "object",
+          "meaning": "pear",
+          "form": "pon",
+          "gloss": "pear",
+          "author": "starter-author",
+          "rationale": "The item offered in this market exchange.",
+          "canonical": true
+        },
+        {
+          "id": "quantity-one",
+          "role": "quantity",
+          "meaning": 1,
+          "form": "un",
+          "gloss": "one",
+          "author": "starter-author",
+          "rationale": "Exactly one item.",
+          "canonical": true
+        },
+        {
+          "id": "quantity-two",
+          "role": "quantity",
+          "meaning": 2,
+          "form": "du",
+          "gloss": "two",
+          "author": "starter-author",
+          "rationale": "Exactly two items.",
+          "canonical": true
+        },
+        {
+          "id": "quantity-three",
+          "role": "quantity",
+          "meaning": 3,
+          "form": "tri",
+          "gloss": "three",
+          "author": "starter-author",
+          "rationale": "Exactly three items.",
+          "canonical": true
+        }
+      ],
+      "examples": [
+        {
+          "id": "inventory-start",
+          "text": "mi si tri pon",
+          "meaning": {
+            "actor": "i",
+            "verb": "have",
+            "object": "pear",
+            "quantity": 3
+          },
+          "note": "Describe your starting inventory."
+        },
+        {
+          "id": "request-lantern",
+          "text": "mi na un lum",
+          "meaning": {
+            "actor": "i",
+            "verb": "request",
+            "object": "lantern",
+            "quantity": 1
+          },
+          "note": "Ask the trader for one lantern."
+        },
+        {
+          "id": "merchant-price",
+          "text": "mi na du pon",
+          "meaning": {
+            "actor": "i",
+            "verb": "request",
+            "object": "pear",
+            "quantity": 2
+          },
+          "note": "Spoken by the trader: I want two pears."
+        },
+        {
+          "id": "give-pears",
+          "text": "mi di du pon",
+          "meaning": {
+            "actor": "i",
+            "verb": "give",
+            "object": "pear",
+            "quantity": 2
+          },
+          "note": "Offer the two pears after hearing the price."
+        },
+        {
+          "id": "merchant-receipt",
+          "text": "tu si un lum",
+          "meaning": {
+            "actor": "you",
+            "verb": "have",
+            "object": "lantern",
+            "quantity": 1
+          },
+          "note": "Spoken by the trader after the exchange: you have one lantern."
+        },
+        {
+          "id": "confirm-lantern",
+          "text": "mi si un lum",
+          "meaning": {
+            "actor": "i",
+            "verb": "have",
+            "object": "lantern",
+            "quantity": 1
+          },
+          "note": "Confirm that the lantern is now yours."
+        }
+      ],
+      "author": "HAMON worked-example contributor",
+      "rationale": "Compare a completed SOV conversation with new practice under SVO.",
+      "acceptance": {
+        "proposalId": "worked-order-change-44aabdd5",
+        "author": "HAMON worked-example contributor"
+      }
+    }
+  ],
+  "currentVersionId": "luma-v2",
+  "viewVersionId": "luma-v2",
+  "sessions": [
+    {
+      "id": "practice-1",
+      "versionId": "luma-v1",
+      "inputs": [
+        "mi un lum na",
+        "mi du pon di",
+        "mi un lum si"
+      ],
+      "hintsUsed": 0
+    },
+    {
+      "id": "practice-2",
+      "versionId": "luma-v2",
+      "inputs": [],
+      "hintsUsed": 0
+    }
+  ],
+  "activeSessionId": "practice-2"
+}
