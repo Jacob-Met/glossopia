@@ -245,8 +245,10 @@ function renderStudio() {
   $('acceptedGrammar').textContent = language.grammar.rationale;
   $('expressiveScope').textContent = 'Four-token statements: speaker, action, quantity and object in the accepted order. Actions are request, give and have. Naming a new object does not add it to the trader’s stock.';
   const selected = $('renameConcept').value;
-  $('renameConcept').replaceChildren(...language.lexicon.map(entry => { const option = node('option', entry.form + ' — ' + entry.gloss); option.value = entry.id; return option; }));
-  if (language.lexicon.some(entry => entry.id === selected)) $('renameConcept').value = selected;
+  // Proposal drafts belong to the latest accepted version, even while inspecting history.
+  const proposalLanguage = current();
+  $('renameConcept').replaceChildren(...proposalLanguage.lexicon.map(entry => { const option = node('option', entry.form + ' — ' + entry.gloss); option.value = entry.id; return option; }));
+  if (proposalLanguage.lexicon.some(entry => entry.id === selected)) $('renameConcept').value = selected;
   for (const control of $('proposalForm').elements) control.disabled = historical;
   updateProposalFields();
 }
