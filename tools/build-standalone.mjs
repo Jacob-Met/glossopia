@@ -3,11 +3,11 @@ import {createHash} from 'node:crypto';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 
-// GLOSSOPIA 0.6.8 maintained experimental standalone builder.
+// GLOSSOPIA 0.6.9 maintained experimental standalone builder.
 // This tool supports only these reviewed source bytes. Updating a pin
 // requires reviewing syntax, bindings, dependencies and browser policy again.
 const SOURCE_PINS = {
-  "src/language-core.mjs": "60b988221a2170e3209ee9ccefdd3fe3437d72f91a9126f16c5f7a71dd39776a",
+  "src/language-core.mjs": "04174a705653be325a706dbc3594d9c1485ada9cc4b27c3d23c0a117b08bfd19",
   "src/starter-language.mjs": "08c0493f315092a813911d6028d1d0af4b2adb60453eb6b6b93ea86a091366bc",
   "src/mission-core.mjs": "50f8f2655464bfa08bfcf2c06043cfaf0b77c5b1045f7f33716345028b253a4b",
   "src/project.mjs": "6cd2a83d961e3770de6323587c08509482cc21eddf1cf42231cf62ee16f08b1a",
@@ -17,10 +17,10 @@ const SOURCE_PINS = {
   "src/project-archive.mjs": "97d193e244b514ba32fac8c51d4a7442e391481dc54e8acb8c5d5baa7921ccd8",
   "src/browser-recovery.mjs": "7f4adb3b77acca76fbb9c666fc9cf5418d579cb8095495a13bb2c00f876f0bc3",
   "src/version-history.mjs": "30d1f90e1937da652b4e3b9c6a79bf099ff2e24ac74945d50fb508b9741e4482",
-  "app.mjs": "2c91d3c7f240df646b5ef57ab45e01d904cfcd9ade644cdd64a88c088317da7f",
-  "index.html": "903429e5d8e7594a610bd31ee7d28ac058b691da685ac52a587a1d95c652af22",
+  "app.mjs": "cc214c36c559f9d120e938278e5fda7fae1f3ba75acb5c91af24802df0462d20",
+  "index.html": "c6a2ccfeb2135c2d46ba9a566315a7263cc4e1ca8ff49b30f6da8325dffa7f73",
   "style.css": "b0fe2710ea7ff43445c1d24f10308b35b6d614c6614a9d693c282d9759b66557",
-  "package.json": "1c688fa8084d68f53997cae82e43d3c517994658c585fbb2e7a5a42a454ac1a1"
+  "package.json": "7bd412cb51493bc9395f4e17db102a417fb5be21e66ec1bb65c486783f27b63d"
 };
 
 const MODULES = Object.keys(SOURCE_PINS).filter(name => name.endsWith('.mjs'));
@@ -81,7 +81,7 @@ for (const [name, expected] of Object.entries(SOURCE_PINS)) {
 }
 const sourcePackage = JSON.parse(sources.get('package.json'));
 assert.equal(sourcePackage.name, 'glossopia');
-assert.equal(sourcePackage.version, '0.6.8');
+assert.equal(sourcePackage.version, '0.6.9');
 const completed = new Map();
 const javascript = 'const modules = Object.create(null);\n' + MODULES.map(name => transform(name, sources.get(name), completed)).join('\n');
 const css = sources.get('style.css');
@@ -102,4 +102,4 @@ html = once(html, '<head>', '<head><meta http-equiv="Content-Security-Policy" co
 await writeFile(outputPath, html, {flag: 'wx'});
 console.log(JSON.stringify({prototype: false, experimental: true, sourcePackage: {name: sourcePackage.name, version: sourcePackage.version, requiredNode: sourcePackage.engines.node, sha256: SOURCE_PINS['package.json']}, sourceRoot, outputPath, bytes: Buffer.byteLength(html), sha256: digest(html), sourceFiles: SOURCE_PINS,
   runtimeQualification: 'separate exact-artifact receiving required',
-  scope: 'Maintained experimental 0.6.8 build from verified source and package bytes. This build report does not establish browser, file-origin storage, CSP or usability qualification; retain the separate exact-artifact receiving reports.'}, null, 2));
+  scope: 'Maintained experimental 0.6.9 build from verified source and package bytes. This build report does not establish browser, file-origin storage, CSP or usability qualification; retain the separate exact-artifact receiving reports.'}, null, 2));

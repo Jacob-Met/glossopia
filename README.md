@@ -78,6 +78,14 @@ Your selected meaning stays in place when you accept a revision or inspect anoth
 
 Exploration changes no accepted versions, proposals or conversations and sends nothing to the trader. The selections are temporary and are not saved in project copies. Reloading, successfully opening a project, creating a language or opening a saved project resets them. Invalid or superseded Open attempts preserve them; exploring while an Open is pending does not prevent that file from opening.
 
+### Choose a preferred existing word
+
+When a meaning has several accepted words, Language studio can choose which existing word generated sentences should use. In the proposal form, select **Choose a preferred word**, choose the meaning, then choose an existing word. The form shows the latest accepted version’s current preference, or explains that none is marked. If no meanings have multiple accepted words, this proposal is unavailable.
+
+Enter your author attribution and reason, then select **Review the effects**. Review the explicit preference changes and the existing example, market and saved-practice effects before accepting. Accepting marks the chosen word preferred and clears that flag from its synonyms. Other forms stay accepted; this does not add, rename or delete words. Existing word authorship is retained, while the accepted version records the preference decision’s author and reason. Choosing an already preferred word alone makes no change and is rejected as an empty revision.
+
+For example, if *basket* has accepted forms `selu` and `sela` with neither preferred, the workbench reports **A preferred word is needed**. After you explicitly review and accept `sela` as preferred, it uses that form when generating the selected basket meaning. A preference cannot resolve a spelling with multiple meanings: the workbench still reports ambiguity when the generated sentence does not uniquely express your choice. Earlier versions and conversations retain their original words and preferences. Inspecting history does not retarget a pending preference choice; return to the latest version to review it.
+
 ### Review accepted changes to words and sentence order
 
 Each accepted revision after version 1 has a **Words and sentence order** comparison with the previous accepted version. The latest comparison starts open. It shows old and new word forms, meanings, glossary labels and preferred-form choices, plus added or removed words and changes to sentence order. The comparison comes from the saved version snapshots, so it remains available after the proposal preview closes, after a reload, and after opening a valid project file.

@@ -147,9 +147,10 @@ export function analyzeImpact(baseInput,candidateInput){
   const base=validateVersion(baseInput),candidate=validateVersion(candidateInput);
   assert(base.languageId===candidate.languageId,'Impact comparison requires the same language','INVALID_REVISION');return impactValidated(base,candidate);
 }
+function preferenceGroup(entry){return JSON.stringify([entry.role,entry.meaning]);}
 function normalizePatch(base,input){
   assert(obj(input),'A revision must be an object','INVALID_REVISION');
-  assert(Object.keys(input).every(key=>['id','author','rationale','order','wordChanges','addEntries'].includes(key)),'The revision contains unsupported fields','INVALID_REVISION');
+  assert(Object.keys(input).every(key=>['id','author','rationale','order','wordChanges','addEntries','preferredEntries'].includes(key)),'The revision contains unsupported fields','INVALID_REVISION');
   const id=identifier(input.id,'Proposal id'),author=field(input.author,'Proposal author',80),rationale=field(input.rationale,'Proposal rationale');
   const order=input.order??base.grammar.order;assert(['SOV','SVO'].includes(order),'A proposed order must be SOV or SVO','INVALID_REVISION');
   const requestedChanges=input.wordChanges??[];
@@ -162,10 +163,24 @@ function normalizePatch(base,input){
     assert(base.lexicon.some(entry=>entry.id===entryId),'No accepted entry exists with id '+entryId,'INVALID_REVISION');
     return {entryId,form:form(change.form)};
   });
+  const requestedPreferences=input.preferredEntries===undefined?[]:input.preferredEntries;
+  assert(Array.isArray(requestedPreferences)&&requestedPreferences.length<=16,'At most 16 preferred entry selections are supported','INVALID_REVISION');
+  const preferredIds=new Set(),preferredGroups=new Set();
+  const preferredEntries=Array.from(requestedPreferences,entryId=>{
+    assert(typeof entryId==='string'&&ID.test(entryId),'A preferred entry id must be a supported identifier','INVALID_REVISION');
+    assert(!preferredIds.has(entryId),'Entry '+entryId+' is selected as preferred twice','INVALID_REVISION');preferredIds.add(entryId);
+    const entry=base.lexicon.find(item=>item.id===entryId);
+    assert(entry,'No accepted entry exists with id '+entryId,'INVALID_REVISION');
+    const group=preferenceGroup(entry);
+    assert(!preferredGroups.has(group),'Choose only one preferred entry for each role and meaning','INVALID_REVISION');preferredGroups.add(group);
+    return entryId;
+  });
   const requestedAdditions=input.addEntries??[];
   assert(Array.isArray(requestedAdditions)&&requestedAdditions.length<=16,'At most 16 new entries are supported','INVALID_REVISION');
   const addEntries=requestedAdditions.length?validateVersion({...base,lexicon:requestedAdditions}).lexicon:[];
-  return {id,author,rationale,order,wordChanges,addEntries};
+  assert(!addEntries.some(entry=>entry.canonical&&preferredGroups.has(preferenceGroup(entry))),
+    'A new preferred entry conflicts with the selected accepted entry for the same meaning','INVALID_REVISION');
+  return {id,author,rationale,order,wordChanges,addEntries,preferredEntries};
 }
 export function proposeRevision(baseInput,requestedPatch){
   const base=validateVersion(baseInput),patch=normalizePatch(base,requestedPatch),changes=[];
@@ -177,6 +192,14 @@ export function proposeRevision(baseInput,requestedPatch){
     changes.push({type:'word_form',entryId:entry.id,role:entry.role,meaning:entry.meaning,from:entry.form,to:nextForm});
     return {...entry,form:nextForm,author:patch.author,rationale:patch.rationale};
   });
+  const preferredByGroup=new Map(patch.preferredEntries.map(entryId=>[preferenceGroup(base.lexicon.find(entry=>entry.id===entryId)),entryId]));
+  for(const entry of lexicon){
+    const selectedId=preferredByGroup.get(preferenceGroup(entry));if(selectedId===undefined)continue;
+    const canonical=entry.id===selectedId;if(entry.canonical===canonical)continue;
+    changes.push({type:'word_preference',entryId:entry.id,role:entry.role,meaning:entry.meaning,form:entry.form,from:entry.canonical,to:canonical});
+    // The version attributes this decision; choosing a form does not reattribute its words.
+    entry.canonical=canonical;
+  }
   for(const entry of patch.addEntries){
     changes.push({type:'word_added',entryId:entry.id,role:entry.role,meaning:entry.meaning,form:entry.form});lexicon.push({...entry});
   }
