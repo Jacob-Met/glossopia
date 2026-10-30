@@ -17,9 +17,9 @@ const SOURCE_PINS = {
   "src/project-archive.mjs": "97d193e244b514ba32fac8c51d4a7442e391481dc54e8acb8c5d5baa7921ccd8",
   "src/browser-recovery.mjs": "7f4adb3b77acca76fbb9c666fc9cf5418d579cb8095495a13bb2c00f876f0bc3",
   "src/version-history.mjs": "30d1f90e1937da652b4e3b9c6a79bf099ff2e24ac74945d50fb508b9741e4482",
-  "app.mjs": "cc214c36c559f9d120e938278e5fda7fae1f3ba75acb5c91af24802df0462d20",
-  "index.html": "c6a2ccfeb2135c2d46ba9a566315a7263cc4e1ca8ff49b30f6da8325dffa7f73",
-  "style.css": "b0fe2710ea7ff43445c1d24f10308b35b6d614c6614a9d693c282d9759b66557",
+  "app.mjs": "f1f8ff97dce11ebe6d744a90e928f10d1ae816b30a3f645a3c6e507bf5baca2d",
+  "index.html": "82aae63d428d83585cc63740d90cc2e4a31f8336bfb107a358bfd0dc9505ad84",
+  "style.css": "d071b6d4642a8c0f69eeadcf3687327f04ad2857e490ef2e7a137c84b1e5fe25",
   "package.json": "7bd412cb51493bc9395f4e17db102a417fb5be21e66ec1bb65c486783f27b63d"
 };
 

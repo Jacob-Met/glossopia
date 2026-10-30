@@ -122,6 +122,11 @@
     <p class="note">Use 1–20 letters, a–z, for each word. Uppercase letters become lowercase and surrounding spaces are trimmed. The preview checks the resulting sentences for clear meanings.</p>
     <div id="creationWords" class="creation-words"></div>
     <label class="creation-rationale">A note about your language (optional)<input id="creationRationale" maxlength="240" autocomplete="off" placeholder="What would you like these words to feel like?"></label>
+    <section class="word-suggestions" aria-labelledby="suggestTitle">
+      <div class="suggest-head"><h3 id="suggestTitle">Need a starting point?</h3><button id="suggestWords" type="button">Suggest words with Nemotron</button></div>
+      <p id="suggestStatus" class="note" role="status">Nemotron on Nebius Token Factory proposes three complete sets. The same checks as the review below run on each set before you can use it.</p>
+      <div id="suggestionList" class="suggestion-list"></div>
+    </section>
     <div class="dialog-actions"><button id="reviewCreation" type="submit" class="dark">Review my language</button></div>
   </form>
   <p id="creationFeedback" class="feedback" role="status"></p>

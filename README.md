@@ -26,6 +26,23 @@ npm test
 
 The maintained test command checks mission inventory and failure behavior, immutable histories, proposal validation, project roundtrip, bounded version identifiers, saved-practice impact semantics and word-order suggestion safety. Browser receiving is recorded separately; passing these core tests alone does not establish a working UI.
 
+## Word suggestions with NVIDIA Nemotron
+
+GLOSSOPIA can generate word suggestions for a new language using NVIDIA's Nemotron model via Nebius Token Factory. In the Language Creation form, click **Suggest words with Nemotron** to receive three candidate word sets. Each set is verified by GLOSSOPIA's deterministic creation check before the browser sees it.
+
+To enable this feature:
+
+1. Get a Nebius Token Factory API key from https://nebius.ai
+2. Save the key to `~/.config/nebius/key` (one line, no newlines)
+3. Start the server with the key available:
+
+```sh
+export NEBIUS_API_KEY=$(tr -d ' \n' < ~/.config/nebius/key)
+npm start
+```
+
+The word-suggestion endpoint uses `nvidia/nemotron-3-super-120b-a12b`, a reasoning model optimized for language design tasks, with a maximum of 6000 completion tokens per request. The API key is never sent to the browser; all suggestions are verified server-side against the same rules as manual language creation. If the API key is not set, the form remains fully usable with hand-typed words.
+
 ## Build a standalone file from the package
 
 For maintainers with Node.js 20 or newer, run this from the extracted package directory:

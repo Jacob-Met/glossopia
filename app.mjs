@@ -569,6 +569,7 @@ function captureActiveProjectValue() {
 function openLanguageCreation() {
   if ($('projectArchiveDialog').open) $('projectArchiveDialog').close();
   $('languageCreationForm').reset(); $('creationFeedback').textContent = '';
+  $('suggestionList').replaceChildren(); $('suggestStatus').textContent = '';
   creationContext = {languageId: 'language-' + crypto.randomUUID()};
   invalidateCreation();
   $('languageCreationDialog').showModal(); $('creationName').focus();
@@ -734,6 +735,47 @@ for (const entry of starterLanguage.lexicon) {
   const input = node('input'); input.id = label.htmlFor; input.name = entry.id; input.maxLength = 24; input.autocomplete = 'off'; input.spellcheck = false; input.required = true;
   label.append(node('span', entry.gloss), node('small', entry.role), input); $('creationWords').append(label);
 }
+function renderWordSuggestions(result) {
+  const list = $('suggestionList');
+  list.replaceChildren(...result.candidates.map((candidate, index) => {
+    const card = node('article', undefined, 'suggestion' + (candidate.ok ? '' : ' suggestion-rejected'));
+    card.append(node('h4', candidate.note || 'Set ' + (index + 1), undefined));
+    if (candidate.ok) {
+      card.append(node('p', starterLanguage.lexicon.map(entry => entry.gloss + ' = ' + candidate.forms[entry.id]).join(' · '), 'suggestion-forms'));
+      card.append(node('code', candidate.examples.slice(0, 3).join('   ')));
+      const use = node('button', 'Use this set'); use.type = 'button';
+      use.addEventListener('click', () => useWordSuggestion(candidate.forms));
+      card.append(use);
+    } else {
+      card.append(node('p', 'Not usable: ' + candidate.reason, 'suggestion-reason'));
+    }
+    return card;
+  }));
+  $('suggestStatus').textContent = 'Each set went through the same creation check. Choose a usable set to fill the fields, then review it before creating.';
+}
+function useWordSuggestion(forms) {
+  for (const entry of starterLanguage.lexicon) $('creationForm-' + entry.id).value = forms[entry.id];
+  invalidateCreation('Words filled from a Nemotron suggestion. Review them before creating.');
+}
+async function requestWordSuggestions() {
+  const button = $('suggestWords');
+  const draft = {name: $('creationName').value, author: $('creationAuthor').value, order: $('creationOrder').value, rationale: $('creationRationale').value};
+  button.disabled = true; $('suggestStatus').textContent = 'Asking Nemotron on Nebius Token Factory. This usually takes about ten seconds.';
+  try {
+    const response = await fetch('/api/word-suggestions', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(draft)});
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.message || 'Word suggestions are unavailable right now.');
+    renderWordSuggestions(data);
+  } catch (error) {
+    $('suggestionList').replaceChildren();
+    $('suggestStatus').textContent = error instanceof TypeError
+      ? 'Word suggestions need the local GLOSSOPIA server (npm start) with NEBIUS_API_KEY set. You can still type the words by hand.'
+      : error.message + ' You can still type the words by hand.';
+  } finally {
+    button.disabled = false;
+  }
+}
+$('suggestWords').addEventListener('click', requestWordSuggestions);
 $('newLanguage').addEventListener('click', openLanguageCreation);
 $('savedProjects').addEventListener('click', openProjectArchive);
 $('cancelCreation').addEventListener('click', () => $('languageCreationDialog').close());

@@ -101,3 +101,14 @@
 .workbench-issues{padding-left:20px;font-size:12px;line-height:1.8;margin-bottom:0}
 @media(max-width:700px){.workbench-selectors,.workbench-derivation{grid-template-columns:repeat(2,minmax(0,1fr))}.workbench-result{padding:14px}}
 @media(max-width:380px){.workbench-selectors{grid-template-columns:1fr}.workbench-sentence{font-size:24px}}
+.word-suggestions{margin:0 0 20px;padding:18px 0 0;border-top:1px solid var(--line)}
+.suggest-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.suggest-head h3{margin:0;font-size:15px}
+.word-suggestions>.note{margin:10px 0 0}
+.suggestion-list{display:grid;gap:12px;margin-top:14px}
+.suggestion{padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:var(--card);overflow-wrap:anywhere}
+.suggestion h4{margin:0 0 8px;font-size:13px}
+.suggestion-forms,.suggestion-reason{margin:0 0 8px;font-size:12px;line-height:1.6}
+.suggestion-rejected{opacity:.75}
+.suggestion code{display:block;margin-bottom:10px;font-size:12px;line-height:1.6}
+.suggestion button{padding:8px 12px;font-size:12px}
