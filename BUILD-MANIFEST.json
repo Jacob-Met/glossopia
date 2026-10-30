@@ -1,17 +1,17 @@
 {
   "schema": "hamon.glossopia-build.v1",
-  "version": "0.6.7",
+  "version": "0.6.8",
   "worker": "estate-astra-619f17c2-7816-4e66-807f-734c83eacdad",
   "session": "estate-astra-619f17c2-7816-4e66-807f-734c83eacdad",
-  "task_id": "glossopia-open-proposal-isolation-619f17c2",
+  "task_id": "glossopia-meaning-first-workbench-619f17c2",
   "prompt_version": "2026-10-29.32",
-  "created_at": "2026-10-30T00:09:23.413494+00:00",
-  "source_role": "Successful Open proposal isolation source; separate receiving reports identify the exact qualified package and standalone bytes.",
-  "base_git_commit": "2ccbf3db9c8732c1859e0b038c473dc273f52bc9",
+  "created_at": "2026-10-30T00:21:04.504722+00:00",
+  "source_role": "Meaning-first Studio workbench source; separate receiving reports identify the exact qualified package and standalone bytes.",
+  "base_git_commit": "33b352f09dec6e99b38b6da7ceca7b8495704f60",
   "base_source": {
-    "git_tree": "2bae036352f1d2fd549b030f5720f9cb207e3756",
-    "manifest_sha256": "034b734ce22f340f498dd2f4d54346077426284cab51cdd7e1d9a51fb4751fdb",
-    "verified_repository_files": 42,
+    "git_tree": "5d7f7b8688c2edf7feeb66dcbb1614794ba83cb0",
+    "manifest_sha256": "318552e60f332e92bd25735005e46dfaa67b7c956c3eed5311f54b7638ef2e03",
+    "verified_repository_files": 43,
     "provenance": "Complete original source, prior manifest and contributor attribution remain preserved at the base Git commit; no prior receiving evidence is rewritten."
   },
   "contribution": {
@@ -21,29 +21,31 @@
       "/root/custody_review"
     ],
     "integration_and_native_execution": "estate-astra-619f17c2-7816-4e66-807f-734c83eacdad",
-    "reconciliation_source_sha256": "8b403663891fc404fa15b032bb2b81cf83ea38c61ff6cc67c95dabf769413bcf",
-    "scope": "Reset proposal fields only after successful Open replacement; preserve failed and superseded Open work, historical selector behavior, inspection-input handler, parser, mission and project formats."
+    "reconciliation_source_sha256": "c183f29cd159a1858af8e0e732da5885271ab53a5aa55487379a0bee07400899",
+    "scope": "Read-only meaning exploration using the displayed accepted version; explicit ambiguity, preferred-form and missing-word feedback; transient selections reset on full project replacement. No mission, parser, project format or durable-state changes.",
+    "independent_receiver_author": "/root/consumer_recovery",
+    "receiver_packaging": "Qualified third receiver retained; package copy changes only node:url import and portable source-root default."
   },
   "files": [
     {
       "path": "README.md",
-      "bytes": 34638,
-      "sha256": "b0d039c11c3a5964ee2333decb2cd25426a7aa799e8be602056614a19ada9e6d"
+      "bytes": 36698,
+      "sha256": "6c5735829d5d993f5fb49012e0daa9e76827709456e42b55b249e1dd4d73f3be"
     },
     {
       "path": "app.mjs",
-      "bytes": 64328,
-      "sha256": "b33b58b303fac55611e53b2bb70e341e19c172b4ceb002857a2d1d7ecd3887a8"
+      "bytes": 69186,
+      "sha256": "2c91d3c7f240df646b5ef57ab45e01d904cfcd9ade644cdd64a88c088317da7f"
     },
     {
       "path": "index.html",
-      "bytes": 22297,
-      "sha256": "a7c03d613e983c64379d84cd8ca677348d6d20a379488a5e42d173be13c3d735"
+      "bytes": 23768,
+      "sha256": "903429e5d8e7594a610bd31ee7d28ac058b691da685ac52a587a1d95c652af22"
     },
     {
       "path": "package.json",
-      "bytes": 1152,
-      "sha256": "6992ab79e59f8580394192ed06e86f9d5f98d410e22e5cfe0e9325be16b41f3f"
+      "bytes": 1217,
+      "sha256": "1c688fa8084d68f53997cae82e43d3c517994658c585fbb2e7a5a42a454ac1a1"
     },
     {
       "path": "server.mjs",
@@ -102,8 +104,8 @@
     },
     {
       "path": "style.css",
-      "bytes": 28459,
-      "sha256": "70bfe9623482d50393a6efe5b6c5ab2d70f66e7c5c26c34d3dbf9326720ef59a"
+      "bytes": 30296,
+      "sha256": "b0fe2710ea7ff43445c1d24f10308b35b6d614c6614a9d693c282d9759b66557"
     },
     {
       "path": "test/archive-management.test.mjs",
@@ -154,6 +156,11 @@
       "path": "test/browser/version-history.mjs",
       "bytes": 7573,
       "sha256": "fed86e59a197962360496e43ea58f2d5dd1489c7dfe09037850cddb0a28c98a2"
+    },
+    {
+      "path": "test/browser/workbench.mjs",
+      "bytes": 11084,
+      "sha256": "723c37d969f7b048cf2e69b2de113ae4579cdcfc848f1b8765365887ab026b20"
     },
     {
       "path": "test/browser-recovery.test.mjs",
@@ -223,7 +230,7 @@
     {
       "path": "tools/build-standalone.mjs",
       "bytes": 7946,
-      "sha256": "9d00030e66f39c01b95195da4b693667d085cf8dd8c3d5e3e9cecd94de3cafd2"
+      "sha256": "7fe3bdcf852cb86304cedc70529a932f6cc66cb76549f92e0a77430babb76a0b"
     }
   ],
   "file_inventory_scope": "All deliverable package files except this manifest itself and repository-only .gitattributes/.gitignore."
