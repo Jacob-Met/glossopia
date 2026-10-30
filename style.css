@@ -80,3 +80,24 @@
 
 /* Keep review feedback clear of the dialog edge when revealing the preview. */
 #creationFeedback { scroll-margin-block-start: 1rem; }
+
+/* Read-only composition from a selected meaning. */
+.sentence-workbench{margin-top:24px;overflow-wrap:anywhere}
+.sentence-workbench .card-heading{gap:16px;flex-wrap:wrap}
+.workbench-selectors{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:22px 0}
+.workbench-selectors label{display:flex;flex-direction:column;gap:8px;min-width:0;font-size:12px;font-weight:600}
+.workbench-selectors select{width:100%;min-width:0;padding:12px 10px;border:1px solid var(--line);border-radius:7px;background:var(--card);font-weight:400}
+.workbench-result{padding:18px;border:1px solid var(--line);border-radius:9px;background:#f0f4ec}
+#workbenchStatus{font-weight:600;line-height:1.6;margin:0 0 8px}
+#workbenchStatus:not([data-status="ok"]){color:#79532e}
+.workbench-sentence{margin:18px 0;font:28px/1.5 Georgia,serif}
+.workbench-sentence code{font:inherit;white-space:normal;overflow-wrap:anywhere}
+.workbench-sentence>small{display:block;font:12px/1.6 Arial,sans-serif;color:#79532e}
+.workbench-derivation{list-style:none;padding:0;margin:16px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.workbench-derivation:empty{display:none}
+.workbench-derivation li{min-width:0;padding:12px;border:1px solid var(--line);border-radius:6px;background:var(--card)}
+.workbench-derivation strong{display:block;font:22px/1.4 Georgia,serif}
+.workbench-derivation span,.workbench-derivation small{display:block;font-size:11px;line-height:1.6;margin-top:4px;color:var(--muted)}
+.workbench-issues{padding-left:20px;font-size:12px;line-height:1.8;margin-bottom:0}
+@media(max-width:700px){.workbench-selectors,.workbench-derivation{grid-template-columns:repeat(2,minmax(0,1fr))}.workbench-result{padding:14px}}
+@media(max-width:380px){.workbench-selectors{grid-template-columns:1fr}.workbench-sentence{font-size:24px}}

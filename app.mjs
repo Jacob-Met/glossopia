@@ -70,6 +70,71 @@ const version = id => project.history.find(item => item.versionId === id);
 const current = () => version(project.currentVersionId);
 const viewed = () => version(project.viewVersionId);
 const session = () => project.sessions.find(item => item.id === project.activeSessionId);
+// Ephemeral meaning exploration, independent of proposals and market conversations.
+let workbenchLanguageId = null, workbenchMeaning = {};
+function resetSentenceWorkbench() { workbenchLanguageId = null; workbenchMeaning = {}; }
+const workbenchRoles = ['actor', 'verb', 'quantity', 'object'];
+const workbenchControls = {actor: 'workbenchActor', verb: 'workbenchVerb', quantity: 'workbenchQuantity', object: 'workbenchObject'};
+const workbenchRoleLabels = {actor: 'Who', verb: 'Action', quantity: 'Quantity', object: 'Thing'};
+function workbenchLabel(role, meaning) {
+  if (role === 'actor') return meaning === 'i' ? 'I (the speaker)' : 'You (the addressee)';
+  return String(meaning).replaceAll('_', ' ');
+}
+function renderSentenceWorkbench() {
+  const language = viewed();
+  if (workbenchLanguageId !== language.languageId) {
+    workbenchLanguageId = language.languageId; workbenchMeaning = {};
+  }
+  $('workbenchVersion').textContent = 'Version ' + language.number + ' · ' + language.grammar.order;
+  for (const role of workbenchRoles) {
+    const values = [...new Set(language.lexicon.filter(entry => entry.role === role).map(entry => entry.meaning))];
+    if (role === 'quantity') values.sort((a, b) => a - b);
+    if (!Object.hasOwn(workbenchMeaning, role)) workbenchMeaning[role] = values[0] ?? null;
+    const selected = workbenchMeaning[role], control = $(workbenchControls[role]);
+    const options = values.map(value => {
+      const option = node('option', workbenchLabel(role, value)); option.value = JSON.stringify(value); return option;
+    });
+    if (!values.includes(selected)) {
+      const label = selected === null ? 'No accepted ' + workbenchRoleLabels[role].toLowerCase() + ' choices'
+        : workbenchLabel(role, selected) + ' — unavailable in version ' + language.number;
+      const unavailable = node('option', label); unavailable.value = JSON.stringify(selected); unavailable.disabled = true;
+      options.unshift(unavailable);
+    }
+    control.replaceChildren(...options); control.value = JSON.stringify(selected); control.disabled = values.length === 0;
+  }
+  const result = compose(language, workbenchMeaning);
+  const labels = {ok: 'Verified sentence.', choice_required: 'A preferred word is needed.', unexpressible: 'This version cannot express the selected meaning.', ambiguous: 'The generated wording has more than one meaning.'};
+  $('workbenchStatus').textContent = labels[result.status];
+  $('workbenchStatus').dataset.status = result.status;
+  $('workbenchMeaning').textContent = 'Selected meaning: ' + workbenchRoles.map(role => workbenchRoleLabels[role] + ': ' + (workbenchMeaning[role] === null ? 'unavailable' : workbenchLabel(role, workbenchMeaning[role]))).join(' · ');
+  const sentence = $('workbenchSentence'); sentence.replaceChildren(); sentence.hidden = !result.text;
+  if (result.text) {
+    if (result.status !== 'ok') sentence.append(node('small', 'Unverified wording'));
+    sentence.append(node('code', result.text));
+  }
+  $('workbenchDerivation').replaceChildren(...result.derivation.map(token => {
+    const item = node('li'); item.append(node('strong', token.token), node('span', workbenchRoleLabels[token.role]), node('small', workbenchLabel(token.role, token.meaning))); return item;
+  }));
+  const issues = [];
+  for (const issue of result.issues) {
+    if (issue.code === 'NO_ACCEPTED_WORD') issues.push('No accepted word for ' + workbenchRoleLabels[issue.role].toLowerCase() + ': ' + workbenchLabel(issue.role, issue.meaning) + '.');
+    else if (issue.code === 'FORM_CHOICE_REQUIRED') {
+      const forms = issue.entryIds.map(id => language.lexicon.find(entry => entry.id === id).form);
+      issues.push('Several accepted forms for ' + workbenchRoleLabels[issue.role].toLowerCase() + ' ' + workbenchLabel(issue.role, workbenchMeaning[issue.role]) + ' (' + forms.join(', ') + ') have no preferred form. This does not mean the language cannot express it.');
+    } else if (issue.code === 'GENERATED_FORM_HAS_MULTIPLE_MEANINGS') {
+      issues.push('The selected word forms do not uniquely express your requested meaning. No alternative wording has been chosen.');
+      for (const [index, reading] of (result.readings ?? []).entries()) issues.push('Reading ' + (index + 1) + ': ' + semanticGloss(reading.meaning));
+    } else if (issue.code === 'UNSUPPORTED_MEANING_SHAPE') {
+      issues.push('Choose an accepted meaning for each part of the sentence.');
+    }
+  }
+  $('workbenchIssues').replaceChildren(...issues.map(text => node('li', text)));
+  $('workbenchIssues').hidden = issues.length === 0;
+}
+for (const role of workbenchRoles) $(workbenchControls[role]).addEventListener('change', () => {
+  workbenchMeaning[role] = JSON.parse($(workbenchControls[role]).value);
+  renderSentenceWorkbench();
+});
 function clearRecoveryReplacement() {
   if (recoveryReview) recoveryNotice = 'Replacement review was cleared. Your work and saved data remain separate.';
   recoveryReview = null; recovery.cancelReplacement();
@@ -458,7 +523,7 @@ function render() {
   $('languageName').textContent = current().name;
   $('languageVersion').textContent = 'Latest accepted version ' + current().number + ' · Studio version ' + viewed().number + ' · Practice version ' + version(session().versionId).number;
   $('saveState').textContent = persistence;
-  renderMarket(); renderStudio(); renderHistory(); renderImpact(); renderStorageRecovery();
+  renderMarket(); renderStudio(); renderSentenceWorkbench(); renderHistory(); renderImpact(); renderStorageRecovery();
 }
 
 function downloadProjectCopy(value) {
@@ -548,7 +613,7 @@ function activateRetainedProject(next, message) {
   if ($('languageCreationDialog').open) $('languageCreationDialog').close();
   if ($('projectArchiveDialog').open) $('projectArchiveDialog').close();
   invalidateCreation(); creationContext = null; archiveContext = null;
-  render(); showView('market'); $('sentenceInput').focus(); tell(message);
+  resetSentenceWorkbench(); render(); showView('market'); $('sentenceInput').focus(); tell(message);
 }
 function createReviewedLanguage() {
   if (!creationIsCurrent()) throw new Error('The open project or file selection changed. Review your language again before creating it.');
@@ -788,6 +853,7 @@ $('projectFile').addEventListener('change', async () => {
   project = next; noteWork(); pending = null; hintVisible = false; clearWordOrderHelp(); $('sentenceInput').value = ''; $('inspectResult').textContent = ''; $('proposalFeedback').textContent = '';
   $('proposalForm').reset(); $('proposalAuthor').defaultValue = current().author; $('proposalAuthor').value = current().author;
   invalidateCreation('A different project was opened. Review the new language again before creating it.');
+  resetSentenceWorkbench();
   guarded(() => { persist(); render(); tell('Project opened. Earlier conversations and accepted versions are available in Versions.'); });
 });
 $('reviewRecovery').addEventListener('click', () => {

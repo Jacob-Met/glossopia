@@ -63,6 +63,24 @@
       <section class="card vocabulary-card"><div class="card-heading"><div><span class="eyebrow">THE ACCEPTED LANGUAGE</span><h2>Words with a meaning.</h2></div><span id="wordCount" class="pill"></span></div><div class="table-scroll"><table class="lexicon"><thead><tr><th>Word</th><th>Meaning</th><th>Role</th></tr></thead><tbody id="lexiconBody"></tbody></table></div><div class="rule-note"><strong id="acceptedOrder"></strong><p id="acceptedGrammar"></p></div><details><summary>What this small grammar can express</summary><p id="expressiveScope"></p><p>These rules define an invented practice language. They do not claim to model all languages or establish linguistic authenticity.</p></details></section>
       <section class="card proposal-card"><span class="eyebrow">A CHANGE STARTS AS A PROPOSAL</span><h2>Try another way.</h2><form id="proposalForm"><label for="changeKind">What would you like to change?</label><select id="changeKind"><option value="order">Sentence order</option><option value="rename">The form of a word</option><option value="add">Add a word for something</option></select><div id="orderFields" class="proposal-fields"><label for="proposedOrder">Proposed sentence order</label><select id="proposedOrder"><option value="SVO">Speaker → action → quantity → thing</option><option value="SOV">Speaker → quantity → thing → action</option></select></div><div id="renameFields" class="proposal-fields" hidden><label for="renameConcept">Accepted word</label><select id="renameConcept"></select><label for="renameForm">New word form (1–20 letters, a–z)</label><input id="renameForm" maxlength="20" autocomplete="off" spellcheck="false"></div><div id="addFields" class="proposal-fields" hidden><label for="newConcept">Meaning of the new thing</label><input id="newConcept" maxlength="40" placeholder="For example: basket"><label for="newWord">Proposed word (1–20 letters, a–z)</label><input id="newWord" maxlength="20" placeholder="For example: selu" autocomplete="off" spellcheck="false"></div><div class="form-pair"><label>Author name (self-entered)<input id="proposalAuthor" maxlength="60" value="Studio author"></label><label>Reason<input id="proposalRationale" maxlength="240" placeholder="What will this make easier?"></label></div><button class="dark wide" type="submit">Review the effects <span aria-hidden="true">→</span></button></form><p class="note">Reviewing a proposal changes no accepted words, rules, or prior version.</p><div id="proposalFeedback" class="feedback" role="status"></div></section>
     </div>
+    <section id="sentenceWorkbench" class="card sentence-workbench" aria-labelledby="sentenceWorkbenchTitle">
+      <div class="card-heading"><div><span class="eyebrow">FROM MEANING TO WORDS</span><h2 id="sentenceWorkbenchTitle">Build a sentence.</h2></div><span id="workbenchVersion" class="pill"></span></div>
+      <p class="body-copy">Choose a meaning to see how the displayed language expresses it. Try your newly accepted words here.</p>
+      <div class="workbench-selectors">
+        <label for="workbenchActor">Who?<select id="workbenchActor"></select></label>
+        <label for="workbenchVerb">Action<select id="workbenchVerb"></select></label>
+        <label for="workbenchQuantity">How many?<select id="workbenchQuantity"></select></label>
+        <label for="workbenchObject">What?<select id="workbenchObject"></select></label>
+      </div>
+      <div class="workbench-result">
+        <p id="workbenchStatus" role="status"></p>
+        <p id="workbenchMeaning" class="note"></p>
+        <p id="workbenchSentence" class="workbench-sentence" hidden></p>
+        <ol id="workbenchDerivation" class="workbench-derivation" aria-label="Words in sentence order"></ol>
+        <ul id="workbenchIssues" class="workbench-issues" hidden></ul>
+      </div>
+      <p class="note">Exploring a sentence does not change your language or send it to the trader. These four-part statements use the displayed version’s accepted words and preferred forms.</p>
+    </section>
     <section id="impactPanel" class="card impact-card" hidden>
       <div class="card-heading"><div><span class="eyebrow">BEFORE THIS BECOMES OUR LANGUAGE</span><h2 id="impactTitle">What changes?</h2></div><span id="impactBadge" class="pill"></span></div>
       <p id="impactSummary" class="body-copy"></p><div id="impactProblems" class="problems"></div><div id="impactRows" class="impact-rows"></div>
